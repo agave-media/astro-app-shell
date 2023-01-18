@@ -31,19 +31,16 @@ export class AppHeader extends LitElement {
 			height: 64px;
 			box-sizing: border-box;
 			display: flex;
-			align-items: stretch;
-			justify-content: space-between;
-			width: 100%;
 		}
 
 		.container {
 			padding: 8px 16px 8px 16px;
 			display: flex;
 			align-items: center;
-			justify-content: center;
+            justify-content: center;
 			background-color: var(--md-surface-2);
 			color: var(--md-sys-color-on-surface);
-			width: 100%;
+            width: 100%;
 		}
 
 		.logo-container {
@@ -51,6 +48,11 @@ export class AppHeader extends LitElement {
 			height: 56px;
             border-radius: 12px;
 		}
+
+        img {
+            height: 100%;
+            width: auto;
+        }
 
         :host([colorscheme="dark"]) .logo-container {
             background: var(--md-sys-color-inverse-surface);
