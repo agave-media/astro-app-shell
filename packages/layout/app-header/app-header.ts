@@ -1,6 +1,8 @@
-import { css, html, LitElement } from "lit";
+import { css, html, LitElement, PropertyValueMap } from "lit";
 import { customElement } from "lit/decorators/custom-element.js";
 import { property } from "lit/decorators/property.js";
+import { getInstance as getSettingsInstance } from "@state/machines/settings";
+import { installMediaQueryWatcher } from "@util/helpers/media-query";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -12,6 +14,12 @@ declare global {
 export class AppHeader extends LitElement {
 	@property({ type: String })
 	logo: string;
+
+	@property({ type: String, reflect: true })
+	colorScheme: string;
+
+	@property({ type: Boolean, reflect: true })
+	_wideview: boolean;
 
 	static override styles = css`
 		:host {
@@ -29,34 +37,28 @@ export class AppHeader extends LitElement {
 		}
 
 		.container {
-			padding: 8px 24px;
+			padding: 8px 16px 8px 16px;
 			display: flex;
 			align-items: center;
-			justify-content: flex-start;
+			justify-content: center;
 			background-color: var(--md-surface-2);
 			color: var(--md-sys-color-on-surface);
 			width: 100%;
 		}
 
-        .header-title {
-			font-size: 16px;
-			margin: 0;
-			color: var(--md-sys-color-on-surface);
-
-			letter-spacing: 0.5px;
-			font-weight: 600;
-
+		.logo-container {
 			display: flex;
-			align-items: center;
-			white-space: nowrap;
+			height: 56px;
+            border-radius: 12px;
 		}
 
-        .logo-container {
-			display: flex;
-			height: 64px;
-			margin-right: 4px;
-			mix-blend-mode: multiply;
-		}
+        :host([colorscheme="dark"]) .logo-container {
+            background: var(--md-sys-color-inverse-surface);
+        }
+
+        :host([_wideview]) .container {
+            margin-right: 80px;
+        }
 	`;
 
 	protected override render() {
@@ -66,25 +68,41 @@ export class AppHeader extends LitElement {
 					<slot name="icon"></slot>
 				</div>
 
-				<h2 class="header-title">
-					<div
-						@click=${() => {
-							if (window.location.pathname !== "/") window.location.href = "/";
-						}}
-						class="logo-container">
-						<img src=${this.logo} alt="Tlaloc Ride Tuned logo" />
-					</div>
-				</h2>
+				<div
+					@click=${() => {
+						if (window.location.pathname !== "/") window.location.href = "/";
+					}}
+					class="logo-container">
+					
+                    <img src=${this.logo} alt="Tlaloc Ride Tuned logo" />
+				</div>
 
 				<div class="leading-container">
 					<slot name="leading"></slot>
 				</div>
 
-				<!-- Add dropdown menu -->
 				<div class="trailing-container">
 					<slot name="trailing"></slot>
 				</div>
 			</div>
 		`;
 	}
+    
+
+	protected override firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		const settings = getSettingsInstance();
+		settings.onTransition((state) => {
+			const { colorScheme } = state.context;
+			console.log("header colorScheme:", colorScheme);
+
+			if (colorScheme) this.colorScheme = colorScheme;
+		});
+
+        installMediaQueryWatcher(`(min-width: 768px)`, (matches) => this._layoutChanged(matches));
+	}
+
+    _layoutChanged(matches: boolean) {
+        console.log("layout changed", matches);
+        this._wideview = matches;
+    }
 }
