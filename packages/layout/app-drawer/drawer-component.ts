@@ -1,4 +1,4 @@
-import { css, html, LitElement } from "lit";
+import { css, html, LitElement, PropertyValueMap } from "lit";
 import { customElement } from "lit/decorators/custom-element.js";
 import { property } from "lit/decorators/property.js";
 
@@ -16,7 +16,7 @@ export class DrawerComponent extends LitElement {
   @property({ type: String, reflect: true })
   type: string;
 
-  static styles = css`
+  static override styles = css`
     :host {
       display: flex;
       flex-direction: column;
@@ -143,7 +143,7 @@ export class DrawerComponent extends LitElement {
     }
   `;
 
-  protected render() {
+  protected override render() {
     return html`
       <div id="container" class="container">
         <slot class="wide"></slot>
@@ -153,8 +153,8 @@ export class DrawerComponent extends LitElement {
     `;
   }
 
-  updated(changedProps) {
-    const openChanged = changedProps.has("open");
+  protected override updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+    const openChanged = _changedProperties.has("open");
     if (openChanged) {
       this.dispatchEvent(
         new CustomEvent("open-changed", {
@@ -166,7 +166,7 @@ export class DrawerComponent extends LitElement {
     }
   }
 
-  _onClick(e) {
+  _onClick(e : Event) {
     console.log("on drawer click:", e.target, e.target != this);
     if (this.type === "persistent") return;
     this.open = false;
