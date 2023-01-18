@@ -1,0 +1,63 @@
+---
+export interface Props {
+	title: string;
+	subtitle: string;
+	href: string;
+}
+
+const { href, title, subtitle } = Astro.props;
+---
+
+<section>
+	<img src={href} />
+	<div class="content prose sm:prose-lg md:prose-xl lg:prose-2xl dark:prose-invert">
+		<h1>{title}</h1>
+		<p>{subtitle}</p>
+
+        <md-filled-button label="Ver fechas"></md-filled-button>
+	</div>
+</section>
+
+<style>
+	section {
+		text-align: center;
+        position: relative;
+        flex: 1;
+	}
+
+	img {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+        border-radius: 24px;
+        filter: brightness(0.35);
+	}
+
+	.content {
+		display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+		
+        height: 100%;
+		padding: 16px;
+		box-sizing: border-box;
+        margin: auto;
+	}
+
+	.content > * {
+		z-index: 1;
+	}
+
+    h1 {
+        margin: 0 !important;
+    }
+</style>
+
+<script>
+    import '@material/web/button/elevated-button'
+    import '@material/web/button/filled-button'
+</script>
