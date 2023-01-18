@@ -30,7 +30,7 @@ export class AppShell extends LitElement {
 
 	static override styles = css`
 		:host {
-			/* min-height: 100vh; */
+			max-height: 100vh;
 			display: flex;
 			flex-direction: column;
 			align-items: stretch;
@@ -50,6 +50,7 @@ export class AppShell extends LitElement {
 			flex: 1;
 
             margin-bottom: 80px;
+            overflow-y: auto;
 		}
 
 		div.main-content {
@@ -58,7 +59,7 @@ export class AppShell extends LitElement {
 			flex-grow: 1;
 			align-self: stretch;
 			box-sizing: border-box;
-			overflow-x: hidden;
+			overflow-y: auto;
 
 			z-index: 1;
 			transition: transform 300ms cubic-bezier(0.62, 0.28, 0.23, 0.99);
