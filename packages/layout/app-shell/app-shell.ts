@@ -31,12 +31,12 @@ export class AppShell extends LitElement {
 	static override styles = css`
 		:host {
 			max-height: 100vh;
+			min-height: 100vh;
 			display: flex;
 			flex-direction: column;
 			align-items: stretch;
 			justify-content: flex-start;
 			overflow-x: hidden;
-			overflow-y: auto;
 		}
 
 		app-header {
@@ -92,6 +92,10 @@ export class AppShell extends LitElement {
 
         :host(:not([_wideview])) md-fab {
             display: block;
+        }
+
+        app-bottom-navigation {
+            z-index: 5;
         }
 	`;
 
