@@ -50,7 +50,6 @@ export class AppShell extends LitElement {
 			flex: 1;
 
             margin-bottom: 80px;
-            overflow-y: auto;
 		}
 
 		div.main-content {
@@ -59,7 +58,6 @@ export class AppShell extends LitElement {
 			flex-grow: 1;
 			align-self: stretch;
 			box-sizing: border-box;
-			overflow-y: auto;
 
 			z-index: 1;
 			transition: transform 300ms cubic-bezier(0.62, 0.28, 0.23, 0.99);
