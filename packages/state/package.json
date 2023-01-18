@@ -1,0 +1,10 @@
+{
+    "name": "@state/machines",
+    "version": "0.0.0",
+    "private": true,
+    "dependencies": {
+        "tsconfig": "*",
+        "xstate": "^4.35.2"
+    }
+}
+  
