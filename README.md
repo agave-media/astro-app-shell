@@ -4,17 +4,19 @@ Extensible app shell built using Astro, Lit, and xState. The project is meant to
 
 ## What's inside?
 
-Astro and Turborepo serve as the core, providing robust primitives that unlock many useful patterns. [Turborepo](https://turbo.build/repo) provides the best way to manage dependencies across multiple projects I've used so far and Astro as an (app framework?) has served me extremely well, with consistent and predictable behavior that I had come to miss. Support for Lit is a welcome plus, extremely grateful for all the work that has gone into all the [UI integrations](https://docs.astro.build/en/guides/integrations-guide/).
+Astro and Turborepo serve as the core, providing robust primitives which unlock a wide range of useful patterns. Astro serves as the app framework, enhancing our apps with file-based routing, multiple rendering options, and an approachable `integrations` system with support for a large number of popular tools and libraries. One additional benefit is Astro's support for Lit; extremely grateful for the work that has gone into all the [UI integrations](https://docs.astro.build/en/guides/integrations-guide/). Turborepo closes this out with the best way to manage dependencies across multiple projects I've used so far.
 
 ### Stack
 
-- `Astro`
-- `Lit`
-- `xState`
-- `Turborepo`
+- [`Astro`](https://astro.build)
+- [`Lit`](https://lit.dev)
+- [`xState`](https://xstate.js.org/docs/)
+- [`Turborepo`](https://turbo.build/repo)
 - `Typescript`
 
-In addition, novel (for me) techniques for managing state are being used. Xstate is the key, providing critical guardrails for modeling events and state. It currently lives under `components/state`, completely outside `apps/bike-shop`. It makes more sense if you see the repo as representing the umbrella project that contains any relevant subprojects and dependencies for the implementor - in this case the bike shop.
+## Why state machines?
+
+Managing state is something every service needs to handle. Different techniques are valid at any given time, so tradeoffs need to be considered. This project uses xState, a continued exploration on how to take full advantage of state machines. It served me well in a previous project, providing critical guardrails for modelling state and allowing it to be decoupled from the UI. It currently lives under `components/state`, completely outside `apps/bike-shop`. It makes more sense if you see the repo as representing the umbrella project that contains all relevant subprojects and dependencies for the implementor - in this case the bike shop. In addition, the idea of serializing app state is extremely compelling and is going to be explored more in depth.
 
 ### Component libraries
 
