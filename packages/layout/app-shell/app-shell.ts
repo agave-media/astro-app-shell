@@ -41,11 +41,15 @@ export class AppShell extends LitElement {
 			z-index: 2;
 		}
 
-		div.main-content {
-            margin-top: 64px;
+        :host(:not([_wideview])) div.main-content {
             margin-bottom: 80px;
             min-height: calc(100vh - 80px - 64px);
-			
+        }
+
+		div.main-content {
+            margin-top: 64px;
+            min-height: calc(100vh - 64px);
+	
             display: flex;
 			flex-direction: column;
 			flex: 1;
