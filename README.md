@@ -1,73 +1,25 @@
-# Turborepo starter
+# Astro App Shell ✨🐚
 
-This is an official Yarn v1 starter turborepo.
+Extensible app shell built using Astro, Lit, and xState. The project is meant to explore how these three technologies can work together to provide a reliable, performant, and enjoyable foundation for building applications. It will be built in public, with the intention of allowing anyone to build their own applications on top. This repo will be the initial use case: a bike shop that hosts cycling tournaments and sells merch. Can we provide a best in class experience for events and stores?
 
 ## What's inside?
 
-This turborepo uses [Yarn](https://classic.yarnpkg.com/) as a package manager. It includes the following packages/apps:
+Astro and Turborepo serve as the core, providing robust primitives that unlock many useful patterns. [Turborepo](https://turbo.build/repo) provides the best way to manage dependencies across multiple projects I've used so far and Astro as an (app framework?) has served me extremely well, with consistent and predictable behavior that I had come to miss. Support for Lit is a welcome plus, extremely grateful for all the work that has gone into all the [UI integrations](https://docs.astro.build/en/guides/integrations-guide/).
 
-### Apps and Packages
+### Stack
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- `Astro`
+- `Lit`
+- `xState`
+- `Turborepo`
+- `Typescript`
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+In addition, novel (for me) techniques for managing state are being used. Xstate is the key, providing critical guardrails for modeling events and state. It currently lives under `components/state`, completely outside `apps/bike-shop`. It makes more sense if you see the repo as representing the umbrella project that contains any relevant subprojects and dependencies for the implementor - in this case the bike shop.
 
-### Utilities
+### Component libraries
 
-This turborepo has some additional tools already setup for you:
+This project takes advantage of open source component libraries. Current integrations are:
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-yarn run build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-yarn run dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+- [Material Web](https://github.com/material-components/material-web)
+- [Material Theme Builder](https://m3.material.io/theme-builder#/custom)
+- [Shoelace](https://shoelace.style/)
