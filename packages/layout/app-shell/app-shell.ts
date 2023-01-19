@@ -30,8 +30,6 @@ export class AppShell extends LitElement {
 
 	static override styles = css`
 		:host {
-			max-height: 100vh;
-			min-height: 100vh;
 			display: flex;
 			flex-direction: column;
 			align-items: stretch;
@@ -43,22 +41,16 @@ export class AppShell extends LitElement {
 			z-index: 2;
 		}
 
-		.content {
-			margin-top: 64px;
-
-			display: flex;
-			flex: 1;
-
-            margin-bottom: 80px;
-		}
-
 		div.main-content {
-			display: flex;
+            margin-top: 64px;
+            margin-bottom: 80px;
+            min-height: calc(100vh - 80px - 64px);
+			
+            display: flex;
 			flex-direction: column;
-			flex-grow: 1;
+			flex: 1;
 			align-self: stretch;
 			box-sizing: border-box;
-
 			z-index: 1;
 			transition: transform 300ms cubic-bezier(0.62, 0.28, 0.23, 0.99);
 			will-change: transform;
@@ -100,17 +92,13 @@ export class AppShell extends LitElement {
 	protected override render() {
 		return html`
 			<app-drawer .colorScheme=${this.colorScheme} .logo=${this.logo} .wideview=${this._wideview} @open-changed=${this._drawerOpenChanged}></app-drawer>
+            <app-header @open-drawer=${this.toggleDrawer} .logo=${this.logo} class="toolbar-top" id="header" title="Tlaloc Ride Tuned"></app-header>
 
 			<div class="main-content" ?persistent=${this._wideview}>
-				<app-header @open-drawer=${this.toggleDrawer} .logo=${this.logo} class="toolbar-top" id="header" title="Tlaloc Ride Tuned"></app-header>
-
-				<div class="content">
-					<slot></slot>
-				</div>
-
-                ${this._wideview ? nothing : html`<app-bottom-navigation></app-bottom-navigation>`}
+                <slot></slot>
 			</div>
 
+            ${this._wideview ? nothing : html`<app-bottom-navigation></app-bottom-navigation>`}
             <md-fab @click=${this._dipatchSetColorSchemeEvent} .icon=${this.colorScheme === "light" ? "dark_mode" : "light_mode"}></md-fab>
 		`;
 	}
