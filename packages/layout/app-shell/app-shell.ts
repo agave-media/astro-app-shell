@@ -115,6 +115,8 @@ export class AppShell extends LitElement {
 			const { colorScheme } = state.context;
 			if (colorScheme) this.colorScheme = colorScheme;
 		});
+
+        this.dispatchEvent(new CustomEvent('update-loading-state', {detail: {state: 'idle'}, bubbles: true, composed: true}))
 	}
 
 	_layoutChanged(isWideLayout: boolean) {

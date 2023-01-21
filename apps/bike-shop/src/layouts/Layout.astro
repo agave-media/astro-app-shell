@@ -6,7 +6,8 @@ export interface Props {
 }
 
 const tlalocLogo = "https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Ftlaloc_ride_tuned_horizontal_transparent.png?alt=media&token=50cf46e7-23a0-43bc-985f-7f566241ed55";
-const { title = "Tlaloc Ride Tuned", logo = tlalocLogo } = Astro.props;
+const { title = "Tlaloc Ride Tuned", logo = tlalocLogo, state = "loading" } = Astro.props;
+const { default: tlalocLoader } = await import(`@layout/components/tlaloc_loader.svg?raw`);
 ---
 
 <!DOCTYPE html>
@@ -21,10 +22,13 @@ const { title = "Tlaloc Ride Tuned", logo = tlalocLogo } = Astro.props;
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 	</head>
 
-	<body class="material-theme">
-		<app-shell logo={logo}>
-			<slot />
-		</app-shell>
+	<body data-state={state} class="material-theme">
+        <div id="loadingOverlay">
+            <Fragment set:html={tlalocLoader} />
+        </div>
+        <app-shell logo={logo}>
+            <slot />
+        </app-shell>
 	</body>
 </html>
 <style is:global>
@@ -33,7 +37,7 @@ const { title = "Tlaloc Ride Tuned", logo = tlalocLogo } = Astro.props;
 	:root {
 		--accent: 124, 58, 237;
 		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, var(--md-surface-2) 60%);
-    }
+	}
 	html {
 		font-family: "Readex Pro", system-ui, sans-serif;
 	}
@@ -46,7 +50,7 @@ const { title = "Tlaloc Ride Tuned", logo = tlalocLogo } = Astro.props;
 		margin: 0;
 		padding: 0;
 		background-color: var(--md-surface-2);
-    }
+	}
 
 	main {
 		margin: 0 16px 16px 0;
@@ -58,6 +62,29 @@ const { title = "Tlaloc Ride Tuned", logo = tlalocLogo } = Astro.props;
 
 		display: flex;
 		flex-direction: column;
+	}
+
+	#loadingOverlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #ECEEF8;
+		z-index: 10;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#tlalocLoader {
+		height: 250px;
+		width: 250px;
+	}
+
+    body[data-state="idle"] #loadingOverlay {
+        display: none;
     }
 
 	@media (max-width: 768px) {
@@ -97,5 +124,11 @@ const { title = "Tlaloc Ride Tuned", logo = tlalocLogo } = Astro.props;
 
 		// Send SET_COLOR_SCHEME event to settings machine
 		settings.send({ type: "SET_COLOR_SCHEME", colorScheme: selected ? "dark" : "light" });
+	});
+
+	// Hide loading overlay on app-shell ready
+	appShell?.addEventListener("update-loading-state", () => {
+		console.log('app-shell loaded...')
+        document.body.dataset.state = "idle";
 	});
 </script>
