@@ -1,0 +1,140 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<style>
+    section {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-family: 'JetBrains Mono';
+        font-style: italic;
+        text-align: center;
+    }
+
+	.checkbox-container {
+		display: flex;
+		align-items: center;
+		position: relative;
+	}
+
+	.checkbox-container input {
+		margin-right: 16px;
+	}
+
+	[hidden] {
+		display: none;
+	}
+
+	#hiddenCheckbox {
+		position: absolute;
+		left: 15px;
+        opacity: 0;
+        pointer-events: none;
+	}
+</style>
+
+<Layout title="Tlaloc Ride Tuned - Registro">
+	<main>
+        <section class="prose sm:prose-md md:prose-lg lg:prose-xl">
+            <h1>Registro</h1>
+            <form class="form">
+                <md-outlined-text-field required class="input" type="text" name="fullName" label="Nombre Completo">Nombre Completo</md-outlined-text-field>
+                <md-outlined-text-field required class="input" type="email" name="email" label="Correo">Correo</md-outlined-text-field>
+                <md-outlined-text-field required class="input" minlength="6" type="password" name="password" id="password" label="Contraseña" minlength="6"></md-outlined-text-field>
+    
+                <div class="checkbox-container">
+                    <md-checkbox></md-checkbox>
+                    <input id="hiddenCheckbox" required class="input" type="checkbox" name="terminos_de_uso" />
+                    <div>Acepto los <a href="#">términos de uso.</a></div>
+                </div>
+    
+                <div class="btns">
+                    <sl-button type="submit">Submit</sl-button>
+                    <!-- <md-filled-button type="submit" label="Enviar registro"></md-filled-button> -->
+                </div>
+            </form>
+        </section>
+	</main>
+</Layout>
+
+<script>
+	import "@material/web/textfield/outlined-text-field";
+	import "@material/web/checkbox/checkbox";
+	import "@material/web/button/filled-button";
+	import type { MdOutlinedTextField } from "@material/web/textfield/outlined-text-field";
+	import "@shoelace-style/shoelace/dist/components/button/button.js";
+
+    // Form + checkbox references
+	const form = document.querySelector("form");
+	const hiddenCheckbox = document.querySelector("input#hiddenCheckbox") as HTMLInputElement;
+	const mdCheckbox = document.querySelector("md-checkbox");
+
+    // Ensures errors are cleared when input is valid.
+    const runningValidation = (input : MdOutlinedTextField) => {
+        input.addEventListener("input", () => {
+			const isInputValid = input.checkValidity();
+			if (!isInputValid) {
+				if (input.value === "") {
+					input.setCustomValidity("Campo requerido.");
+				} else if (input.validity.typeMismatch || input.validity.badInput) {
+					input.setCustomValidity("Por favor ingresa un valor válido.");
+				} else if (input.validity.tooShort) {
+					input.setCustomValidity("Requiere un mínimo de 6 caracteres");
+				} else if (input.validity.valid || input.validity.valueMissing) {
+					input.setCustomValidity("Campo requerido.");
+				} else {
+					input.setCustomValidity("");
+				}
+
+				// Report to update input error message.
+				input.reportValidity();
+			}
+		});
+    }
+
+    // Sets initial error message for required fields.
+    // Checkbox not in inputs array due to being synced via md-checkbox.
+	hiddenCheckbox.setCustomValidity("Campo requerido.");
+	const inputs = document.querySelectorAll("md-outlined-text-field");
+	inputs.forEach(async (input) => {
+		input.setCustomValidity("Campo requerido.");
+        runningValidation(input)
+	});
+
+	// Add submit event listener
+	form?.addEventListener("submit", async (event) => {
+		event.preventDefault();
+
+		let isFormValid = form.reportValidity();
+		console.log("isFormValid:", isFormValid);
+		if (isFormValid) {
+			console.log("SUBMIT success:", event);
+			handleSubmit();
+		} else {
+			console.log("SUBMIT error:", event);
+		}
+	});
+
+	const handleSubmit = async () => {
+		if (!form) return;
+		const data = new FormData(form);
+		console.log("form data:", data);
+	};
+
+	// Syncs the native checkbox with the material checkbox.
+	const _syncNativeCheckbox = () => {
+		const toggledCheck = !hiddenCheckbox.checked;
+		console.log("syncing checkbox, new value:", toggledCheck);
+		hiddenCheckbox.setCustomValidity(!toggledCheck ? "Campo requerido." : "");
+		hiddenCheckbox.checked = toggledCheck;
+		hiddenCheckbox.reportValidity();
+	};
+
+	// Add checkbox change listener
+	mdCheckbox?.addEventListener("change", _syncNativeCheckbox);
+</script>
