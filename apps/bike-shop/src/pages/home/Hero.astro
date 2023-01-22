@@ -12,11 +12,11 @@ const { href } = Astro.props;
 	<img class="overlay" src={href} />
 	
     <div class="content">
-		<div class="header-image">
-            <img src="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Fcalendariomtb.png?alt=media&token=dd0c1255-22d5-4409-af0d-0ce6aa9329db">
+		<div class="header-image-container">
+            <img class="header-image" src="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Fcalendariomtb.png?alt=media&token=dd0c1255-22d5-4409-af0d-0ce6aa9329db">
         </div>
 
-        <md-filled-button label="Ver fechas"></md-filled-button>
+        <!-- <md-filled-button label="Ver fechas"></md-filled-button> -->
 	</div>
 </section>
 
@@ -30,6 +30,10 @@ const { href } = Astro.props;
         flex-direction: column;
 	}
 
+    md-filled-button {
+        margin-top: 24px;
+    }
+
 	img.overlay {
 		position: absolute;
 		left: 0;
@@ -42,13 +46,13 @@ const { href } = Astro.props;
 	}
 
     img.header-image {
-        height: 180px;
+        width: 100%;
     }
 
 	.content {
 		display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
 		
         height: 100%;
@@ -67,6 +71,5 @@ const { href } = Astro.props;
 </style>
 
 <script>
-    import '@material/web/button/elevated-button'
     import '@material/web/button/filled-button'
 </script>
