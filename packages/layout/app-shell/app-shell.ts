@@ -6,6 +6,7 @@ import "../app-drawer/app-drawer";
 import "../app-header/app-header";
 import "../app-bottom-navigation/app-bottom-navigation";
 import "@material/web/fab/fab";
+import "@material/web/iconbutton/standard-icon-button-toggle";
 import { getInstance as getSettingsInstance } from "@state/machines/settings";
 
 declare global {
@@ -21,6 +22,9 @@ export class AppShell extends LitElement {
 
 	@property({ type: Boolean, reflect: true })
 	_wideview: boolean;
+
+	@property({ type: Boolean, reflect: true })
+	_railopen: boolean;
 
 	@property({ type: String })
 	logo: string;
@@ -60,7 +64,7 @@ export class AppShell extends LitElement {
 			will-change: transform;
 		}
 
-		div.main-content[persistent] {
+        div.main-content[persistent] {
 			margin-right: 80px;
 			-webkit-transform: translateX(80px);
 			transform: translateX(80px);
@@ -88,6 +92,10 @@ export class AppShell extends LitElement {
             display: block;
         }
 
+        :host(:not([_wideview])) md-standard-icon-button-toggle {
+            display: none;
+        }
+
         app-bottom-navigation {
             z-index: 5;
         }
@@ -95,10 +103,12 @@ export class AppShell extends LitElement {
 
 	protected override render() {
 		return html`
-			<app-drawer .colorScheme=${this.colorScheme} .logo=${this.logo} .wideview=${this._wideview} @open-changed=${this._drawerOpenChanged}></app-drawer>
-            <app-header @open-drawer=${this.toggleDrawer} .logo=${this.logo} class="toolbar-top" id="header" title="Tlaloc Ride Tuned"></app-header>
+			<app-drawer .colorScheme=${this.colorScheme} .logo=${this.logo} .railopen=${this._railopen} .wideview=${this._wideview} @open-changed=${this._drawerOpenChanged}></app-drawer>
+            <app-header @open-drawer=${this.toggleDrawer} .logo=${this.logo} class="toolbar-top" id="header" title="Tlaloc Ride Tuned">
+                <md-standard-icon-button-toggle .selected=${!this._railopen} @click=${() => this.toggleRail()} slot="icon" onIcon="menu" offIcon="menu_open"></md-standard-icon-button-toggle>
+            </app-header>
 
-			<div class="main-content" ?persistent=${this._wideview}>
+			<div class="main-content" ?persistent=${this._wideview && this._railopen}>
                 <slot></slot>
 			</div>
 
@@ -119,9 +129,15 @@ export class AppShell extends LitElement {
         this.dispatchEvent(new CustomEvent('update-loading-state', {detail: {state: 'idle'}, bubbles: true, composed: true}))
 	}
 
+    toggleRail() {
+        this._railopen = !this._railopen;
+    }
+
 	_layoutChanged(isWideLayout: boolean) {
 		console.log("layout changed:", isWideLayout);
-		this._wideview = isWideLayout;
+		
+        this._wideview = isWideLayout;
+		this._railopen = isWideLayout;
 
 		if (!isWideLayout) this._closeDrawer();
 	}

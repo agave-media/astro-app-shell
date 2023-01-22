@@ -31,6 +31,9 @@ export class AppDrawer extends LitElement {
 	@property({ type: Boolean, reflect: true })
 	wideview: boolean;
 
+	@property({ type: Boolean, reflect: true })
+	railopen: boolean;
+
 	static override styles = css`
 		:host {
 			display: block;
@@ -120,7 +123,10 @@ export class AppDrawer extends LitElement {
 				@open-changed="${(e: CustomEvent) => {
 					if (this._open !== e.detail) this._open = e.detail;
 				}}"
-				.type="${this.wideview ? "persistent" : "modal"}">
+				.type="${this.wideview ? (
+                    this.railopen ? "persistent" : "modal"
+                ) : "modal"}"
+            >
 				<!-- Causes weird overlay bug when transitioning. Since it isn't used, temp. remove it. -->
 				<!-- <div id="drawerContent" class="drawer-content">
 					<div class="dialog-header">
@@ -183,14 +189,14 @@ export class AppDrawer extends LitElement {
 										<md-icon>directions_bike</md-icon>
 									</div>
 								</md-navigation-tab>
-								<md-navigation-tab ?active=${window.location.pathname.includes("/tienda")} .label=${"Tienda"}>
+								<!-- <md-navigation-tab ?active=${window.location.pathname.includes("/tienda")} .label=${"Tienda"}>
 									<div slot="activeIcon">
 										<md-icon>storefront</md-icon>
 									</div>
 									<div slot="inactiveIcon">
 										<md-icon>storefront</md-icon>
 									</div>
-								</md-navigation-tab>
+								</md-navigation-tab> -->
 								<md-navigation-tab
 									@click=${() => {
 										if (window.location.pathname !== "/registro") window.location.href = "/registro";
@@ -228,6 +234,12 @@ export class AppDrawer extends LitElement {
 		let drawer = this.shadowRoot?.querySelector("drawer-component");
 		if (drawer) drawer.open = !drawer.open;
 	}
+
+    toggleRail() {
+        if (this.wideview) {
+            this.railopen = !this.railopen
+        }
+    }
 
 	_darkModeToggle(e: CustomEvent) {
 		this.dispatchEvent(new CustomEvent("dark-mode-toggle", { detail: { selected: e.detail.selected }, bubbles: true, composed: true }));

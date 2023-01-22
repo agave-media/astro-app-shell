@@ -5,8 +5,7 @@ export interface Props {
 	title: string;
 }
 
-const tlalocLogo = "https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Ftlaloc_ride_tuned_horizontal_transparent.png?alt=media&token=50cf46e7-23a0-43bc-985f-7f566241ed55";
-const { title = "Tlaloc Ride Tuned", logo = tlalocLogo, state = "loading" } = Astro.props;
+const { title = "Tlaloc Ride Tuned", state = "loading" } = Astro.props;
 const { default: tlalocLoader } = await import(`@layout/components/tlaloc_loader.svg?raw`);
 ---
 
@@ -23,17 +22,16 @@ const { default: tlalocLoader } = await import(`@layout/components/tlaloc_loader
 	</head>
 
 	<body data-state={state} class="material-theme">
-        <div id="loadingOverlay">
-            <Fragment set:html={tlalocLoader} />
-        </div>
-        <app-shell logo={logo}>
-            <slot />
-        </app-shell>
+		<div id="loadingOverlay">
+			<Fragment set:html={tlalocLoader} />
+		</div>
+		<app-shell logo="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Ftlaloc_ride_tuned_horizontal_transparent.png?alt=media&token=50cf46e7-23a0-43bc-985f-7f566241ed55">
+			<slot />
+		</app-shell>
 	</body>
 </html>
 <style is:global>
-	@import url("https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;600;700&family=Readex+Pro:wght@300;400;600;700&display=swap");
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,700;1,800&family=Overpass:wght@300;400;600;700&family=Readex+Pro:wght@400;600;700&display=swap');
+	@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,800&family=Overpass:wght@300;400;600;700&family=Readex+Pro:wght@400;600;700&display=swap");
 
 	:root {
 		--accent: 124, 58, 237;
@@ -65,13 +63,17 @@ const { default: tlalocLoader } = await import(`@layout/components/tlaloc_loader
 		flex-direction: column;
 	}
 
+    app-shell[_wideview]:not([_railopen]) main {
+        margin-left: 16px;
+    }
+
 	#loadingOverlay {
 		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background-color: #ECEEF8;
+		background-color: #eceef8;
 		z-index: 10;
 
 		display: flex;
@@ -84,9 +86,9 @@ const { default: tlalocLoader } = await import(`@layout/components/tlaloc_loader
 		width: 250px;
 	}
 
-    body[data-state="idle"] #loadingOverlay {
-        display: none;
-    }
+	body[data-state="idle"] #loadingOverlay {
+		display: none;
+	}
 
 	@media (max-width: 768px) {
 		main {
@@ -129,7 +131,7 @@ const { default: tlalocLoader } = await import(`@layout/components/tlaloc_loader
 
 	// Hide loading overlay on app-shell ready
 	appShell?.addEventListener("update-loading-state", () => {
-		console.log('app-shell loaded...')
-        document.body.dataset.state = "idle";
+		console.log("app-shell loaded...");
+		document.body.dataset.state = "idle";
 	});
 </script>
