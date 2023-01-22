@@ -26,6 +26,17 @@ import Layout from "../../layouts/Layout.astro";
 		margin-right: 16px;
 	}
 
+    .banner {
+        display: flex;
+        width: 100%;
+        max-width: 120ch;
+        object-fit: cover;
+        margin: 0 auto;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 24px;
+    }
+
 	[hidden] {
 		display: none;
 	}
@@ -40,8 +51,13 @@ import Layout from "../../layouts/Layout.astro";
 
 <Layout title="Tlaloc Ride Tuned - Registro">
 	<main>
+        <div class="banner">
+            <img src="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Fserial_banner.jpg?alt=media&token=26be61c9-9f3b-4119-93ff-1ad5cf7e626a" alt="event banner">
+        </div>
+
         <section class="prose sm:prose-md md:prose-lg lg:prose-xl">
             <h1>Registro</h1>
+
             <form class="form">
                 <md-outlined-text-field required class="input" type="text" name="fullName" label="Nombre Completo">Nombre Completo</md-outlined-text-field>
                 <md-outlined-text-field required class="input" type="email" name="email" label="Correo">Correo</md-outlined-text-field>
