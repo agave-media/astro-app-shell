@@ -3,7 +3,7 @@ import { customElement } from "lit/decorators/custom-element.js";
 import "@material/web/navigationbar/navigation-bar";
 import "@material/web/navigationtab/navigation-tab";
 import "@material/web/icon/icon";
-import { tlalocIcon } from '../tlaloc_icon';
+import { tlalocIcon } from "../tlaloc_icon";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -66,6 +66,19 @@ export class AppBottomNavigation extends LitElement {
 						</div>
 						<div slot="inactiveIcon">
 							<md-icon>storefront</md-icon>
+						</div>
+					</md-navigation-tab>
+					<md-navigation-tab
+						@click=${() => {
+							if (window.location.pathname !== "/registro") window.location.href = "/registro";
+						}}
+						?active=${window.location.pathname.includes("/registro")}
+						.label=${"Registro"}>
+						<div slot="activeIcon">
+							<md-icon>confirmation_number</md-icon>
+						</div>
+						<div slot="inactiveIcon">
+							<md-icon>confirmation_number</md-icon>
 						</div>
 					</md-navigation-tab>
 				</md-navigation-bar>
