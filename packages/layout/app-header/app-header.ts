@@ -34,19 +34,20 @@ export class AppHeader extends LitElement {
 		}
 
 		.container {
-			padding: 8px 16px 8px 16px;
-			display: flex;
-			align-items: center;
-            justify-content: center;
+			padding: 8px 16px;
 			background-color: var(--md-surface-2);
 			color: var(--md-sys-color-on-surface);
             width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
 		}
 
 		.logo-container {
 			display: flex;
-			height: 56px;
+			height: 48px;
             border-radius: 12px;
+            justify-self: center;
 		}
 
         img {
@@ -56,10 +57,6 @@ export class AppHeader extends LitElement {
 
         :host([colorscheme="dark"]) .logo-container {
             background: var(--md-sys-color-inverse-surface);
-        }
-
-        :host([_wideview]) .container {
-            margin-right: 80px;
         }
 	`;
 
@@ -78,11 +75,7 @@ export class AppHeader extends LitElement {
 					
                     <img src=${this.logo} alt="Tlaloc Ride Tuned logo" />
 				</div>
-
-				<div class="leading-container">
-					<slot name="leading"></slot>
-				</div>
-
+                
 				<div class="trailing-container">
 					<slot name="trailing"></slot>
 				</div>
@@ -90,7 +83,6 @@ export class AppHeader extends LitElement {
 		`;
 	}
     
-
 	protected override firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		const settings = getSettingsInstance();
 		settings.onTransition((state) => {
