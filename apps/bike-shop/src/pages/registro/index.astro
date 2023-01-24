@@ -3,17 +3,16 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <style>
-    main {
-        color: var(--md-sys-color-on-primary-container);
-    }
-    
+	main {
+		color: var(--md-sys-color-on-primary-container);
+	}
+
 	section {
 		padding: 16px;
 		display: flex;
 		flex-direction: column;
 		margin: 0 auto;
-		width: 100%;
-        max-width: 80ch;
+		max-width: 80ch;
 	}
 
 	form {
@@ -37,7 +36,7 @@ import Layout from "../../layouts/Layout.astro";
 
 	.checkbox-container {
 		display: flex;
-        align-items: center;
+		align-items: center;
 		position: relative;
 		font-size: 14px;
 	}
@@ -54,9 +53,9 @@ import Layout from "../../layouts/Layout.astro";
 		font-weight: 800;
 	}
 
-    md-menu {
-        --md-menu-container-elevation: 1;
-    }
+	md-menu {
+		--md-menu-container-elevation: 1;
+	}
 
 	[hidden] {
 		display: none;
@@ -69,29 +68,28 @@ import Layout from "../../layouts/Layout.astro";
 		opacity: 0;
 		pointer-events: none;
 	}
-    
-    image-loader {
-        width: 100%;
-        max-width: 120ch;
-        margin: 0 auto;
-        border-radius: 12px;
-        overflow: hidden;
-        margin-bottom: 24px;
-    }
+
+	image-loader {
+		width: 100%;
+		max-width: 120ch;
+		margin: 0 auto;
+		border-radius: 12px;
+		overflow: hidden;
+		margin-bottom: 24px;
+	}
 
 	.checkbox-container md-checkbox,
-    .checkbox-container input {
+	.checkbox-container input {
 		flex-shrink: 0;
 	}
-    
-    .disclaimer-container {
-        align-items: flex-start;
-    }
 
+	.disclaimer-container {
+		align-items: flex-start;
+	}
 
-    .disclaimer-container > div {
-        margin-top: 10px;
-    }
+	.disclaimer-container > div {
+		margin-top: 10px;
+	}
 </style>
 
 <Layout title="Tlaloc Ride Tuned - Registro">
@@ -108,9 +106,9 @@ import Layout from "../../layouts/Layout.astro";
 					<h4 class="subheader">PERFIL</h4>
 					<md-outlined-text-field required class="input" type="text" name="fullName" label="Nombre Completo"></md-outlined-text-field>
 					<md-outlined-text-field required class="input" type="email" name="email" label="Correo"></md-outlined-text-field>
-                    <md-outlined-text-field required class="input" minlength="6" type="password" name="password" id="passwordInput" label="Contraseña" minlength="6"></md-outlined-text-field>
+					<md-outlined-text-field required class="input" minlength="6" type="password" name="password" id="passwordInput" label="Contraseña" minlength="6"></md-outlined-text-field>
 
-                    <div class="checkbox-container">
+					<div class="checkbox-container">
 						<md-checkbox id="noAccountCheckbox"></md-checkbox>
 						<div>No quiero crear una cuenta.</div>
 					</div>
@@ -120,15 +118,15 @@ import Layout from "../../layouts/Layout.astro";
 
 				<div>
 					<h4 class="subheader">INFORMACION DE CARRERA</h4>
-					<md-outlined-segmented-button-set>
+					<md-outlined-segmented-button-set name="raceType">
 						<md-outlined-segmented-button label="Femenil" hasIcon></md-outlined-segmented-button>
 						<md-outlined-segmented-button label="Varonil" hasIcon></md-outlined-segmented-button>
 					</md-outlined-segmented-button-set>
-                    
-                    <md-outlined-text-field required class="input" type="text" name="teamName" label="Nombre del equipo"></md-outlined-text-field>
-					
-                    <div class="dropdown-container">
-						<md-outlined-text-field placeholder="Selecciona una opcion" class="input" id="categoriasInput" label="Categoria" required></md-outlined-text-field>
+
+					<md-outlined-text-field required class="input" type="text" name="teamName" label="Nombre del equipo"></md-outlined-text-field>
+
+					<div class="dropdown-container">
+						<md-outlined-text-field placeholder="Selecciona una opcion" class="input" id="categoriasInput" label="Categoria" name="raceCategory" required></md-outlined-text-field>
 
 						<md-menu fullwidth>
 							<md-menu-item data-value="master" headline="Master"></md-menu-item>
@@ -140,7 +138,7 @@ import Layout from "../../layouts/Layout.astro";
 					</div>
 
 					<div class="dropdown-container">
-						<md-outlined-text-field placeholder="Selecciona una opcion" class="input" id="tipoSangreInput" label="Tipo de sangre" required></md-outlined-text-field>
+						<md-outlined-text-field placeholder="Selecciona una opcion" class="input" id="tipoSangreInput" name="bloodType" label="Tipo de sangre" required></md-outlined-text-field>
 
 						<md-menu fullwidth>
 							<md-menu-item data-value="o_plus" headline="O+"></md-menu-item>
@@ -160,12 +158,12 @@ import Layout from "../../layouts/Layout.astro";
 						<div>
 							En consideración de la presente, renuncio a cualquier derecho y reclamación por daños que yo pueda tener, en contra del comité organizador, grupos coordinadores y cualquier persona asociada con el evento, sus representantes, sucesores y asignados, los exonero de cualquier daño que pudiera sufrir antes, durante y después del evento, por considerarse riesgo deportivo. Adicionalmente, ninguna de las personas antes mencionadas, serán responsables por la pérdida de
 							artículos personales ni de cualquier forma de agravación en relación con dicho evento. Reconozco que he leído y comprometido mi propia responsabilidad y acepto las restricciones impuestas, así mismo acepto que he de cumplir apegado al reglamento y lineamientos de operación vigente.
-                        </div>
+						</div>
 					</div>
 
 					<div class="checkbox-container">
 						<md-checkbox id="termsCheckbox"></md-checkbox>
-						<input id="hiddenTermsCheckbox" required class="input" type="checkbox" name="terminos_de_uso" />
+						<input id="hiddenTermsCheckbox" required class="input" type="checkbox" name="terms" />
 						<div>Acepto los <a>términos de uso.</a></div>
 					</div>
 				</div>
@@ -188,21 +186,32 @@ import Layout from "../../layouts/Layout.astro";
 	import "@material/web/segmentedbutton/outlined-segmented-button";
 	import "@material/web/menu/menu";
 	import "@material/web/menu/menu-item";
-    import "./image-loader";
+	import "./image-loader";
 	import type { MdOutlinedTextField } from "@material/web/textfield/outlined-text-field";
 	import type { MdMenu } from "@material/web/menu/menu";
+	import type { MdCheckbox } from "@material/web/checkbox/checkbox";
 	import type { MdMenuItem } from "@material/web/menu/menu-item";
+	import singleton from "@db/clients/firebase.js";
+	import { getInstance as getMachine } from "@state/machines/registration";
+	
+    const registrationMachine = getMachine();
+    registrationMachine.onTransition((state) => {
+		console.log("registration machine transition:", state.value, state.context);
+		if (state.matches("success")) {
+			console.log("REGISTRATION SUCCESS:", state.context);
+		}
+	});
 
 	// Form + checkbox references
 	const form = document.querySelector("form");
-	
-    const disclaimerCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox");
+
+	const disclaimerCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox");
 	const disclaimerHiddenCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox + input") as HTMLInputElement;
-	
-    const termsCheckbox = document.querySelector("md-checkbox#termsCheckbox");
+
+	const termsCheckbox = document.querySelector("md-checkbox#termsCheckbox");
 	const termsHiddenCheckbox = document.querySelector("md-checkbox#termsCheckbox + input") as HTMLInputElement;
 
-    const noAccountCheckbox = document.querySelector("md-checkbox#noAccountCheckbox");
+	const noAccountCheckbox = document.querySelector("md-checkbox#noAccountCheckbox") as MdCheckbox;
 
 	const categoriasInput = document.querySelector("md-outlined-text-field#categoriasInput") as MdOutlinedTextField;
 	const categoriasMenu = document.querySelector("#categoriasInput + md-menu") as MdMenu;
@@ -210,11 +219,11 @@ import Layout from "../../layouts/Layout.astro";
 	const tipoSangreInput = document.querySelector("md-outlined-text-field#tipoSangreInput") as MdOutlinedTextField;
 	const tipoSangreMenu = document.querySelector("#tipoSangreInput + md-menu") as MdMenu;
 
-    const slButton = document.querySelector("sl-button");
-    const mdButton = document.querySelector("md-filled-button");
-    mdButton?.addEventListener("click", () => {
-        slButton?.click();
-    });
+	const slButton = document.querySelector("sl-button");
+	const mdButton = document.querySelector("md-filled-button");
+	mdButton?.addEventListener("click", () => {
+		slButton?.click();
+	});
 
 	// Click listener
 	categoriasInput?.addEventListener("click", () => {
@@ -228,7 +237,10 @@ import Layout from "../../layouts/Layout.astro";
 	categoriasMenu?.addEventListener("action", (event) => {
 		let target = event.target as HTMLElement;
 		let { value } = target.dataset;
-		if (value) categoriasInput.value = value;
+		if (value) {
+			categoriasInput.value = value;
+			validateInput(categoriasInput);
+		}
 	});
 
 	tipoSangreInput?.addEventListener("click", () => {
@@ -242,29 +254,36 @@ import Layout from "../../layouts/Layout.astro";
 	tipoSangreMenu?.addEventListener("action", (event) => {
 		let target = event.target as MdMenuItem;
 		console.log("headline click:", target.headline);
-		if (target) tipoSangreInput.value = target.headline;
+		if (target) {
+			tipoSangreInput.value = target.headline;
+			validateInput(tipoSangreInput);
+		}
 	});
+
+	const validateInput = (input: MdOutlinedTextField) => {
+		const isInputValid = input.checkValidity();
+		if (!isInputValid) {
+			if (input.value === "") {
+				input.setCustomValidity("Campo requerido.");
+			} else if (input.validity.typeMismatch || input.validity.badInput) {
+				input.setCustomValidity("Por favor ingresa un valor válido.");
+			} else if (input.validity.tooShort) {
+				input.setCustomValidity("Requiere un mínimo de 6 caracteres");
+			} else if (input.validity.valid || input.validity.valueMissing) {
+				input.setCustomValidity("Campo requerido.");
+			} else {
+				input.setCustomValidity("");
+			}
+
+			// Report to update input error message.
+			input.reportValidity();
+		}
+	};
 
 	// Ensures errors are cleared when input is valid.
 	const runningValidation = (input: MdOutlinedTextField) => {
 		input.addEventListener("input", () => {
-			const isInputValid = input.checkValidity();
-			if (!isInputValid) {
-				if (input.value === "") {
-					input.setCustomValidity("Campo requerido.");
-				} else if (input.validity.typeMismatch || input.validity.badInput) {
-					input.setCustomValidity("Por favor ingresa un valor válido.");
-				} else if (input.validity.tooShort) {
-					input.setCustomValidity("Requiere un mínimo de 6 caracteres");
-				} else if (input.validity.valid || input.validity.valueMissing) {
-					input.setCustomValidity("Campo requerido.");
-				} else {
-					input.setCustomValidity("");
-				}
-
-				// Report to update input error message.
-				input.reportValidity();
-			}
+			validateInput(input);
 		});
 	};
 
@@ -289,14 +308,42 @@ import Layout from "../../layouts/Layout.astro";
 			handleSubmit();
 		} else {
 			console.log("SUBMIT error:", event);
-            form.scrollIntoView({ behavior: "smooth", block: "start" })
+			form.scrollIntoView({ behavior: "smooth", block: "start" });
+			registrationMachine.send({
+				type: "NOTIFY_FORM_ERROR",
+			});
 		}
 	});
 
 	const handleSubmit = async () => {
 		if (!form) return;
-		const data = new FormData(form);
-		console.log("form data:", data);
+		// Get form data
+		const formData = new FormData(form);
+		const data = Object.fromEntries(formData.entries());
+		console.log("data:", data);
+
+		// Create account using firebase singleton. Consider moving this to machine.
+		if (!noAccountCheckbox?.checked) {
+			singleton.machine.send({
+                type: "CREATE_ACCOUNT",
+                newUser: {
+                    email: data.email as string,
+                    password: data.password as string,
+                }
+            });
+		}
+
+		registrationMachine.send({
+			type: "SUBMIT_REGISTRATION",
+			registrationDetails: {
+				email: data.email as string,
+				fullName: data.fullName as string,
+				teamName: data.teamName as string,
+				raceType: (data.raceType || "") as string,
+				raceCategory: data.raceCategory as string,
+				bloodType: data.bloodType as string,
+			}
+		});
 	};
 
 	// Syncs the native checkbox with the material checkbox.
@@ -311,20 +358,19 @@ import Layout from "../../layouts/Layout.astro";
 	// Add checkbox change listener
 	disclaimerCheckbox?.addEventListener("change", () => _syncNativeCheckbox(disclaimerHiddenCheckbox));
 	termsCheckbox?.addEventListener("change", () => _syncNativeCheckbox(termsHiddenCheckbox));
-    
-    
-    // Disable/enable password input
-    noAccountCheckbox?.addEventListener("change", (e) => {
-        console.log('check:', e)
-        const noAccount = e?.target?.checked;
-        const passwordInput = document.querySelector("md-outlined-text-field#passwordInput") as MdOutlinedTextField;
-        passwordInput.disabled = noAccount;
-        if (noAccount) {
-            passwordInput.value = '';
-            passwordInput.setCustomValidity('');
-        } else {
-            passwordInput.setCustomValidity('Campo requerido.');
-        }
-        passwordInput.reportValidity()
-    });
+
+	// Disable/enable password input
+	noAccountCheckbox?.addEventListener("change", (e) => {
+		console.log("check:", e);
+		const noAccount = e?.target?.checked;
+		const passwordInput = document.querySelector("md-outlined-text-field#passwordInput") as MdOutlinedTextField;
+		passwordInput.disabled = noAccount;
+		if (noAccount) {
+			passwordInput.value = "";
+			passwordInput.setCustomValidity("");
+		} else {
+			passwordInput.setCustomValidity("Campo requerido.");
+		}
+		passwordInput.reportValidity();
+	});
 </script>
