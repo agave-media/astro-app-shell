@@ -73,6 +73,18 @@ export class AppHeader extends LitElement {
 		:host([colorscheme="dark"]) .logo-container img:hover {
 			background: var(--md-sys-color-secondary-container-light);
 		}
+
+        :host(:not([_wideview])) .icon-container {
+            display: none;
+        }
+
+        :host(:not([_wideview])) .container {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        :host(:not([_wideview])) .logo-container {
+            justify-self: flex-start;
+        }
 	`;
 
 	protected override render() {
