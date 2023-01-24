@@ -14,6 +14,7 @@
     "@layout/components": "*",
     "@state/machines": "*",
     "@util/helpers": "*",
+    "@db/clients": "*",
     "astro": "^1.9.0",
     "@astrojs/vercel": "^2.4.0",
     "@astrojs/lit": "^1.0.2",
