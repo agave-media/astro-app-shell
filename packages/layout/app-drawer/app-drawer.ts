@@ -9,7 +9,7 @@ import "@material/web/list/list-item-icon";
 import "@material/web/navigationtab/navigation-tab";
 import "@material/web/icon/icon";
 import "@material/web/iconbutton/outlined-icon-button-toggle";
-import { tlalocIcon } from '../tlaloc_icon';
+import { tlalocIcon } from "../tlaloc_icon";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -31,6 +31,9 @@ export class AppDrawer extends LitElement {
 	@property({ type: Boolean, reflect: true })
 	wideview: boolean;
 
+	@property({ type: Boolean, reflect: true })
+	railopen: boolean;
+
 	static override styles = css`
 		:host {
 			display: block;
@@ -48,15 +51,15 @@ export class AppDrawer extends LitElement {
 			flex-direction: column;
 			height: 100%;
 		}
-        .narrow-drawer-content .nav-elements {
-            margin-top: 64px;
-        }
-        .narrow-drawer-content .nav-elements div {
-            flex: 1;
+		.narrow-drawer-content .nav-elements {
+			margin-top: 64px;
+		}
+		.narrow-drawer-content .nav-elements div {
+			flex: 1;
 
-            display: flex;
-            align-items: center;
-        }
+			display: flex;
+			align-items: center;
+		}
 		:host(:not([wideview])) drawer-component {
 			margin-top: 0;
 		}
@@ -108,10 +111,10 @@ export class AppDrawer extends LitElement {
 		.logo-icon {
 			mix-blend-mode: multiply;
 		}
-        md-outlined-icon-button-toggle {
-            align-self: center;
-            margin-bottom: 16px;
-        }
+		md-outlined-icon-button-toggle {
+			align-self: center;
+			margin-bottom: 16px;
+		}
 	`;
 
 	protected override render() {
@@ -120,8 +123,11 @@ export class AppDrawer extends LitElement {
 				@open-changed="${(e: CustomEvent) => {
 					if (this._open !== e.detail) this._open = e.detail;
 				}}"
-				.type="${this.wideview ? "persistent" : "modal"}">
-                <!-- Causes weird overlay bug when transitioning. Since it isn't used, temp. remove it. -->
+				.type="${this.wideview ? (
+                    this.railopen ? "persistent" : "modal"
+                ) : "modal"}"
+            >
+				<!-- Causes weird overlay bug when transitioning. Since it isn't used, temp. remove it. -->
 				<!-- <div id="drawerContent" class="drawer-content">
 					<div class="dialog-header">
 						<md-standard-icon-button @click=${this.close}>${tlalocIcon}</md-standard-icon-button>
@@ -129,8 +135,8 @@ export class AppDrawer extends LitElement {
 						<h2 class="header-title">
 							<div
 								@click=${() => {
-									if (window.location.pathname !== "/") window.location.href = "/";
-								}}
+					if (window.location.pathname !== "/") window.location.href = "/";
+				}}
 								class="logo-container">
 								<img src=${this.logo} alt="Tlaloc Ride Tuned logo" />
 							</div>
@@ -141,8 +147,8 @@ export class AppDrawer extends LitElement {
 							<md-list-item
 								?data-active=${window.location.pathname === "/"}
 								@click=${() => {
-									if (window.location.pathname !== "/") window.location.href = "/";
-								}}
+					if (window.location.pathname !== "/") window.location.href = "/";
+				}}
 								headline="Inicio">
 								<md-list-item-icon slot="start">${tlalocIcon}</md-list-item-icon>
 							</md-list-item>
@@ -160,41 +166,54 @@ export class AppDrawer extends LitElement {
 
 				<div slot="narrow" class="narrow-drawer-content">
 					<div class="nav-elements">
-                        <div>
-                            <md-list>
-                                <md-navigation-tab
-                                    @click=${() => {
-                                        if (window.location.pathname !== "/") window.location.href = "/";
-                                    }}
-                                    ?active=${window.location.pathname === "/"}
-                                    .label=${"Inicio"}>
-                                    <div slot="activeIcon">
-                                        <md-icon>${tlalocIcon}</md-icon>
-                                    </div>
-                                    <div slot="inactiveIcon">
-                                        <md-icon>${tlalocIcon}</md-icon>
-                                    </div>
-                                </md-navigation-tab>
-                                <md-navigation-tab ?active=${window.location.pathname.includes("/eventos")} .label=${"Eventos"}>
-                                    <div slot="activeIcon">
-                                        <md-icon>directions_bike</md-icon>
-                                    </div>
-                                    <div slot="inactiveIcon">
-                                        <md-icon>directions_bike</md-icon>
-                                    </div>
-                                </md-navigation-tab>
-                                <md-navigation-tab ?active=${window.location.pathname.includes("/tienda")} .label=${"Tienda"}>
-                                    <div slot="activeIcon">
-                                        <md-icon>storefront</md-icon>
-                                    </div>
-                                    <div slot="inactiveIcon">
-                                        <md-icon>storefront</md-icon>
-                                    </div>
-                                </md-navigation-tab>
-                            </md-list>
-                        </div>
+						<div>
+							<md-list>
+								<md-navigation-tab
+									@click=${() => {
+										if (window.location.pathname !== "/") window.location.href = "/";
+									}}
+									?active=${window.location.pathname === "/"}
+									.label=${"Inicio"}>
+									<div slot="activeIcon">
+										<md-icon>${tlalocIcon}</md-icon>
+									</div>
+									<div slot="inactiveIcon">
+										<md-icon>${tlalocIcon}</md-icon>
+									</div>
+								</md-navigation-tab>
+								<md-navigation-tab ?active=${window.location.pathname.includes("/eventos")} .label=${"Eventos"}>
+									<div slot="activeIcon">
+										<md-icon>directions_bike</md-icon>
+									</div>
+									<div slot="inactiveIcon">
+										<md-icon>directions_bike</md-icon>
+									</div>
+								</md-navigation-tab>
+								<!-- <md-navigation-tab ?active=${window.location.pathname.includes("/tienda")} .label=${"Tienda"}>
+									<div slot="activeIcon">
+										<md-icon>storefront</md-icon>
+									</div>
+									<div slot="inactiveIcon">
+										<md-icon>storefront</md-icon>
+									</div>
+								</md-navigation-tab> -->
+								<md-navigation-tab
+									@click=${() => {
+										if (window.location.pathname !== "/registro") window.location.href = "/registro";
+									}}
+									?active=${window.location.pathname.includes("/registro")}
+									.label=${"Registro"}>
+									<div slot="activeIcon">
+										<md-icon>confirmation_number</md-icon>
+									</div>
+									<div slot="inactiveIcon">
+										<md-icon>confirmation_number</md-icon>
+									</div>
+								</md-navigation-tab>
+							</md-list>
+						</div>
 
-                        <md-outlined-icon-button-toggle .selected=${this.colorScheme === "dark"} @icon-button-toggle-change=${this._darkModeToggle} onIcon="light_mode" offIcon="dark_mode"></md-outlined-icon-button-toggle>
+						<md-outlined-icon-button-toggle .selected=${this.colorScheme === "dark"} @icon-button-toggle-change=${this._darkModeToggle} onIcon="light_mode" offIcon="dark_mode"></md-outlined-icon-button-toggle>
 					</div>
 				</div>
 			</drawer-component>
@@ -216,7 +235,13 @@ export class AppDrawer extends LitElement {
 		if (drawer) drawer.open = !drawer.open;
 	}
 
-    _darkModeToggle(e : CustomEvent) {
-        this.dispatchEvent(new CustomEvent('dark-mode-toggle', {detail: {selected: e.detail.selected}, bubbles: true, composed: true}))
+    toggleRail() {
+        if (this.wideview) {
+            this.railopen = !this.railopen
+        }
     }
+
+	_darkModeToggle(e: CustomEvent) {
+		this.dispatchEvent(new CustomEvent("dark-mode-toggle", { detail: { selected: e.detail.selected }, bubbles: true, composed: true }));
+	}
 }

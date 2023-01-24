@@ -5,16 +5,18 @@ export interface Props {
 	href: string;
 }
 
-const { href, title, subtitle } = Astro.props;
+const { href } = Astro.props;
 ---
 
 <section>
-	<img src={href} />
-	<div class="content prose sm:prose-lg md:prose-xl lg:prose-2xl dark:prose-invert">
-		<h1>{title}</h1>
-		<p>{subtitle}</p>
+	<img class="overlay" src={href} />
+	
+    <div class="content">
+		<div class="header-image-container">
+            <img class="header-image" src="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Fcalendariomtb.png?alt=media&token=dd0c1255-22d5-4409-af0d-0ce6aa9329db">
+        </div>
 
-        <md-filled-button label="Ver fechas"></md-filled-button>
+        <!-- <md-filled-button label="Ver fechas"></md-filled-button> -->
 	</div>
 </section>
 
@@ -22,12 +24,17 @@ const { href, title, subtitle } = Astro.props;
 	section {
 		text-align: center;
         position: relative;
-        flex: 1;
+        height: 350px;
 
         display: flex;
+        flex-direction: column;
 	}
 
-	img {
+    md-filled-button {
+        margin-top: 24px;
+    }
+
+	img.overlay {
 		position: absolute;
 		left: 0;
 		top: 0;
@@ -35,13 +42,17 @@ const { href, title, subtitle } = Astro.props;
 		width: 100%;
 		object-fit: cover;
         border-radius: 24px;
-        filter: brightness(0.35);
+        object-position: top;
 	}
+
+    img.header-image {
+        width: 100%;
+    }
 
 	.content {
 		display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
 		
         height: 100%;
@@ -60,6 +71,5 @@ const { href, title, subtitle } = Astro.props;
 </style>
 
 <script>
-    import '@material/web/button/elevated-button'
     import '@material/web/button/filled-button'
 </script>

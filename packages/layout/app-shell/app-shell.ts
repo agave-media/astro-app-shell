@@ -6,7 +6,11 @@ import "../app-drawer/app-drawer";
 import "../app-header/app-header";
 import "../app-bottom-navigation/app-bottom-navigation";
 import "@material/web/fab/fab";
+import "@material/web/button/outlined-button";
+import "@material/web/iconbutton/standard-icon-button";
+import "@material/web/iconbutton/standard-icon-button-toggle";
 import { getInstance as getSettingsInstance } from "@state/machines/settings";
+import singleton from "@db/clients/firebase.js";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -22,10 +26,16 @@ export class AppShell extends LitElement {
 	@property({ type: Boolean, reflect: true })
 	_wideview: boolean;
 
+	@property({ type: Boolean, reflect: true })
+	_railopen: boolean;
+
+	@property({ type: Boolean })
+	loggedIn: boolean;
+
 	@property({ type: String })
 	logo: string;
 
-    @property({ type: String })
+	@property({ type: String })
 	colorScheme: string;
 
 	static override styles = css`
@@ -41,16 +51,16 @@ export class AppShell extends LitElement {
 			z-index: 2;
 		}
 
-        :host(:not([_wideview])) div.main-content {
-            margin-bottom: 80px;
-            min-height: calc(100vh - 80px - 64px);
-        }
+		:host(:not([_wideview])) div.main-content {
+			margin-bottom: 80px;
+			min-height: calc(100vh - 80px - 64px);
+		}
 
 		div.main-content {
-            margin-top: 64px;
-            min-height: calc(100vh - 64px);
-	
-            display: flex;
+			margin-top: 64px;
+			min-height: calc(100vh - 64px);
+
+			display: flex;
 			flex-direction: column;
 			flex: 1;
 			align-self: stretch;
@@ -72,54 +82,84 @@ export class AppShell extends LitElement {
 			transform: translateX(280px);
 		}
 
-        :host([_wideview]) .content {
-            margin-bottom: 0;
-        }
+		:host([_wideview]) .content {
+			margin-bottom: 0;
+		}
 
-        md-fab {
-            position: fixed;
-            bottom: 96px;
-            right: 16px;
-            z-index: 3;
-            display: none;
-        }
+		md-fab {
+			position: fixed;
+			bottom: 96px;
+			right: 16px;
+			z-index: 3;
+			display: none;
+		}
 
-        :host(:not([_wideview])) md-fab {
-            display: block;
-        }
+		:host(:not([_wideview])) md-fab {
+			display: block;
+		}
 
-        app-bottom-navigation {
-            z-index: 5;
-        }
+		:host(:not([_wideview])) md-standard-icon-button-toggle {
+			display: none;
+		}
+
+		app-bottom-navigation {
+			z-index: 5;
+		}
 	`;
 
 	protected override render() {
 		return html`
-			<app-drawer .colorScheme=${this.colorScheme} .logo=${this.logo} .wideview=${this._wideview} @open-changed=${this._drawerOpenChanged}></app-drawer>
-            <app-header @open-drawer=${this.toggleDrawer} .logo=${this.logo} class="toolbar-top" id="header" title="Tlaloc Ride Tuned"></app-header>
+			<app-drawer .colorScheme=${this.colorScheme} .logo=${this.logo} .railopen=${this._railopen} .wideview=${this._wideview} @open-changed=${this._drawerOpenChanged}></app-drawer>
+			<app-header @open-drawer=${this.toggleDrawer} .logo=${this.logo} class="toolbar-top" id="header" title="Tlaloc Ride Tuned">
+				<md-standard-icon-button-toggle .selected=${!this._railopen} @click=${() => this.toggleRail()} slot="icon" onIcon="menu" offIcon="menu_open"></md-standard-icon-button-toggle>
+                
+                ${this.loggedIn ? html`
+                    <md-outlined-button @click=${this.signOut} slot="trailing" label="MiSerial">
+                        <md-icon slot="icon">bolt</md-icon>
+                    </md-outlined-button>
+                ` : nothing}
+            </app-header>
 
-			<div class="main-content" ?persistent=${this._wideview}>
-                <slot></slot>
+			<div class="main-content" ?persistent=${this._wideview && this._railopen}>
+				<slot></slot>
 			</div>
 
-            ${this._wideview ? nothing : html`<app-bottom-navigation></app-bottom-navigation>`}
-            <md-fab @click=${this._dipatchSetColorSchemeEvent} .icon=${this.colorScheme === "light" ? "dark_mode" : "light_mode"}></md-fab>
+			${this._wideview ? nothing : html`<app-bottom-navigation></app-bottom-navigation>`}
+			<md-fab @click=${this._dipatchSetColorSchemeEvent} .icon=${this.colorScheme === "light" ? "dark_mode" : "light_mode"}></md-fab>
 		`;
 	}
 
 	protected override async firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): Promise<void> {
 		installMediaQueryWatcher(`(min-width: 768px)`, (matches) => this._layoutChanged(matches));
 
-        const settings = getSettingsInstance();
+		singleton.attachAuthListener();
+        singleton.machine.onTransition((state) => {
+            if (state.matches("loggedIn")) {
+                console.log("logged in:", state.context);
+                this.loggedIn = true;
+            } else {
+                this.loggedIn = false;
+            }
+        });
+
+		const settings = getSettingsInstance();
 		settings.onTransition((state) => {
 			const { colorScheme } = state.context;
 			if (colorScheme) this.colorScheme = colorScheme;
 		});
+
+		this.dispatchEvent(new CustomEvent("update-loading-state", { detail: { state: "idle" }, bubbles: true, composed: true }));
+	}
+
+	toggleRail() {
+		this._railopen = !this._railopen;
 	}
 
 	_layoutChanged(isWideLayout: boolean) {
 		console.log("layout changed:", isWideLayout);
+
 		this._wideview = isWideLayout;
+		this._railopen = isWideLayout;
 
 		if (!isWideLayout) this._closeDrawer();
 	}
@@ -140,8 +180,12 @@ export class AppShell extends LitElement {
 		this._draweropen = e.detail;
 	}
 
-    _dipatchSetColorSchemeEvent(e : CustomEvent) {
-        const activateDarkMode = this.colorScheme === "light"; 
-        this.dispatchEvent(new CustomEvent('dark-mode-toggle', {detail: {selected: activateDarkMode}, bubbles: true, composed: true}))
+	_dipatchSetColorSchemeEvent(e: CustomEvent) {
+		const activateDarkMode = this.colorScheme === "light";
+		this.dispatchEvent(new CustomEvent("dark-mode-toggle", { detail: { selected: activateDarkMode }, bubbles: true, composed: true }));
+	}
+
+    signOut() {
+        singleton.signOut()
     }
 }

@@ -1,0 +1,10 @@
+{
+    "name": "@db/clients",
+    "version": "0.0.0",
+    "private": true,
+    "dependencies": {
+        "tsconfig": "*",
+        "@state/machines": "*"
+    }
+}
+  
