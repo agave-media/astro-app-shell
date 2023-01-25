@@ -181,7 +181,12 @@ export class AppDrawer extends LitElement {
 										<md-icon>${tlalocIcon}</md-icon>
 									</div>
 								</md-navigation-tab>
-								<md-navigation-tab ?active=${window.location.pathname.includes("/eventos")} .label=${"Eventos"}>
+								
+								<md-navigation-tab
+								@click=${() => {
+									if (window.location.pathname !== "/eventos") window.location.href = "/eventos";
+								}}
+								 ?active=${window.location.pathname.includes("/eventos")} .label=${"Eventos"}>
 									<div slot="activeIcon">
 										<md-icon>directions_bike</md-icon>
 									</div>
@@ -189,14 +194,19 @@ export class AppDrawer extends LitElement {
 										<md-icon>directions_bike</md-icon>
 									</div>
 								</md-navigation-tab>
-								<!-- <md-navigation-tab ?active=${window.location.pathname.includes("/tienda")} .label=${"Tienda"}>
+
+								<md-navigation-tab 
+								@click=${() => {
+									if (window.location.pathname !== "/tienda") window.location.href = "/tienda";
+								}}
+								?active=${window.location.pathname.includes("/tienda")} .label=${"Tienda"}>
 									<div slot="activeIcon">
 										<md-icon>storefront</md-icon>
 									</div>
 									<div slot="inactiveIcon">
 										<md-icon>storefront</md-icon>
 									</div>
-								</md-navigation-tab> -->
+								</md-navigation-tab>
 								<md-navigation-tab
 									@click=${() => {
 										if (window.location.pathname !== "/registro") window.location.href = "/registro";
