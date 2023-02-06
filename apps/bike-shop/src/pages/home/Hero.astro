@@ -12,26 +12,27 @@ const { href } = Astro.props;
 	<img class="overlay" src={href} />
 	
     <div class="content">
-		<div class="header-image-container">
-            <img class="header-image" src="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Fcalendariomtb.png?alt=media&token=dd0c1255-22d5-4409-af0d-0ce6aa9329db">
-        </div>
+		<h1>Reto 2 cumbres</h1>
+        <h3>1er fecha - 19 de febrero</h3>
+        <h3>Salida en Cabañas TLALOCAMP, Monte Tláloc, Texcoco</h3>
 
-        <!-- <md-filled-button label="Ver fechas"></md-filled-button> -->
+        <md-filled-button label="Registrate ahora"></md-filled-button>
 	</div>
 </section>
 
 <style>
 	section {
-		text-align: center;
         position: relative;
         height: 350px;
 
         display: flex;
         flex-direction: column;
+        color: var(--md-sys-color-inverse-on-surface-light);
+        justify-content: center;
 	}
 
     md-filled-button {
-        margin-top: 24px;
+        margin-top: 32px;
     }
 
 	img.overlay {
@@ -41,8 +42,10 @@ const { href } = Astro.props;
 		height: 100% !important;
 		width: 100%;
 		object-fit: cover;
-        border-radius: 24px;
-        object-position: top;
+        border-radius: 16px;
+        object-position: center;
+
+        filter: brightness(0.8);
 	}
 
     img.header-image {
@@ -52,13 +55,12 @@ const { href } = Astro.props;
 	.content {
 		display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
+        justify-content: center;
+        align-items: flex-start;
 		
-        height: 100%;
-		padding: 16px;
+		padding: 24px;
 		box-sizing: border-box;
-        margin: auto;
+        border-radius: 12px;
 	}
 
 	.content > * {
@@ -67,6 +69,27 @@ const { href } = Astro.props;
 
     h1 {
         margin: 0 !important;
+        font-family: "JetBrains Mono";
+        letter-spacing: 0.5px;
+        font-size: 52px;
+        text-transform: uppercase;
+    }
+
+    h3 {
+        font-family: "JetBrains Mono";
+        font-weight: 300;
+        margin: 0;
+        font-size: 20px;
+    }
+
+    @media (max-width: 768px) {
+        md-filled-button {
+            align-self: center;
+        }
+
+        section {
+            height: auto;
+        }
     }
 </style>
 
