@@ -16,7 +16,7 @@ const { href } = Astro.props;
         <h3>1er fecha - 19 de febrero</h3>
         <h3>Salida en Cabañas TLALOCAMP, Monte Tláloc, Texcoco</h3>
 
-        <md-filled-button label="Registrate ahora"></md-filled-button>
+        <md-filled-link-button href="/registro" label="Registrate ahora"></md-filled-link-button>
 	</div>
 </section>
 
@@ -31,7 +31,7 @@ const { href } = Astro.props;
         justify-content: center;
 	}
 
-    md-filled-button {
+    md-filled-link-button {
         margin-top: 32px;
     }
 
@@ -83,7 +83,7 @@ const { href } = Astro.props;
     }
 
     @media (max-width: 768px) {
-        md-filled-button {
+        md-filled-link-button {
             align-self: center;
         }
 
@@ -94,5 +94,5 @@ const { href } = Astro.props;
 </style>
 
 <script>
-    import '@material/web/button/filled-button'
+    import '@material/web/button/filled-link-button'
 </script>
