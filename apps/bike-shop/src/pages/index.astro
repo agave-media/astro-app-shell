@@ -14,6 +14,34 @@ const { default: medalIcon } = await import(`@layout/components/icons/medal_icon
 
 		<p>Evento deportivo, perfecto para aquellos que disfrutan de los retos y buscan superar sus limites. Este emocionante evento se llevara a cabo en Monte Tlaloc y Monte Telapon, Texcoco, Estado de Mexico, contara con un circuito de 34 kilometros y 1562 metros de desnivel positivo, llenos de obstaculos naturales como subidas demandantes, bajadas tecnicas, rock garden y escalones.</p>
 
+		<div class="rewards-container">
+			<h2>
+				INSCRIPCIÓN POR PERSONA
+				
+				<!-- <p class="rewards">
+					Tu inscripcion incluye:<br>
+					Desayuno (sandwich, fruta, yogurt, cereal, cafe y pan), 4 puntos de hidratacion basicos y un punto de recuperacion entre cumbres (con fruta, barra de ensaladas, pastas y servicio medico), marcaje de ruta, jersey tipo XC, bandana, medalla conmemorativa, premios en efectivo al 1er lugar de cada categoria.
+				</p> -->
+				
+				<p class="rewards">
+					Tu inscripcion incluye:<br>
+					<ul>
+						<li>Desayuno (sandwich, fruta, yogurt, cereal, cafe y pan)</li>
+						<li>4 puntos de hidratacion basicos</li>
+						<li>Un punto de recuperacion entre cumbres (con fruta, barra de ensaladas, pastas y servicio medico)</li>
+						<li>Marcaje de ruta</li>
+						<li>Jersey tipo XC</li>
+						<li>Bandana</li>
+						<li>Medalla conmemorativa</li>
+						<li>Premios en efectivo al 1er lugar de cada categoria</li>
+					</ul>
+				</p>
+			</h2>
+
+			<image-loader href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2F2cumbres_square_banner.jpg?alt=media&token=7ac51350-10d4-4581-94eb-172e64ffe8fd"></image-loader>
+		</div>
+
+
 		<div class="info-container">
 			<SingleInfoCard title="Ruta" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a quam rhoncus.">
                 <Fragment set:html={mountainTrailIcon} />
@@ -34,9 +62,10 @@ const { default: medalIcon } = await import(`@layout/components/icons/medal_icon
 
 <style>
 	main {
-		gap: 56px;
+		gap: 72px;
+		color: var(--md-sys-color-on-surface);
 	}
-
+	
 	.info-container {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, 1fr);
@@ -45,17 +74,51 @@ const { default: medalIcon } = await import(`@layout/components/icons/medal_icon
         margin: 40px auto;
 	}
 	
+	h2 {
+		font-family: "JetBrains Mono";
+		letter-spacing: 1px;
+		margin: 0;
+	}
+	
 	p {
-		color: var(--md-sys-color-on-surface);
-		/* font-family: "JetBrains Mono"; */
 		font-size: 1.3rem;
 		letter-spacing: 1px;
-		padding: 0 24px;
 		font-weight: 300;
 		margin: 0;
+	}
+
+	.rewards {
+		margin-top: 12px;
+		font-size: 1rem;
+	}
+
+	ul {
+		font-size: 1rem;
+		font-weight: 300;
+		margin: 0;
+		padding: 0 30px;
+	}
+
+	.rewards-container {
+		display: grid;
+		grid-template-columns: 3fr 2fr;
+	}
+
+	@media(max-width: 768px) {
+		.rewards-container {
+			grid-template-columns: 1fr;
+		}
+
+		image-loader {
+			max-width: 400px;
+			margin: auto;
+			margin-bottom: 24px;
+			order: -1;
+		}
 	}
 </style>
 
 <script>
 	import "../sections/contact-section";
+	import "../components/image-loader"
 </script>
