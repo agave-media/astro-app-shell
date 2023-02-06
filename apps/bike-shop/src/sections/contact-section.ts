@@ -9,8 +9,8 @@ export class ContactSection extends LitElement {
 	@property({ type: String })
 	email: string;
 
-	@property({ type: Number })
-	phoneNumber: number;
+	@property({ type: String })
+	phoneNumber: string;
 
 	@property({ type: Object })
 	map: any;
@@ -118,20 +118,13 @@ export class ContactSection extends LitElement {
 		}
 	`;
 
-	constructor() {
-		super();
-
-		this.phoneNumber = 1234323423;
-		this.email = "test@test.com";
-	}
-
 	protected override render() {
 		return html`
 			<section class="wrapper">
 				<div class="left">
 					<div class="text-info">
 						<h1>Como llegar</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a quam rhoncus.</p>
+						<p>Lugar sede, Cabañas "Tlalocamp", Monte Tláloc, Estado de México</p>
 					</div>
 					<div class="contact-info">
 						<a class="contact-links" target="_blank" href=${`mailto: ${this?.email}`} rel="noreferrer">
