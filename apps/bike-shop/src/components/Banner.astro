@@ -1,0 +1,66 @@
+---
+export interface Props {
+	title: string;
+	href: string;
+}
+
+const { href, title } = Astro.props;
+---
+
+<section>
+	<img class="overlay" src={href} />
+	
+    <div class="content">
+		<h1>{title}</h1>
+    </div>
+</section>
+
+<style>
+	section {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        color: var(--md-sys-color-inverse-on-surface-light);
+        justify-content: center;
+	}
+
+	img.overlay {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100% !important;
+		width: 100%;
+		object-fit: cover;
+        border-radius: 16px;
+        object-position: center;
+
+        filter: brightness(0.8);
+	}
+
+	.content {
+		display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+		
+		padding: 24px;
+		box-sizing: border-box;
+        border-radius: 12px;
+	}
+
+	.content > * {
+		z-index: 1;
+	}
+
+    h1 {
+        margin: 0 !important;
+        font-family: "JetBrains Mono";
+        letter-spacing: 0.5px;
+        font-size: 42px;
+        text-transform: uppercase;
+    }
+</style>
+
+<script>
+    import '@material/web/button/filled-button'
+</script>
