@@ -12,6 +12,8 @@ const { default: medalIcon } = await import(`@layout/components/icons/medal_icon
 	<main>
 		<Hero href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Fhero_better_forest.jpg?alt=media&token=5196fb7b-1cd4-4fa3-9296-49283f02c61b" title="Serial MTB Texcoco" subtitle="La mejor experiencia de ciclismo de montaña en Texcoco" />
 
+		<p>Evento deportivo, perfecto para aquellos que disfrutan de los retos y buscan superar sus limites. Este emocionante evento se llevara a cabo en Monte Tlaloc y Monte Telapon, Texcoco, Estado de Mexico, contara con un circuito de 34 kilometros y 1562 metros de desnivel positivo, llenos de obstaculos naturales como subidas demandantes, bajadas tecnicas, rock garden y escalones.</p>
+
 		<div class="info-container">
 			<SingleInfoCard title="Ruta" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a quam rhoncus.">
                 <Fragment set:html={mountainTrailIcon} />
@@ -42,10 +44,16 @@ const { default: medalIcon } = await import(`@layout/components/icons/medal_icon
         max-width: 600px;
         margin: 40px auto;
 	}
-
-    svg {
-        fill: white;
-    }
+	
+	p {
+		color: var(--md-sys-color-on-surface);
+		/* font-family: "JetBrains Mono"; */
+		font-size: 1.3rem;
+		letter-spacing: 1px;
+		padding: 0 24px;
+		font-weight: 300;
+		margin: 0;
+	}
 </style>
 
 <script>

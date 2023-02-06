@@ -20,7 +20,7 @@ export class ImageLoader extends LitElement {
     protected override render() {
         return html`
             <div class="banner">
-                <img src="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Fserial_banner.jpg?alt=media&token=26be61c9-9f3b-4119-93ff-1ad5cf7e626a" alt="serial banner">
+                <img src="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2F2cumbres_long_banner.jpg?alt=media&token=68d73a5e-f976-43be-83c3-4a6ff47bd64bs" alt="serial banner">
             </div>
         `;
     }

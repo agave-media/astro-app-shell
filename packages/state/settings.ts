@@ -9,7 +9,7 @@ export type SettingsMachineEvent = { type: "SET_COLOR_SCHEME"; colorScheme: stri
 const settingsMachine = createMachine<SettingsMachineContext, SettingsMachineEvent>(
 	{
 		context: {
-			colorScheme: "light",
+			colorScheme: "dark",
 		},
 		id: "settings",
 		type: "parallel",

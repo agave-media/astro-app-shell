@@ -28,7 +28,7 @@ export class AppHeader extends LitElement {
 			left: 0;
 			right: 0;
 
-			height: 64px;
+			height: 106px;
 			box-sizing: border-box;
 			display: flex;
 		}
@@ -41,6 +41,7 @@ export class AppHeader extends LitElement {
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr;
 			align-items: center;
+			align-content: center;
 		}
 
 		.trailing-container {
@@ -51,27 +52,27 @@ export class AppHeader extends LitElement {
 
 		.logo-container {
 			display: flex;
-			height: 48px;
+			height: 90px;
 			justify-self: center;
 			cursor: pointer;
 			align-items: center;
-			border-radius: 12px;
 		}
 
 		img {
 			border-radius: 12px;
-			padding: 4px;
 			height: 100%;
 			width: auto;
+			mix-blend-mode: lighten;
 		}
 
-		:host([colorscheme="dark"]) .logo-container img {
-			background: var(--md-sys-color-inverse-surface);
+		:host([colorscheme="light"]) .logo-container img {
+			mix-blend-mode: difference;
 		}
 
 		.logo-container img:hover,
-		:host([colorscheme="dark"]) .logo-container img:hover {
-			background: var(--md-sys-color-secondary-container-light);
+		:host([colorscheme="dark"]) .logo-container img:hover,
+		:host([colorscheme="light"]) .logo-container img:hover {
+			mix-blend-mode: initial;
 		}
 
         :host(:not([_wideview])) .icon-container {

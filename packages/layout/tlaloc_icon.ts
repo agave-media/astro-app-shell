@@ -1,7 +1,7 @@
 import { html } from 'lit'
 export const tlalocIcon = html`
     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="584.000000pt" height="584.000000pt" viewBox="0 0 584.000000 584.000000" preserveAspectRatio="xMidYMid meet">
-        <g transform="translate(0.000000,584.000000) scale(0.100000,-0.100000)" fill="#007a78" stroke="none">
+        <g transform="translate(0.000000,584.000000) scale(0.100000,-0.100000)" stroke="none">
             <path d="M2713 4473 c-31 -4 -33 -6 -33 -46 0 -51 -30 -119 -61 -141 -13 -9
             -40 -16 -61 -16 -48 0 -108 52 -135 115 -20 49 -24 51 -98 32 l-50 -13 -5 -75
             c-6 -79 -17 -109 -52 -133 -53 -37 -125 -8 -187 76 l-35 46 -60 -22 c-34 -13
