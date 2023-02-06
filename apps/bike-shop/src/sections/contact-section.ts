@@ -18,12 +18,21 @@ export class ContactSection extends LitElement {
 	static override styles = css`
 		:host {
 			display: block;
+			color: var(--md-sys-color-on-surface);
 		}
-
+		
 		h1,
 		p {
 			margin: 0;
 		}
+		
+		/* h1 {
+			color: var(--md-sys-color-primary);
+		}
+		
+		p {
+			color: var(--md-sys-color-on-surface);
+		} */
 
 		.wrapper {
 			display: grid;
@@ -53,15 +62,19 @@ export class ContactSection extends LitElement {
 			align-items: center;
 
 			text-decoration: none;
-			color: black;
 		}
-
+		
 		.contact-links:hover p {
 			text-decoration: underline;
 		}
 
+		md-icon {
+			color: var(--md-sys-color-primary);
+		}
+		
 		.contact-links p {
 			margin-left: 5px;
+			color: var(--md-sys-color-on-surface);
 		}
 
 		.right {
