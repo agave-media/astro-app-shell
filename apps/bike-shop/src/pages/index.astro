@@ -1,14 +1,53 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "./home/Hero.astro";
+import SingleInfoCard from "../components/SingleInfoCard.astro";
+
+const { default: mountainTrailIcon } = await import(`@layout/components/icons/mountain_trail_icon.svg?raw`);
+const { default: rulesIcon } = await import(`@layout/components/icons/rules_icon.svg?raw`);
+const { default: medalIcon } = await import(`@layout/components/icons/medal_icon.svg?raw`);
 ---
 
 <Layout title="Tlaloc Ride Tuned">
 	<main>
-		<Hero
-			href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Fhero_better_forest.jpg?alt=media&token=5196fb7b-1cd4-4fa3-9296-49283f02c61b"
-            title="Serial MTB Texcoco"
-            subtitle="La mejor experiencia de ciclismo de montaña en Texcoco"
-		/>
+		<Hero href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Fhero_better_forest.jpg?alt=media&token=5196fb7b-1cd4-4fa3-9296-49283f02c61b" title="Serial MTB Texcoco" subtitle="La mejor experiencia de ciclismo de montaña en Texcoco" />
+
+		<div class="info-container">
+			<SingleInfoCard title="Ruta" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a quam rhoncus.">
+                <Fragment set:html={mountainTrailIcon} />
+            </SingleInfoCard>
+			
+            <SingleInfoCard title="Reglamento" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a quam rhoncus.">
+                <Fragment set:html={rulesIcon} />
+            </SingleInfoCard>
+
+			<SingleInfoCard title="Resultados" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a quam rhoncus.">
+                <Fragment set:html={medalIcon} />
+            </SingleInfoCard>
+		</div>
+
+        <contact-section></contact-section>
 	</main>
 </Layout>
+
+<style>
+	main {
+		gap: 56px;
+	}
+
+	.info-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, 1fr);
+		gap: 50px;
+        max-width: 600px;
+        margin: 40px auto;
+	}
+
+    svg {
+        fill: white;
+    }
+</style>
+
+<script>
+	import "../sections/contact-section";
+</script>

@@ -1,0 +1,60 @@
+---
+const { title, description } = Astro.props;
+---
+
+<div class="card-container">
+	<div class="icon-container">
+		<slot />
+	</div>
+	<div class="info-container">
+		<header>
+			<h1>{title}</h1>
+		</header>
+		<div class="description">
+			<p>{description}</p>
+		</div>
+	</div>
+</div>
+
+<style>
+	h1,
+	p {
+		margin: 0;
+	}
+
+	h1 {
+		font-size: 1.3rem;
+		text-transform: capitalize;
+	}
+
+	.info-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.card-container {
+		display: flex;
+		gap: 8px;
+	}
+
+	.icon-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		border-radius: 6px;
+		background-color: var(--md-sys-color-primary);
+
+		width: 60px;
+		padding: 12px;
+		height: 60px;
+		fill: white;
+	}
+
+	@media (max-width: 800px) {
+		.icon-container {
+			margin: 0 auto;
+		}
+	}
+</style>
