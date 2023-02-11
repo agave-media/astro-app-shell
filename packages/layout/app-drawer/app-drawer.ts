@@ -3,9 +3,6 @@ import { customElement } from "lit/decorators/custom-element.js";
 import { property } from "lit/decorators/property.js";
 import "./drawer-component";
 import "@material/web/list/list";
-import "@material/web/list/list-item";
-import "@material/web/list/list-divider";
-import "@material/web/list/list-item-icon";
 import "@material/web/navigationtab/navigation-tab";
 import "@material/web/icon/icon";
 import "@material/web/iconbutton/outlined-icon-button-toggle";
@@ -67,12 +64,6 @@ export class AppDrawer extends LitElement {
 			--md-list-container-color: var(--md-surface-2);
 			--md-list-list-item-container-color: var(--md-surface-2);
 			--md-list-list-item-label-text-color: var(--md-sys-color-on-surface);
-		}
-		md-list-item[data-active] {
-			--md-list-list-item-container-color: var(--md-sys-color-secondary-container);
-		}
-		md-list-item-icon {
-			display: flex;
 		}
 		.header-title {
 			font-size: 16px;
