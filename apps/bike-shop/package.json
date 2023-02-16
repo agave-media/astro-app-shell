@@ -18,6 +18,7 @@
     "astro": "^1.9.0",
     "@astrojs/vercel": "^2.4.0",
     "@astrojs/lit": "^1.0.2",
+    "@astrojs/sitemap": "^1.0.1",
     "lit": "^2.6.1",
     "@webcomponents/template-shadowroot": "^0.1.0",
     "@astrojs/tailwind": "^2.1.3",
