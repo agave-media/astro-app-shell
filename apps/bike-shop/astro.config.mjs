@@ -9,10 +9,10 @@ export default defineConfig({
     site: 'https://enduro4150.com',
     integrations: [lit(), sitemap({
         customPages: [
-            'https://enduro4150.com', 
-            'https://enduro4150.com/registro',
-            'https://enduro4150.com/eventos',
-            'https://enduro4150.com/nosotros',
+            'https://www.enduro4150.com', 
+            'https://www.enduro4150.com/registro',
+            'https://www.enduro4150.com/eventos',
+            'https://www.enduro4150.com/nosotros',
         ]
     })],
     adapter: vercel()
