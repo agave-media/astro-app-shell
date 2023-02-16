@@ -7,6 +7,13 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
     output: 'server',
     site: 'https://enduro4150.com',
-    integrations: [lit(), sitemap()],
+    integrations: [lit(), sitemap({
+        customPages: [
+            'https://enduro4150.com', 
+            'https://enduro4150.com/registro',
+            'https://enduro4150.com/eventos',
+            'https://enduro4150.com/nosotros',
+        ]
+    })],
     adapter: vercel()
 });
