@@ -110,7 +110,7 @@ export class AppShell extends LitElement {
 	protected override render() {
 		return html`
 			<app-drawer .colorScheme=${this.colorScheme} .logo=${this.logo} .railopen=${this._railopen} .wideview=${this._wideview} @open-changed=${this._drawerOpenChanged}></app-drawer>
-			<app-header @open-drawer=${this.toggleDrawer} .logo=${this.logo} class="toolbar-top" id="header" title="Tlaloc Ride Tuned">
+			<app-header @open-drawer=${this.toggleDrawer} .logo=${this.logo} class="toolbar-top" id="header" title="Reto 2 Cumbres">
 				<md-standard-icon-button-toggle .selected=${!this._railopen} @click=${() => this.toggleRail()} slot="icon" onIcon="menu" offIcon="menu_open"></md-standard-icon-button-toggle>
                 
                 ${this.loggedIn ? html`
