@@ -645,23 +645,23 @@
 	--md-surface-dark-5: #2e333e;
 
 	/* Required for correct font customization */
-	--md-filled-button-label-text-font: "Readex Pro";
-	--md-elevated-button-label-text-font: "Readex Pro";
-	--md-outlined-button-label-text-font: "Readex Pro";
-	--md-tonal-button-label-text-font: "Readex Pro";
-	--md-text-button-label-text-font: "Readex Pro";
-	--md-list-list-item-label-text-font: "Readex Pro";
-	--md-list-list-item-supporting-text-font: "Readex Pro";
-	--md-navigation-bar-label-text-font: "Readex Pro";
-	--md-filled-text-field-input-text-font: "Readex Pro";
-	--md-filled-text-field-label-text-font: "Readex Pro";
-	--md-filled-text-field-supporting-text-font: "Readex Pro";
-	--md-outlined-text-field-input-text-font: "Readex Pro";
-	--md-outlined-text-field-label-text-font: "Readex Pro";
-	--md-outlined-text-field-supporting-text-font: "Readex Pro";
-	--md-fab-extended-label-text-font: "Readex Pro";
-	--md-segmented-button-label-text-font: "Readex Pro";
-	--md-menu-list-item-label-text-font: "Readex Pro";
+	--md-filled-button-label-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-elevated-button-label-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-outlined-button-label-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-tonal-button-label-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-text-button-label-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-list-list-item-label-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-list-list-item-supporting-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-navigation-bar-label-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-filled-text-field-input-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-filled-text-field-label-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-filled-text-field-supporting-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-outlined-text-field-input-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-outlined-text-field-label-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-outlined-text-field-supporting-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-fab-extended-label-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-segmented-button-label-text-type: 500 0.75rem/1rem "Readex Pro";
+	--md-menu-list-item-label-text-type: 500 0.75rem/1rem "Readex Pro";
 
 	/* App shell background color */
 	--md-app-shell-background: var(--md-ref-palette-primary95);
