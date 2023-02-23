@@ -25,14 +25,6 @@ export class ContactSection extends LitElement {
 		p {
 			margin: 0;
 		}
-		
-		/* h1 {
-			color: var(--md-sys-color-primary);
-		}
-		
-		p {
-			color: var(--md-sys-color-on-surface);
-		} */
 
 		.wrapper {
 			display: grid;
@@ -124,7 +116,7 @@ export class ContactSection extends LitElement {
 				<div class="left">
 					<div class="text-info">
 						<h1>Como llegar</h1>
-						<p>Lugar sede, Cabañas "Tlalocamp", Monte Tláloc, Estado de México</p>
+						<p>Monte Tláloc, Estado de México</p>
 					</div>
 					<div class="contact-info">
 						<a class="contact-links" target="_blank" href=${`mailto: ${this?.email}`} rel="noreferrer">
@@ -140,7 +132,7 @@ export class ContactSection extends LitElement {
 				</div>
 				<div class="right">
 					<sl-card>
-						<iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3762.217949011207!2d-98.7572493!3d19.4461678!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1c37effe33393c43!2s76F3C6WV%2BCQ8!5e0!3m2!1sen!2smx!4v1674629624890!5m2!1sen!2smx" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d470.22999567451785!2d-98.7913189!3d19.4624655!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1dd020ac05093%3A0x19b556cec9581527!2sPluma%20Tlaloc!5e0!3m2!1sen!2smx!4v1677191226527!5m2!1sen!2smx" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 					</sl-card>
 				</div>
 			</section>
