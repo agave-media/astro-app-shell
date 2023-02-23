@@ -7,6 +7,7 @@ import "@material/web/navigationtab/navigation-tab";
 import "@material/web/icon/icon";
 import "@material/web/iconbutton/outlined-icon-button-toggle";
 import { tlalocIcon } from "../tlaloc_icon";
+import type { MdOutlinedIconButtonToggle } from "@material/web/iconbutton/outlined-icon-button-toggle";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -110,40 +111,37 @@ export class AppDrawer extends LitElement {
 				@open-changed="${(e: CustomEvent) => {
 					if (this._open !== e.detail) this._open = e.detail;
 				}}"
-				.type="${this.wideview ? (
-                    this.railopen ? "persistent" : "modal"
-                ) : "modal"}"
-            >
+				.type="${this.wideview ? (this.railopen ? "persistent" : "modal") : "modal"}">
 				<div slot="narrow" class="narrow-drawer-content">
 					<div class="nav-elements">
 						<div>
 							<md-list>
-								<md-navigation-tab 
+								<md-navigation-tab
 									@click=${() => {
 										if (window.location.pathname !== "/") window.location.href = "/";
-									}} 
-									?active=${window.location.pathname === "/"} 
+									}}
+									?active=${window.location.pathname === "/"}
 									.label=${"Inicio"}>
-										<div slot="activeIcon">
-											<md-icon>directions_bike</md-icon>
-										</div>
-										<div slot="inactiveIcon">
-											<md-icon>directions_bike</md-icon>
-										</div>
+									<div slot="activeIcon">
+										<md-icon>directions_bike</md-icon>
+									</div>
+									<div slot="inactiveIcon">
+										<md-icon>directions_bike</md-icon>
+									</div>
 								</md-navigation-tab>
 
-								<md-navigation-tab 
+								<md-navigation-tab
 									@click=${() => {
 										if (window.location.pathname !== "/eventos") window.location.href = "/eventos";
-									}} 
-									?active=${window.location.pathname.includes("/eventos")} 
+									}}
+									?active=${window.location.pathname.includes("/eventos")}
 									.label=${"Eventos"}>
-										<div slot="activeIcon">
-											<md-icon>confirmation_number</md-icon>
-										</div>
-										<div slot="inactiveIcon">
-											<md-icon>confirmation_number</md-icon>
-										</div>
+									<div slot="activeIcon">
+										<md-icon>confirmation_number</md-icon>
+									</div>
+									<div slot="inactiveIcon">
+										<md-icon>confirmation_number</md-icon>
+									</div>
 								</md-navigation-tab>
 
 								<md-navigation-tab
@@ -152,12 +150,12 @@ export class AppDrawer extends LitElement {
 									}}
 									?active=${window.location.pathname.includes("/registro")}
 									.label=${"Registro"}>
-										<div slot="activeIcon">
-											<md-icon>badge</md-icon>
-										</div>
-										<div slot="inactiveIcon">
-											<md-icon>badge</md-icon>
-										</div>
+									<div slot="activeIcon">
+										<md-icon>badge</md-icon>
+									</div>
+									<div slot="inactiveIcon">
+										<md-icon>badge</md-icon>
+									</div>
 								</md-navigation-tab>
 
 								<md-navigation-tab
@@ -166,22 +164,24 @@ export class AppDrawer extends LitElement {
 									}}
 									?active=${window.location.pathname.includes("/nosotros")}
 									.label=${"Nosotros"}>
-										<div slot="activeIcon">
-											<md-icon>${tlalocIcon}</md-icon>
-										</div>
-										<div slot="inactiveIcon">
-											<md-icon>${tlalocIcon}</md-icon>
-										</div>
+									<div slot="activeIcon">
+										<md-icon>${tlalocIcon}</md-icon>
+									</div>
+									<div slot="inactiveIcon">
+										<md-icon>${tlalocIcon}</md-icon>
+									</div>
 								</md-navigation-tab>
 							</md-list>
 						</div>
 
-						<md-outlined-icon-button-toggle 
-							.selected=${this.colorScheme === "dark"} 
-							@icon-button-toggle-change=${this._darkModeToggle} 
-							onIcon="light_mode" 
-							offIcon="dark_mode"
-						></md-outlined-icon-button-toggle>
+						<md-outlined-icon-button-toggle .selected=${this.colorScheme === "dark"} @input=${this._darkModeToggle}>
+                            <div>
+                                <md-icon>dark_mode</md-icon>
+                            </div>
+							<div slot="selectedIcon">
+								<md-icon>light_mode</md-icon>
+							</div>
+						</md-outlined-icon-button-toggle>
 					</div>
 				</div>
 			</drawer-component>
@@ -203,13 +203,14 @@ export class AppDrawer extends LitElement {
 		if (drawer) drawer.open = !drawer.open;
 	}
 
-    toggleRail() {
-        if (this.wideview) {
-            this.railopen = !this.railopen
-        }
-    }
+	toggleRail() {
+		if (this.wideview) {
+			this.railopen = !this.railopen;
+		}
+	}
 
 	_darkModeToggle(e: CustomEvent) {
-		this.dispatchEvent(new CustomEvent("dark-mode-toggle", { detail: { selected: e.detail.selected }, bubbles: true, composed: true }));
+        const { selected } = e.target as MdOutlinedIconButtonToggle
+        this.dispatchEvent(new CustomEvent("dark-mode-toggle", { detail: { selected }, bubbles: true, composed: true }));
 	}
 }
