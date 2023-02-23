@@ -130,7 +130,7 @@ export class AppDrawer extends LitElement {
 									</div>
 								</md-navigation-tab>
 
-								<md-navigation-tab
+								<!-- <md-navigation-tab
 									@click=${() => {
 										if (window.location.pathname !== "/eventos") window.location.href = "/eventos";
 									}}
@@ -142,7 +142,7 @@ export class AppDrawer extends LitElement {
 									<div slot="inactiveIcon">
 										<md-icon>confirmation_number</md-icon>
 									</div>
-								</md-navigation-tab>
+								</md-navigation-tab> -->
 
 								<md-navigation-tab
 									@click=${() => {
