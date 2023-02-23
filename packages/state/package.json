@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "tsconfig": "*",
-        "xstate": "^4.35.2"
+        "xstate": "^4.36.0"
     }
 }
   
