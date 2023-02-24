@@ -50,7 +50,7 @@ export class AppDrawer extends LitElement {
 			height: 100%;
 		}
 		.narrow-drawer-content .nav-elements {
-			margin-top: 106px;
+			margin-top: 64px;
 		}
 		.narrow-drawer-content .nav-elements div {
 			flex: 1;

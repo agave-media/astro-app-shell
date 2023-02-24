@@ -28,7 +28,7 @@ export class AppHeader extends LitElement {
 			left: 0;
 			right: 0;
 
-			height: 106px;
+			height: 64px;
 			box-sizing: border-box;
 			display: flex;
 		}
@@ -52,7 +52,7 @@ export class AppHeader extends LitElement {
 
 		.logo-container {
 			display: flex;
-			height: 90px;
+			height: 48px;
 			justify-self: center;
 			cursor: pointer;
 			align-items: center;
