@@ -353,15 +353,15 @@ import Layout from "../../layouts/Layout.astro";
 		console.log("data:", data);
 
 		// Create account using firebase singleton. Consider moving this to machine.
-		if (!noAccountCheckbox?.checked) {
-			singleton.machine.send({
-                type: "CREATE_ACCOUNT",
-                newUser: {
-                    email: data.email as string,
-                    password: data.password as string,
-                }
-            });
-		}
+		// if (!noAccountCheckbox?.checked) {
+		// 	singleton.machine.send({
+        //         type: "CREATE_ACCOUNT",
+        //         newUser: {
+        //             email: data.email as string,
+        //             password: data.password as string,
+        //         }
+        //     });
+		// }
 
 		registrationMachine.send({
 			type: "SUBMIT_REGISTRATION",
@@ -372,6 +372,7 @@ import Layout from "../../layouts/Layout.astro";
 				raceType: (data.raceType || "") as string,
 				raceCategory: data.raceCategory as string,
 				bloodType: data.bloodType as string,
+				size: data.size as string
 			}
 		});
 	};
