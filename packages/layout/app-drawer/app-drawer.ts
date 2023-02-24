@@ -50,7 +50,7 @@ export class AppDrawer extends LitElement {
 			height: 100%;
 		}
 		.narrow-drawer-content .nav-elements {
-			margin-top: 106px;
+			margin-top: 64px;
 		}
 		.narrow-drawer-content .nav-elements div {
 			flex: 1;
@@ -174,14 +174,14 @@ export class AppDrawer extends LitElement {
 							</md-list>
 						</div>
 
-						<md-outlined-icon-button-toggle .selected=${this.colorScheme === "dark"} @input=${this._darkModeToggle}>
+						<!-- <md-outlined-icon-button-toggle .selected=${this.colorScheme === "dark"} @input=${this._darkModeToggle}>
                             <div>
                                 <md-icon>dark_mode</md-icon>
                             </div>
 							<div slot="selectedIcon">
 								<md-icon>light_mode</md-icon>
 							</div>
-						</md-outlined-icon-button-toggle>
+						</md-outlined-icon-button-toggle> -->
 					</div>
 				</div>
 			</drawer-component>

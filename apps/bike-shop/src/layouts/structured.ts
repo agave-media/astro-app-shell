@@ -10,7 +10,7 @@ const generateSchema = () => {
         "eventStatus": "https://schema.org/EventScheduled",
         "keywords": ["mtb", "coatl race", "xc texcoco", "enduro", "serial enduro 2023"],
         "sport": "https://en.wikipedia.org/wiki/Enduro_(mountain_biking)",
-        "description": "Evento deportivo, perfecto para aquellos que disfrutan de los retos y buscan superar sus limites. Este emocionante evento se llevara a cabo en Monte Tláloc, Texcoco, Estado de Mexico.",
+        "description": "Este evento se lleva a cabo en Monte Tláloc, Estado de México. Una competencia de aproximadamente 22 kilometros y 6 pruebas especiales (3 de ellas completamente nuevas).",
         "location": {
             "@type": "Place",
             "name": "La Pluma de San Pablo Ixayoc, Monte Tláloc",

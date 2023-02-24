@@ -53,12 +53,12 @@ export class AppShell extends LitElement {
 
 		:host(:not([_wideview])) div.main-content {
 			margin-bottom: 80px;
-			min-height: calc(100vh - 80px - 106px);
+			min-height: calc(100vh - 80px - 64px);
 		}
 
 		div.main-content {
-			margin-top: 106px;
-			min-height: calc(100vh - 106px);
+			margin-top: 64px;
+			min-height: calc(100vh - 64px);
 
 			display: flex;
 			flex-direction: column;
@@ -125,7 +125,7 @@ export class AppShell extends LitElement {
 			</div>
 
 			${this._wideview ? nothing : html`<app-bottom-navigation></app-bottom-navigation>`}
-			<md-fab @click=${this._dipatchSetColorSchemeEvent} .icon=${this.colorScheme === "light" ? "dark_mode" : "light_mode"}></md-fab>
+			<!-- <md-fab @click=${this._dipatchSetColorSchemeEvent} .icon=${this.colorScheme === "light" ? "dark_mode" : "light_mode"}></md-fab> -->
 		`;
 	}
 

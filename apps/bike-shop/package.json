@@ -22,10 +22,9 @@
     "lit": "^2.6.1",
     "@webcomponents/template-shadowroot": "^0.2.1",
     "@astrojs/tailwind": "^3.0.1",
-    "tailwindcss": "^3.2.7",
-    "@tailwindcss/typography": "^0.5.9",
     "firebase": "^9.17.1",
     "xstate": "^4.36.0",
-    "@shoelace-style/shoelace": "^2.1.0"
+    "@shoelace-style/shoelace": "^2.1.0",
+    "luxon": "^3.2.1"
   }
 }
