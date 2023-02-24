@@ -125,7 +125,7 @@ export class AppShell extends LitElement {
 			</div>
 
 			${this._wideview ? nothing : html`<app-bottom-navigation></app-bottom-navigation>`}
-			<md-fab @click=${this._dipatchSetColorSchemeEvent} .icon=${this.colorScheme === "light" ? "dark_mode" : "light_mode"}></md-fab>
+			<!-- <md-fab @click=${this._dipatchSetColorSchemeEvent} .icon=${this.colorScheme === "light" ? "dark_mode" : "light_mode"}></md-fab> -->
 		`;
 	}
 

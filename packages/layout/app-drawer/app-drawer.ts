@@ -174,14 +174,14 @@ export class AppDrawer extends LitElement {
 							</md-list>
 						</div>
 
-						<md-outlined-icon-button-toggle .selected=${this.colorScheme === "dark"} @input=${this._darkModeToggle}>
+						<!-- <md-outlined-icon-button-toggle .selected=${this.colorScheme === "dark"} @input=${this._darkModeToggle}>
                             <div>
                                 <md-icon>dark_mode</md-icon>
                             </div>
 							<div slot="selectedIcon">
 								<md-icon>light_mode</md-icon>
 							</div>
-						</md-outlined-icon-button-toggle>
+						</md-outlined-icon-button-toggle> -->
 					</div>
 				</div>
 			</drawer-component>
