@@ -62,17 +62,19 @@ export class AppHeader extends LitElement {
 			border-radius: 12px;
 			height: 100%;
 			width: auto;
-			mix-blend-mode: lighten;
+			/* mix-blend-mode: lighten; */
 		}
 
-		:host([colorscheme="light"]) .logo-container img {
+		/* :host([colorscheme="light"]) .logo-container img {
 			mix-blend-mode: difference;
-		}
+		} */
 
 		.logo-container img:hover,
 		:host([colorscheme="dark"]) .logo-container img:hover,
 		:host([colorscheme="light"]) .logo-container img:hover {
-			mix-blend-mode: initial;
+			/* mix-blend-mode: initial; */
+            /* background-color: var(--md-sys-color-secondary-container); */
+            background-color: var(--md-sys-color-outline-variant);
 		}
 
         :host(:not([_wideview])) .icon-container {
@@ -100,7 +102,7 @@ export class AppHeader extends LitElement {
 						if (window.location.pathname !== "/") window.location.href = "/";
 					}}
 					class="logo-container">
-					<img src=${this.logo} alt="Tlaloc Ride Tuned logo" />
+					<img src=${this.logo} alt="Coatl Race logo" />
 				</div>
 
 				<div class="trailing-container">

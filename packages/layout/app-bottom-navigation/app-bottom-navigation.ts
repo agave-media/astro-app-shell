@@ -57,19 +57,6 @@ export class AppBottomNavigation extends LitElement {
 							</div>
 					</md-navigation-tab>
 
-					<md-navigation-tab 
-						@click=${() => {
-							if (window.location.pathname !== "/eventos") window.location.href = "/eventos";
-						}} 
-						.label=${"Eventos"}>
-							<div slot="activeIcon">
-								<md-icon>confirmation_number</md-icon>
-							</div>
-							<div slot="inactiveIcon">
-								<md-icon>confirmation_number</md-icon>
-							</div>
-					</md-navigation-tab>
-
 					<md-navigation-tab
 						@click=${() => {
 							if (window.location.pathname !== "/registro") window.location.href = "/registro";
@@ -108,12 +95,10 @@ export class AppBottomNavigation extends LitElement {
 		switch (window.location.pathname) {
 			case "/":
 				return 0;
-			case "/eventos":
-				return 1;
 			case "/registro":
-				return 2;
+				return 1;
 			case "/nosotros":
-				return 3;
+				return 2;
 			default:
 				return 0;
 		}

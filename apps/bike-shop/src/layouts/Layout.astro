@@ -5,12 +5,12 @@ export interface Props {
 	title: string;
 }
 
-const { title = "Reto 2 Cumbres", state = "loading" } = Astro.props;
+const { title = "Coatl Race", state = "loading" } = Astro.props;
 const { default: tlalocLoader } = await import(`@layout/components/tlaloc_loader.svg?raw`);
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-419">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -20,15 +20,18 @@ const { default: tlalocLoader } = await import(`@layout/components/tlaloc_loader
 
 		<!-- loads Material Icons font -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
 		<!-- loads the entire Symbols Variable Font -->
 		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+        <script src="./structured.js"></script>
 	</head>
 
 	<body data-state={state} class="material-theme">
 		<div id="loadingOverlay">
 			<Fragment set:html={tlalocLoader} />
 		</div>
-		<app-shell logo="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2F2cumbres_logo.jpg?alt=media&token=140c878e-6610-491e-8614-669c4862fb12">
+		<app-shell logo="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/icons%2Fcoatl.png?alt=media&token=5467b4e8-4034-4e81-a3e5-ded260d1d89e">
 			<slot />
 		</app-shell>
 	</body>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.enduro4150.com/sitemap-index.xml
+Sitemap: https://www.serialmtbtexcoco.com/sitemap-index.xml
