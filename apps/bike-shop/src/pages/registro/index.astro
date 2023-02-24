@@ -169,9 +169,9 @@ import Layout from "../../layouts/Layout.astro";
 					</div>
 				</div>
 
-				<div class="btns">
+				<div class="btns light-theme">
 					<sl-button hidden type="submit">Submit</sl-button>
-					<md-filled-button type="submit" label="Enviar registro"></md-filled-button>
+					<md-filled-button id="submitButton" type="submit" label="Enviar registro"></md-filled-button>
 				</div>
 			</form>
 		</section>
@@ -221,7 +221,7 @@ import Layout from "../../layouts/Layout.astro";
 	const tipoSangreMenu = document.querySelector("#tipoSangreInput + md-menu") as MdMenu;
 
 	const slButton = document.querySelector("sl-button");
-	const mdButton = document.querySelector("md-filled-button");
+	const mdButton = document.querySelector("#submitButton");
 	mdButton?.addEventListener("click", () => {
 		slButton?.click();
 	});
