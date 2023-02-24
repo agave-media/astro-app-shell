@@ -11,7 +11,6 @@ export default defineConfig({
         customPages: [
             'https://www.serialmtbtexcoco.com/', 
             'https://www.serialmtbtexcoco.com/registro',
-            'https://www.serialmtbtexcoco.com/eventos',
             'https://www.serialmtbtexcoco.com/nosotros',
         ]
     })],
