@@ -91,6 +91,14 @@ import Layout from "../../layouts/Layout.astro";
 	.disclaimer-container > div {
 		margin-top: 10px;
 	}
+
+    #raceTypeInput {
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
+        align-self: center;
+    }
 </style>
 
 <Layout title="Coatl Race - Registro">
@@ -120,9 +128,10 @@ import Layout from "../../layouts/Layout.astro";
 				<div>
 					<h4 class="subheader">INFORMACION DE CARRERA</h4>
 					<md-outlined-segmented-button-set name="raceType">
-						<md-outlined-segmented-button label="Femenil" hasIcon></md-outlined-segmented-button>
-						<md-outlined-segmented-button label="Varonil" hasIcon></md-outlined-segmented-button>
+						<md-outlined-segmented-button data-value="femenil" label="Femenil" hasIcon></md-outlined-segmented-button>
+						<md-outlined-segmented-button data-value="varonil" label="Varonil" hasIcon></md-outlined-segmented-button>
 					</md-outlined-segmented-button-set>
+                    <input class="input" id="raceTypeInput" name="raceType" required>
 
 					<md-outlined-text-field required class="input" type="text" name="teamName" label="Nombre del equipo"></md-outlined-text-field>
 
@@ -204,7 +213,6 @@ import Layout from "../../layouts/Layout.astro";
 	import type { MdMenu } from "@material/web/menu/menu";
 	import type { MdCheckbox } from "@material/web/checkbox/checkbox";
 	import type { MdMenuItem } from "@material/web/menu/menu-item";
-	import singleton from "@db/clients/firebase.js";
 	import { getInstance as getMachine } from "@state/machines/registration";
 	
     const registrationMachine = getMachine();
@@ -234,6 +242,17 @@ import Layout from "../../layouts/Layout.astro";
 
 	const tallaInput = document.querySelector("md-outlined-text-field#tallaInput") as MdOutlinedTextField;
 	const tallaMenu = document.querySelector("#tallaInput + md-menu") as MdMenu;
+
+    const raceTypeInput = document.querySelector("#raceTypeInput") as HTMLInputElement
+    const raceTypeSegmentedButtonSet = document.querySelector("md-outlined-segmented-button-set")
+    raceTypeSegmentedButtonSet?.addEventListener("segmented-button-set-selection", (e) => {
+        let target = e?.detail?.button as MdMenuItem;
+		let { value } = target.dataset;
+        console.log('race type select:', value)
+        
+        if (raceTypeInput && value) raceTypeInput.value = value
+        validateInput(raceTypeInput)
+    })
 
 	const slButton = document.querySelector("sl-button");
 	const mdButton = document.querySelector("#submitButton");
@@ -290,7 +309,7 @@ import Layout from "../../layouts/Layout.astro";
 		}
 	});
 
-	const validateInput = (input: MdOutlinedTextField) => {
+	const validateInput = (input: MdOutlinedTextField | HTMLInputElement) => {
 		const isInputValid = input.checkValidity();
 		if (!isInputValid) {
 			if (input.value === "") {
@@ -311,7 +330,7 @@ import Layout from "../../layouts/Layout.astro";
 	};
 
 	// Ensures errors are cleared when input is valid.
-	const runningValidation = (input: MdOutlinedTextField) => {
+	const runningValidation = (input: MdOutlinedTextField | HTMLInputElement) => {
 		input.addEventListener("input", () => {
 			validateInput(input);
 		});
@@ -321,7 +340,7 @@ import Layout from "../../layouts/Layout.astro";
 	// Checkboxes not in inputs array due to being synced via md-checkbox.
 	disclaimerHiddenCheckbox?.setCustomValidity("Campo requerido.");
 	termsHiddenCheckbox?.setCustomValidity("Campo requerido.");
-	const inputs = document.querySelectorAll("md-outlined-text-field");
+	const inputs = document.querySelectorAll("md-outlined-text-field, input") as NodeListOf<MdOutlinedTextField | HTMLInputElement>;
 	inputs.forEach(async (input) => {
 		input.setCustomValidity("Campo requerido.");
 		runningValidation(input);
@@ -392,11 +411,10 @@ import Layout from "../../layouts/Layout.astro";
 
 	// Disable/enable password input
 	noAccountCheckbox?.addEventListener("change", (e) => {
-		console.log("check:", e);
-		const noAccount = e?.target?.checked;
+        const { checked } = e?.target as MdCheckbox;
 		const passwordInput = document.querySelector("md-outlined-text-field#passwordInput") as MdOutlinedTextField;
-		passwordInput.disabled = noAccount;
-		if (noAccount) {
+		passwordInput.disabled = checked;
+		if (checked) {
 			passwordInput.value = "";
 			passwordInput.setCustomValidity("");
 		} else {
