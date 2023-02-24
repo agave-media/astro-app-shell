@@ -153,6 +153,18 @@ import Layout from "../../layouts/Layout.astro";
 						</md-menu>
 					</div>
 
+					<div class="dropdown-container">
+						<md-outlined-text-field placeholder="Selecciona una talla" class="input" id="tallaInput" name="size" label="Talla" required></md-outlined-text-field>
+
+						<md-menu fullwidth>
+							<md-menu-item data-value="XS" headline="XS"></md-menu-item>
+							<md-menu-item data-value="S" headline="S"></md-menu-item>
+							<md-menu-item data-value="M" headline="M"></md-menu-item>
+							<md-menu-item data-value="L" headline="L"></md-menu-item>
+							<md-menu-item data-value="XL" headline="XL"></md-menu-item>
+						</md-menu>
+					</div>
+
 					<div class="checkbox-container disclaimer-container">
 						<md-checkbox id="disclaimerCheckbox"></md-checkbox>
 						<input id="hiddenDisclaimerCheckbox" required class="input" type="checkbox" name="disclaimer" />
@@ -220,13 +232,15 @@ import Layout from "../../layouts/Layout.astro";
 	const tipoSangreInput = document.querySelector("md-outlined-text-field#tipoSangreInput") as MdOutlinedTextField;
 	const tipoSangreMenu = document.querySelector("#tipoSangreInput + md-menu") as MdMenu;
 
+	const tallaInput = document.querySelector("md-outlined-text-field#tallaInput") as MdOutlinedTextField;
+	const tallaMenu = document.querySelector("#tallaInput + md-menu") as MdMenu;
+
 	const slButton = document.querySelector("sl-button");
 	const mdButton = document.querySelector("#submitButton");
 	mdButton?.addEventListener("click", () => {
 		slButton?.click();
 	});
 
-	// Click listener
 	categoriasInput?.addEventListener("click", () => {
 		console.log("click");
 		if (categoriasMenu) {
@@ -234,10 +248,9 @@ import Layout from "../../layouts/Layout.astro";
 			categoriasMenu.show();
 		}
 	});
-	// Add selected listener to menu
-	categoriasMenu?.addEventListener("closed", (event) => {
+	categoriasMenu?.addEventListener("close-menu", (event) => {
         console.log('on close:', event)
-		let target = event.target as HTMLElement;
+		let target = event.target as MdMenuItem;
 		let { value } = target.dataset;
 		if (value) {
 			categoriasInput.value = value;
@@ -252,13 +265,28 @@ import Layout from "../../layouts/Layout.astro";
 			tipoSangreMenu.show();
 		}
 	});
-	// Add selected listener to menu
-	tipoSangreMenu?.addEventListener("closed", (event) => {
+	tipoSangreMenu?.addEventListener("close-menu", (event) => {
 		let target = event.target as MdMenuItem;
-		console.log("headline click:", target.headline);
-		if (target) {
-			tipoSangreInput.value = target.headline;
+		let { value } = target.dataset;
+		if (value) {
+			tipoSangreInput.value = value;
 			validateInput(tipoSangreInput);
+		}
+	});
+
+	tallaInput?.addEventListener("click", () => {
+		console.log("click");
+		if (tallaMenu) {
+			tallaMenu.anchor = tallaInput;
+			tallaMenu.show();
+		}
+	});
+	tallaMenu?.addEventListener("close-menu", (event) => {
+		let target = event.target as MdMenuItem;
+		let { value } = target.dataset;
+		if (value) {
+			tallaInput.value = value;
+			validateInput(tallaInput);
 		}
 	});
 
