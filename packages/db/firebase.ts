@@ -2,11 +2,13 @@ import { FirebaseApp, initializeApp } from "firebase/app";
 import type { Auth, Unsubscribe } from "firebase/auth";
 import { getInstance as getMachine } from "@state/machines/iam";
 import type { DocumentData, Firestore, Query } from "firebase/firestore";
+import type { FirebaseStorage } from "firebase/storage";
 
 let resolve: any,
 	firebaseInstance: FirebaseApp,
 	authInstance: Auth,
 	firestoreInstance: Firestore,
+    storageInstance: FirebaseStorage,
 	firestoreListeners: { [key: string]: Unsubscribe } = {},
 	authListener: Unsubscribe,
 	machine = getMachine();
@@ -43,6 +45,15 @@ export async function getInstance() {
 	return promise;
 }
 
+export async function getStorage() {
+	if (storageInstance) return storageInstance;
+
+	const { getStorage } = await import("firebase/storage");
+	await getInstance();
+	storageInstance = getStorage();
+	return storageInstance;
+}
+
 export async function getFirestore() {
 	if (firestoreInstance) return firestoreInstance;
 
@@ -55,7 +66,7 @@ export async function getFirestore() {
 export const fetchDoc = async (path: string) => {
 	const { getDoc, doc } = await import("firebase/firestore");
 
-    let curFirestore = await getFirestore()
+	let curFirestore = await getFirestore();
 	const docRef = await doc(curFirestore, path);
 	const docSnap = await getDoc(docRef);
 
@@ -136,6 +147,20 @@ export async function signOut() {
 	const { signOut } = await import("firebase/auth");
 	let curAuth = await getAuth();
 	return signOut(curAuth);
+}
+
+export async function getUploadString(imgFile: File) {
+	const { ref, getDownloadURL, uploadBytes } = await import("firebase/storage");
+
+    // url-safe timestamp suffix for image file name
+    const imgSuffix = new Date().toISOString();
+    const sanitizedFileName = (`${imgFile.name}_${imgSuffix}`).replace(/\s/g, '_').replace(/:/g, '-').replace(/\./g, '-')
+    console.log('file name:', imgFile.name, sanitizedFileName)
+
+	let curStorage = await getStorage();
+	let storageRef = ref(curStorage, `comprobantes/${sanitizedFileName}`);
+	let uploadRes = await uploadBytes(storageRef, imgFile);
+	return await getDownloadURL(uploadRes.ref);
 }
 
 const iam = {
