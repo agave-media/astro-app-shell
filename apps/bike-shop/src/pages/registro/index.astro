@@ -92,7 +92,7 @@ import Layout from "../../layouts/Layout.astro";
 		margin-top: 10px;
 	}
 
-    #raceTypeInput {
+    #raceTypeInput, #comprobanteInput {
         width: 1px;
         height: 1px;
         opacity: 0;
@@ -100,8 +100,10 @@ import Layout from "../../layouts/Layout.astro";
         align-self: center;
     }
 
-    comprobante-uploader {
+    .comprobante-container {
         align-self: center;
+        display: flex;
+        flex-direction: column;
     }
 </style>
 
@@ -118,13 +120,16 @@ import Layout from "../../layouts/Layout.astro";
 				<div>
 					<h4 class="subheader">1. COMPROBANTE DE PAGO</h4>
 
-                    <comprobante-uploader></comprobante-uploader>
+                    <div class="comprobante-container">
+                        <comprobante-uploader></comprobante-uploader>
+                        <input class="input" id="comprobanteInput" name="comprobante" required>
+                    </div>
                 </div>
 
 				<div>
 					<h4 class="subheader">2. PERFIL</h4>
 					<md-outlined-text-field required class="input" type="text" name="fullName" label="Nombre Completo"></md-outlined-text-field>
-					<md-outlined-text-field required class="input" type="email" name="email" label="Correo"></md-outlined-text-field>
+					<md-outlined-text-field required class="input" type="email" name="email" label="Correo electronico"></md-outlined-text-field>
 					<!-- <md-outlined-text-field required class="input" minlength="6" type="password" name="password" id="passwordInput" label="Contraseña" minlength="6"></md-outlined-text-field>
 
 					<div class="checkbox-container">
@@ -135,11 +140,17 @@ import Layout from "../../layouts/Layout.astro";
 					<!-- <md-outlined-text-field required class="input" type="tel" name="phone" label="Telefono"></md-outlined-text-field> -->
 				</div>
 
+                <div>
+					<h4 class="subheader">3. CONTACTO DE EMERGENCIA</h4>
+					<md-outlined-text-field required class="input" type="text" name="fullNameEmergencyContact" label="Nombre Completo"></md-outlined-text-field>
+					<md-outlined-text-field required class="input" type="tel" name="phoneEmergencyContact" label="Telefono"></md-outlined-text-field>
+				</div>
+
 				<div>
-					<h4 class="subheader">3. INFORMACION DE CARRERA</h4>
+					<h4 class="subheader">4. INFORMACION DE CARRERA</h4>
 					<md-outlined-segmented-button-set name="raceType">
-						<md-outlined-segmented-button data-value="femenil" label="Femenil" hasIcon></md-outlined-segmented-button>
-						<md-outlined-segmented-button data-value="varonil" label="Varonil" hasIcon></md-outlined-segmented-button>
+						<md-outlined-segmented-button data-value="femenil" label="Femenil - $800" hasIcon></md-outlined-segmented-button>
+						<md-outlined-segmented-button data-value="varonil" label="Varonil - $1050" hasIcon></md-outlined-segmented-button>
 					</md-outlined-segmented-button-set>
                     <input class="input" id="raceTypeInput" name="raceType" required>
 
@@ -184,6 +195,8 @@ import Layout from "../../layouts/Layout.astro";
 						</md-menu>
 					</div>
 
+                    <md-outlined-text-field required class="input" type="text" name="placeOfOrigin" label="Lugar de procedencia"></md-outlined-text-field>
+
 					<div class="checkbox-container disclaimer-container">
 						<md-checkbox id="disclaimerCheckbox"></md-checkbox>
 						<input id="hiddenDisclaimerCheckbox" required class="input" type="checkbox" name="disclaimer" />
@@ -227,10 +240,14 @@ import Layout from "../../layouts/Layout.astro";
 	import { getInstance as getMachine } from "@state/machines/registration";
 	
     const registrationMachine = getMachine();
-    registrationMachine.onTransition((state) => {
+    registrationMachine.onTransition(async (state) => {
 		console.log("registration machine transition:", state.value, state.context);
-		if (state.matches("success")) {
+		if (state.matches("complete")) {
 			console.log("REGISTRATION SUCCESS:", state.context);
+
+            // Wait 3 seconds before redirecting
+            // await new Promise(resolve => setTimeout(resolve, 3000))
+            window.location.replace(`/confirmacion/${state.context.id}`)
 		}
 	});
 
@@ -254,7 +271,20 @@ import Layout from "../../layouts/Layout.astro";
 	const tallaInput = document.querySelector("md-outlined-text-field#tallaInput") as MdOutlinedTextField;
 	const tallaMenu = document.querySelector("#tallaInput + md-menu") as MdMenu;
 
-    // const fileUploaderInput = document.querySelector("comprobante-uploader") as HTMLInputElement
+    const fileUploaderInput = document.querySelector("#comprobanteInput") as HTMLInputElement
+    const fileUploader = document.querySelector("comprobante-uploader") as HTMLInputElement
+    fileUploader?.addEventListener("file-added", (e) => {
+        const { detail } = e as CustomEvent
+        console.log('file uploaded:', e, detail)
+        
+        if (fileUploaderInput && e) {
+            fileUploaderInput.type = "file"
+            const dT = new DataTransfer();
+            dT?.items?.add(detail)
+            fileUploaderInput.files = dT.files 
+        }
+        validateInput(fileUploaderInput)
+    })
     
     const raceTypeInput = document.querySelector("#raceTypeInput") as HTMLInputElement
     const raceTypeSegmentedButtonSet = document.querySelector("md-outlined-segmented-button-set")
@@ -404,7 +434,11 @@ import Layout from "../../layouts/Layout.astro";
 				raceType: (data.raceType || "") as string,
 				raceCategory: data.raceCategory as string,
 				bloodType: data.bloodType as string,
-				size: data.size as string
+				size: data.size as string,
+				fullNameEmergencyContact: data.fullNameEmergencyContact as string,
+				phoneEmergencyContact: data.phoneEmergencyContact as string,
+				placeOfOrigin: data.placeOfOrigin as string,
+                comprobante: data.comprobante as File
 			}
 		});
 	};

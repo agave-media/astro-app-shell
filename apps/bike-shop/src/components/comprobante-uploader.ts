@@ -40,6 +40,10 @@ export class ComprobanteUploader extends LitElement {
 		const { detail } = e;
 		console.log("file uploaded:", e, detail.addedFiles);
 		this.files = detail.addedFiles;
+
+        this.dispatchEvent(new CustomEvent("file-added", {
+            detail: detail?.addedFiles?.[0]
+        }))
 	}
 
 	_clearFiles() {
