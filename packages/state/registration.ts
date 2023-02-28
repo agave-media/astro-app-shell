@@ -11,6 +11,7 @@ export interface RegistrationDetails {
 	bloodType: string;
 	size: string;
 	ageGroup?: string;
+    id?: string;
 }
 
 type RegistrationMachineContext = {
