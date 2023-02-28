@@ -25,6 +25,10 @@
     "firebase": "^9.17.1",
     "xstate": "^4.36.0",
     "@shoelace-style/shoelace": "^2.1.0",
-    "luxon": "^3.2.1"
+    "luxon": "^3.2.1",
+    "@carbon/web-components": "2.0.0-lit-v2-alpha"
+  },
+  "devDependencies": {
+    "sass": "^1.58.3"    
   }
 }
