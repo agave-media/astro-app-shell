@@ -52,6 +52,16 @@ export async function getFirestore() {
 	return firestoreInstance;
 }
 
+export const fetchDoc = async (path: string) => {
+	const { getDoc, doc } = await import("firebase/firestore");
+
+    let curFirestore = await getFirestore()
+	const docRef = await doc(curFirestore, path);
+	const docSnap = await getDoc(docRef);
+
+	return { ...docSnap.data(), id: docSnap.id };
+};
+
 export async function attachFirestoreCollectionListener(key: string, cb: any, q?: Query<DocumentData>) {
 	let curFirestore = await getFirestore();
 	const { collection, onSnapshot, query } = await import("firebase/firestore");
@@ -116,25 +126,26 @@ export async function register(email: string, pw: string) {
 	return createUserWithEmailAndPassword(authInstance, email, pw);
 }
 
-export async function signIn(email : string, pw: string) {
-    const { signInWithEmailAndPassword } = await import('firebase/auth')
-    let curAuth = await getAuth()
-    return signInWithEmailAndPassword(curAuth, email, pw)
-  }
-  
-  export async function signOut () {
-    const { signOut } = await import('firebase/auth')
-    let curAuth = await getAuth()
-    return signOut(curAuth)
-  }
+export async function signIn(email: string, pw: string) {
+	const { signInWithEmailAndPassword } = await import("firebase/auth");
+	let curAuth = await getAuth();
+	return signInWithEmailAndPassword(curAuth, email, pw);
+}
+
+export async function signOut() {
+	const { signOut } = await import("firebase/auth");
+	let curAuth = await getAuth();
+	return signOut(curAuth);
+}
 
 const iam = {
 	initialize,
 	getInstance,
 	getAuth,
 	attachAuthListener,
-    signIn,
-    signOut,
+	signIn,
+	signOut,
+	fetchDoc,
 	machine,
 };
 export default iam;
