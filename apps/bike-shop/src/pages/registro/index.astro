@@ -19,6 +19,7 @@ import Layout from "../../layouts/Layout.astro";
 		display: flex;
 		flex-direction: column;
 		gap: 48px;
+        margin-top: 48px;
 	}
 
 	form > div {
@@ -75,8 +76,7 @@ import Layout from "../../layouts/Layout.astro";
 		width: 100%;
 		max-width: 80ch;
 		margin: 0 auto;
-		border-radius: 12px;
-		overflow: hidden;
+        z-index: 1;
 	}
 
 	.checkbox-container md-checkbox,
@@ -99,12 +99,16 @@ import Layout from "../../layouts/Layout.astro";
         pointer-events: none;
         align-self: center;
     }
+
+    comprobante-uploader {
+        align-self: center;
+    }
 </style>
 
 <Layout title="Coatl Race - Registro">
 	<main>
 		<div class="banner">
-			<image-loader href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Fcoatl_long.jpg?alt=media&token=a58aa96b-62b4-44bb-bc90-3c7335ad34d3"></image-loader>
+            <image-loader href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Fcoatl_long.jpg?alt=media&token=a58aa96b-62b4-44bb-bc90-3c7335ad34d3"></image-loader>
 		</div>
 
 		<section>
@@ -112,7 +116,13 @@ import Layout from "../../layouts/Layout.astro";
 
 			<form class="form">
 				<div>
-					<h4 class="subheader">PERFIL</h4>
+					<h4 class="subheader">1. COMPROBANTE DE PAGO</h4>
+
+                    <comprobante-uploader></comprobante-uploader>
+                </div>
+
+				<div>
+					<h4 class="subheader">2. PERFIL</h4>
 					<md-outlined-text-field required class="input" type="text" name="fullName" label="Nombre Completo"></md-outlined-text-field>
 					<md-outlined-text-field required class="input" type="email" name="email" label="Correo"></md-outlined-text-field>
 					<!-- <md-outlined-text-field required class="input" minlength="6" type="password" name="password" id="passwordInput" label="Contraseña" minlength="6"></md-outlined-text-field>
@@ -126,7 +136,7 @@ import Layout from "../../layouts/Layout.astro";
 				</div>
 
 				<div>
-					<h4 class="subheader">INFORMACION DE CARRERA</h4>
+					<h4 class="subheader">3. INFORMACION DE CARRERA</h4>
 					<md-outlined-segmented-button-set name="raceType">
 						<md-outlined-segmented-button data-value="femenil" label="Femenil" hasIcon></md-outlined-segmented-button>
 						<md-outlined-segmented-button data-value="varonil" label="Varonil" hasIcon></md-outlined-segmented-button>
@@ -209,6 +219,7 @@ import Layout from "../../layouts/Layout.astro";
 	import "@material/web/menu/menu";
 	import "@material/web/menu/menu-item";
 	import "../../components/image-loader";
+	import "../../components/comprobante-uploader";
 	import type { MdOutlinedTextField } from "@material/web/textfield/outlined-text-field";
 	import type { MdMenu } from "@material/web/menu/menu";
 	import type { MdCheckbox } from "@material/web/checkbox/checkbox";
@@ -243,6 +254,8 @@ import Layout from "../../layouts/Layout.astro";
 	const tallaInput = document.querySelector("md-outlined-text-field#tallaInput") as MdOutlinedTextField;
 	const tallaMenu = document.querySelector("#tallaInput + md-menu") as MdMenu;
 
+    // const fileUploaderInput = document.querySelector("comprobante-uploader") as HTMLInputElement
+    
     const raceTypeInput = document.querySelector("#raceTypeInput") as HTMLInputElement
     const raceTypeSegmentedButtonSet = document.querySelector("md-outlined-segmented-button-set")
     raceTypeSegmentedButtonSet?.addEventListener("segmented-button-set-selection", (e) => {
