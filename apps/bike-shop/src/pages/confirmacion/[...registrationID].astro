@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Banner from "../../components/Banner.astro";
+
+const { registrationID } = Astro.params;
+const [id] = registrationID?.split('/') || []; 
+---
+
+<Layout title="Coatl Race - Detalles de Registro">
+	<main data-id={id}>
+		<Banner title="Detalles de registro" href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Fhero_better_forest.jpg?alt=media&token=5196fb7b-1cd4-4fa3-9296-49283f02c61b" />
+
+		<section>
+            <registration-details registrationID={id}></registration-details>         
+		</section>
+	</main>
+</Layout>
+
+<style>
+	h2 {
+		font-family: "JetBrains Mono";
+		font-weight: 900;
+	}
+
+	section {
+		margin-top: 24px;
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		align-items: center;
+	}
+</style>
+
+<script>
+	import "../../components/registration-details";
+</script>

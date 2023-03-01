@@ -1,5 +1,5 @@
 import { createMachine, interpret, assign } from "xstate";
-import { writeDoc } from "@db/clients/firebase.js";
+import { getUploadString, writeDoc } from "@db/clients/firebase.js";
 
 export interface RegistrationDetails {
 	email: string;
@@ -11,6 +11,13 @@ export interface RegistrationDetails {
 	bloodType: string;
 	size: string;
 	ageGroup?: string;
+	fullNameEmergencyContact?: string;
+	phoneEmergencyContact?: string;
+	placeOfOrigin?: string;
+	comprobante?: File;
+	comprobanteHref?: string;
+    confirmed?: boolean;
+    id?: string;
 }
 
 type RegistrationMachineContext = {
@@ -117,12 +124,20 @@ const registrationMachine = createMachine<RegistrationMachineContext, Registrati
 		},
 		services: {
 			submitRegistration: async (context) => {
-				if (context.registrationDetails) {
+				if (context.registrationDetails && context.registrationDetails.comprobante) {
 					console.log("writing registration to db:", context.registrationDetails);
 					try {
-						const result = await writeDoc("registrations", context.registrationDetails);
-						console.log("write result:", result);
-						return Promise.resolve({ id: result.id });
+                        const imgUploadResult = await getUploadString(context.registrationDetails.comprobante)
+                        console.log("img upload result:", imgUploadResult);
+                        
+                        const clonedRegistration = structuredClone(context.registrationDetails)
+                        delete clonedRegistration.comprobante
+                        clonedRegistration.comprobanteHref = imgUploadResult
+
+                        const result = await writeDoc("registrations", clonedRegistration);
+                        console.log("write result:", result);
+                        
+                        return Promise.resolve({ id: result.id });
 					} catch (e) {
 						console.log("error writing registration:", e);
 						return Promise.reject(e);

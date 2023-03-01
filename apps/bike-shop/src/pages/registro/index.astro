@@ -19,6 +19,7 @@ import Layout from "../../layouts/Layout.astro";
 		display: flex;
 		flex-direction: column;
 		gap: 48px;
+        margin-top: 48px;
 	}
 
 	form > div {
@@ -75,8 +76,7 @@ import Layout from "../../layouts/Layout.astro";
 		width: 100%;
 		max-width: 80ch;
 		margin: 0 auto;
-		border-radius: 12px;
-		overflow: hidden;
+        z-index: 1;
 	}
 
 	.checkbox-container md-checkbox,
@@ -92,19 +92,25 @@ import Layout from "../../layouts/Layout.astro";
 		margin-top: 10px;
 	}
 
-    #raceTypeInput {
+    #raceTypeInput, #comprobanteInput {
         width: 1px;
         height: 1px;
         opacity: 0;
         pointer-events: none;
         align-self: center;
     }
+
+    .comprobante-container {
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+    }
 </style>
 
 <Layout title="Coatl Race - Registro">
 	<main>
 		<div class="banner">
-			<image-loader href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Fcoatl_long.jpg?alt=media&token=a58aa96b-62b4-44bb-bc90-3c7335ad34d3"></image-loader>
+            <image-loader href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Fcoatl_long.jpg?alt=media&token=a58aa96b-62b4-44bb-bc90-3c7335ad34d3"></image-loader>
 		</div>
 
 		<section>
@@ -112,9 +118,18 @@ import Layout from "../../layouts/Layout.astro";
 
 			<form class="form">
 				<div>
-					<h4 class="subheader">PERFIL</h4>
+					<h4 class="subheader">1. COMPROBANTE DE PAGO</h4>
+
+                    <div class="comprobante-container">
+                        <comprobante-uploader></comprobante-uploader>
+                        <input class="input" id="comprobanteInput" name="comprobante" required>
+                    </div>
+                </div>
+
+				<div>
+					<h4 class="subheader">2. PERFIL</h4>
 					<md-outlined-text-field required class="input" type="text" name="fullName" label="Nombre Completo"></md-outlined-text-field>
-					<md-outlined-text-field required class="input" type="email" name="email" label="Correo"></md-outlined-text-field>
+					<md-outlined-text-field required class="input" type="email" name="email" label="Correo electronico"></md-outlined-text-field>
 					<!-- <md-outlined-text-field required class="input" minlength="6" type="password" name="password" id="passwordInput" label="Contraseña" minlength="6"></md-outlined-text-field>
 
 					<div class="checkbox-container">
@@ -125,11 +140,17 @@ import Layout from "../../layouts/Layout.astro";
 					<!-- <md-outlined-text-field required class="input" type="tel" name="phone" label="Telefono"></md-outlined-text-field> -->
 				</div>
 
+                <div>
+					<h4 class="subheader">3. CONTACTO DE EMERGENCIA</h4>
+					<md-outlined-text-field supportingText="Nombre completo de tu contacto de emergencia" required class="input" type="text" name="fullNameEmergencyContact" label="Nombre"></md-outlined-text-field>
+					<md-outlined-text-field supportingText="Telefono de tu contacto de emergencia" required class="input" type="tel" name="phoneEmergencyContact" label="Telefono"></md-outlined-text-field>
+				</div>
+
 				<div>
-					<h4 class="subheader">INFORMACION DE CARRERA</h4>
+					<h4 class="subheader">4. INFORMACION DE CARRERA</h4>
 					<md-outlined-segmented-button-set name="raceType">
-						<md-outlined-segmented-button data-value="femenil" label="Femenil" hasIcon></md-outlined-segmented-button>
-						<md-outlined-segmented-button data-value="varonil" label="Varonil" hasIcon></md-outlined-segmented-button>
+						<md-outlined-segmented-button data-value="femenil" label="Femenil - $800" hasIcon></md-outlined-segmented-button>
+						<md-outlined-segmented-button data-value="varonil" label="Varonil - $1050" hasIcon></md-outlined-segmented-button>
 					</md-outlined-segmented-button-set>
                     <input class="input" id="raceTypeInput" name="raceType" required>
 
@@ -174,6 +195,8 @@ import Layout from "../../layouts/Layout.astro";
 						</md-menu>
 					</div>
 
+                    <md-outlined-text-field required class="input" type="text" name="placeOfOrigin" label="Lugar de procedencia"></md-outlined-text-field>
+
 					<div class="checkbox-container disclaimer-container">
 						<md-checkbox id="disclaimerCheckbox"></md-checkbox>
 						<input id="hiddenDisclaimerCheckbox" required class="input" type="checkbox" name="disclaimer" />
@@ -209,6 +232,7 @@ import Layout from "../../layouts/Layout.astro";
 	import "@material/web/menu/menu";
 	import "@material/web/menu/menu-item";
 	import "../../components/image-loader";
+	import "../../components/comprobante-uploader";
 	import type { MdOutlinedTextField } from "@material/web/textfield/outlined-text-field";
 	import type { MdMenu } from "@material/web/menu/menu";
 	import type { MdCheckbox } from "@material/web/checkbox/checkbox";
@@ -216,10 +240,14 @@ import Layout from "../../layouts/Layout.astro";
 	import { getInstance as getMachine } from "@state/machines/registration";
 	
     const registrationMachine = getMachine();
-    registrationMachine.onTransition((state) => {
+    registrationMachine.onTransition(async (state) => {
 		console.log("registration machine transition:", state.value, state.context);
-		if (state.matches("success")) {
+		if (state.matches("complete")) {
 			console.log("REGISTRATION SUCCESS:", state.context);
+
+            // Wait 3 seconds before redirecting
+            // await new Promise(resolve => setTimeout(resolve, 3000))
+            window.location.replace(`/confirmacion/${state.context.id}`)
 		}
 	});
 
@@ -243,6 +271,21 @@ import Layout from "../../layouts/Layout.astro";
 	const tallaInput = document.querySelector("md-outlined-text-field#tallaInput") as MdOutlinedTextField;
 	const tallaMenu = document.querySelector("#tallaInput + md-menu") as MdMenu;
 
+    const fileUploaderInput = document.querySelector("#comprobanteInput") as HTMLInputElement
+    const fileUploader = document.querySelector("comprobante-uploader") as HTMLInputElement
+    fileUploader?.addEventListener("file-added", (e) => {
+        const { detail } = e as CustomEvent
+        console.log('file uploaded:', e, detail)
+        
+        if (fileUploaderInput && e) {
+            fileUploaderInput.type = "file"
+            const dT = new DataTransfer();
+            dT?.items?.add(detail)
+            fileUploaderInput.files = dT.files 
+        }
+        validateInput(fileUploaderInput)
+    })
+    
     const raceTypeInput = document.querySelector("#raceTypeInput") as HTMLInputElement
     const raceTypeSegmentedButtonSet = document.querySelector("md-outlined-segmented-button-set")
     raceTypeSegmentedButtonSet?.addEventListener("segmented-button-set-selection", (e) => {
@@ -391,7 +434,11 @@ import Layout from "../../layouts/Layout.astro";
 				raceType: (data.raceType || "") as string,
 				raceCategory: data.raceCategory as string,
 				bloodType: data.bloodType as string,
-				size: data.size as string
+				size: data.size as string,
+				fullNameEmergencyContact: data.fullNameEmergencyContact as string,
+				phoneEmergencyContact: data.phoneEmergencyContact as string,
+				placeOfOrigin: data.placeOfOrigin as string,
+                comprobante: data.comprobante as File
 			}
 		});
 	};

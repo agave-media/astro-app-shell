@@ -2,11 +2,14 @@ import { FirebaseApp, initializeApp } from "firebase/app";
 import type { Auth, Unsubscribe } from "firebase/auth";
 import { getInstance as getMachine } from "@state/machines/iam";
 import type { DocumentData, Firestore, Query } from "firebase/firestore";
+import type { FirebaseStorage } from "firebase/storage";
+import type { RegistrationDetails } from "@state/machines/registration";
 
 let resolve: any,
 	firebaseInstance: FirebaseApp,
 	authInstance: Auth,
 	firestoreInstance: Firestore,
+    storageInstance: FirebaseStorage,
 	firestoreListeners: { [key: string]: Unsubscribe } = {},
 	authListener: Unsubscribe,
 	machine = getMachine();
@@ -43,6 +46,15 @@ export async function getInstance() {
 	return promise;
 }
 
+export async function getStorage() {
+	if (storageInstance) return storageInstance;
+
+	const { getStorage } = await import("firebase/storage");
+	await getInstance();
+	storageInstance = getStorage();
+	return storageInstance;
+}
+
 export async function getFirestore() {
 	if (firestoreInstance) return firestoreInstance;
 
@@ -51,6 +63,38 @@ export async function getFirestore() {
 	firestoreInstance = getFirestore();
 	return firestoreInstance;
 }
+
+export const fetchDoc = async (path: string) => {
+	const { getDoc, doc } = await import("firebase/firestore");
+
+	let curFirestore = await getFirestore();
+	const docRef = await doc(curFirestore, path);
+	const docSnap = await getDoc(docRef);
+
+	return { ...docSnap.data(), id: docSnap.id };
+};
+
+export const queryDocs = async (path: string, searchQuery: string) => {
+	let curFirestore = await getFirestore();
+    
+    // Create a reference to the cities collection
+    const { collection, query, where, getDocs } = await import("firebase/firestore");
+    const ref = collection(curFirestore, path);
+
+    // Create a query against the collection.
+    const q = query(ref, where("email", "==", searchQuery));
+
+    const querySnapshot = await getDocs(q);
+    let arr = [] as RegistrationDetails[]
+    querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        let curData = structuredClone(doc.data()) as RegistrationDetails
+        curData.id = doc.id
+        arr.push(curData)
+    });
+
+    return arr
+};
 
 export async function attachFirestoreCollectionListener(key: string, cb: any, q?: Query<DocumentData>) {
 	let curFirestore = await getFirestore();
@@ -116,25 +160,41 @@ export async function register(email: string, pw: string) {
 	return createUserWithEmailAndPassword(authInstance, email, pw);
 }
 
-export async function signIn(email : string, pw: string) {
-    const { signInWithEmailAndPassword } = await import('firebase/auth')
-    let curAuth = await getAuth()
-    return signInWithEmailAndPassword(curAuth, email, pw)
-  }
-  
-  export async function signOut () {
-    const { signOut } = await import('firebase/auth')
-    let curAuth = await getAuth()
-    return signOut(curAuth)
-  }
+export async function signIn(email: string, pw: string) {
+	const { signInWithEmailAndPassword } = await import("firebase/auth");
+	let curAuth = await getAuth();
+	return signInWithEmailAndPassword(curAuth, email, pw);
+}
+
+export async function signOut() {
+	const { signOut } = await import("firebase/auth");
+	let curAuth = await getAuth();
+	return signOut(curAuth);
+}
+
+export async function getUploadString(imgFile: File) {
+	const { ref, getDownloadURL, uploadBytes } = await import("firebase/storage");
+
+    // url-safe timestamp suffix for image file name
+    const imgSuffix = new Date().toISOString();
+    const sanitizedFileName = (`${imgFile.name}_${imgSuffix}`).replace(/\s/g, '_').replace(/:/g, '-').replace(/\./g, '-')
+    console.log('file name:', imgFile.name, sanitizedFileName)
+
+	let curStorage = await getStorage();
+	let storageRef = ref(curStorage, `comprobantes/${sanitizedFileName}`);
+	let uploadRes = await uploadBytes(storageRef, imgFile);
+	return await getDownloadURL(uploadRes.ref);
+}
 
 const iam = {
 	initialize,
 	getInstance,
 	getAuth,
 	attachAuthListener,
-    signIn,
-    signOut,
+	signIn,
+	signOut,
+	fetchDoc,
+    queryDocs,
 	machine,
 };
 export default iam;
