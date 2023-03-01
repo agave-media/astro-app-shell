@@ -4,8 +4,9 @@ import { customElement } from "lit/decorators.js";
 import { fetchDoc } from "@db/clients/firebase";
 import { ifDefined } from "lit/directives/if-defined.js";
 import "@carbon/web-components/es/components/link/index.js";
-import type { RegistrationDetails as Registration } from "@state/machines/registration";
 import "@carbon/web-components/es/components/notification/index.js";
+import "@material/web/icon/icon";
+import type { RegistrationDetails as Registration } from "@state/machines/registration";
 
 @customElement("registration-details")
 export class RegistrationDetails extends LitElement {
@@ -25,6 +26,8 @@ export class RegistrationDetails extends LitElement {
             gap: 24px;
 
             width: 100%;
+            margin: 0 auto;
+		    max-width: 80ch;
         }
 
 		h4,
@@ -40,7 +43,7 @@ export class RegistrationDetails extends LitElement {
 
 			display: flex;
 			flex-direction: column;
-			color: var(--md-sys-color-on-primary-container);
+			color: var(--md-sys-color-primary);
 		}
 
 		p {
@@ -48,9 +51,26 @@ export class RegistrationDetails extends LitElement {
 			font-weight: 400;
 			text-transform: none;
 			font-size: 17px;
-			color: var(--md-sys-color-on-surface);
+			color: var(--md-sys-color-on-surface-variant);
 			font-style: normal;
 		}
+        
+        .single-attachment div {
+            letter-spacing: 0.5px;
+            font-weight: 400;
+            text-transform: none;
+            font-size: 15px;
+            color: var(--md-sys-color-on-surface-variant);
+            font-style: normal;
+            
+            display: flex;
+            align-items: center;
+        }
+
+        md-icon {
+            margin-right: 6px;
+            font-size: 20px;
+        }
 
 		bx-link {
 			font-style: normal;
@@ -60,16 +80,38 @@ export class RegistrationDetails extends LitElement {
         .card-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 32px;
 
             border-radius: 6px;
-            border: 1px solid var(--md-sys-color-outline-variant);
             padding: 12px;
+            background-color: var(--md-sys-color-surface-variant);
         }
 
         bx-inline-notification {
             min-width: 100%;
             margin: 0;
+        }
+
+        .single-attachment-container {
+            grid-column: span 2;
+            gap: 6px;
+        }
+
+        .single-attachment {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--md-sys-color-on-surface-variant);
+
+            padding: 8px 12px;
+            border: 1px solid var(--md-sys-color-outline);
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .card-container {
+                grid-template-columns: 1fr;
+            }
         }
 	`;
 
@@ -86,29 +128,36 @@ export class RegistrationDetails extends LitElement {
             }
 
 			<div class="card-container">
+                <h4>
+                    Nombre completo
+                    <p>${this.registrationDetails?.fullName}</p>
+                </h4>
+
 				<h4>
 					Correo electronico
 					<p>${this.registrationDetails?.email}</p>
 				</h4>
 
-				<h4>
-					Nombre completo
-					<p>${this.registrationDetails?.fullName}</p>
-				</h4>
+                <h4>
+                    Categoria
+                    <p>${this.registrationDetails?.raceCategory}</p>
+                </h4>
 
 				<h4>
 					Grupo
 					<p>${this.registrationDetails?.raceType}</p>
 				</h4>
 
-				<h4>
-					Categoria
-					<p>${this.registrationDetails?.raceCategory}</p>
-				</h4>
+				<h4 class="single-attachment-container">
+					Archivos
 
-				<h4>
-					Comprobante de pago
-					<bx-link target="_blank" href=${ifDefined(this.registrationDetails?.comprobanteHref)}>Ver archivo</bx-link>
+                    <div class="single-attachment">
+                        <div>
+                            <md-icon>attach_file</md-icon>
+                            <div>Comprobante de pago</div>
+                        </div>
+                        <bx-link target="_blank" href=${ifDefined(this.registrationDetails?.comprobanteHref)}>Ver archivo</bx-link>
+                    </div>
 				</h4>
 			</div>
 		`;
