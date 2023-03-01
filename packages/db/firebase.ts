@@ -3,6 +3,7 @@ import type { Auth, Unsubscribe } from "firebase/auth";
 import { getInstance as getMachine } from "@state/machines/iam";
 import type { DocumentData, Firestore, Query } from "firebase/firestore";
 import type { FirebaseStorage } from "firebase/storage";
+import type { RegistrationDetails } from "@state/machines/registration";
 
 let resolve: any,
 	firebaseInstance: FirebaseApp,
@@ -71,6 +72,28 @@ export const fetchDoc = async (path: string) => {
 	const docSnap = await getDoc(docRef);
 
 	return { ...docSnap.data(), id: docSnap.id };
+};
+
+export const queryDocs = async (path: string, searchQuery: string) => {
+	let curFirestore = await getFirestore();
+    
+    // Create a reference to the cities collection
+    const { collection, query, where, getDocs } = await import("firebase/firestore");
+    const ref = collection(curFirestore, path);
+
+    // Create a query against the collection.
+    const q = query(ref, where("email", "==", searchQuery));
+
+    const querySnapshot = await getDocs(q);
+    let arr = [] as RegistrationDetails[]
+    querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        let curData = structuredClone(doc.data()) as RegistrationDetails
+        curData.id = doc.id
+        arr.push(curData)
+    });
+
+    return arr
 };
 
 export async function attachFirestoreCollectionListener(key: string, cb: any, q?: Query<DocumentData>) {
@@ -171,6 +194,7 @@ const iam = {
 	signIn,
 	signOut,
 	fetchDoc,
+    queryDocs,
 	machine,
 };
 export default iam;
