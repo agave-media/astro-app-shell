@@ -33,11 +33,6 @@ export class AppBottomNavigation extends LitElement {
 			justify-content: center;
 			width: 100%;
 		}
-
-		md-navigation-tab {
-			--md-navigation-bar-active-label-text-color: var(--md-ref-palette-tertiary60);
-			--md-navigation-bar-active-hover-label-text-color: var(--md-ref-palette-tertiary60);
-		}
 	`;
 
 	protected override render() {
