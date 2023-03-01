@@ -16,6 +16,7 @@ export interface RegistrationDetails {
 	placeOfOrigin?: string;
 	comprobante?: File;
 	comprobanteHref?: string;
+    confirmed?: boolean;
     id?: string;
 }
 
