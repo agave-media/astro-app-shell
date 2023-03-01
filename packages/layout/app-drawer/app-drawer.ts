@@ -99,10 +99,6 @@ export class AppDrawer extends LitElement {
 			align-self: center;
 			margin-bottom: 16px;
 		}
-		md-navigation-tab {
-			--md-navigation-bar-active-label-text-color: var(--md-ref-palette-tertiary60);
-			--md-navigation-bar-active-hover-label-text-color: var(--md-ref-palette-tertiary60);
-		}
 	`;
 
 	protected override render() {
@@ -174,14 +170,14 @@ export class AppDrawer extends LitElement {
 							</md-list>
 						</div>
 
-						<!-- <md-outlined-icon-button-toggle .selected=${this.colorScheme === "dark"} @input=${this._darkModeToggle}>
+						<md-outlined-icon-button-toggle .selected=${this.colorScheme === "dark"} @input=${this._darkModeToggle}>
                             <div>
                                 <md-icon>dark_mode</md-icon>
                             </div>
 							<div slot="selectedIcon">
 								<md-icon>light_mode</md-icon>
 							</div>
-						</md-outlined-icon-button-toggle> -->
+						</md-outlined-icon-button-toggle>
 					</div>
 				</div>
 			</drawer-component>
