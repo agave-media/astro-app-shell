@@ -76,12 +76,12 @@ export class RegistrationDetails extends LitElement {
 	protected override render() {
 		return html`
 			${ifDefined(this.status) && this.status === "confirmado" ? 
-                html` <bx-inline-notification .title=${"Listo para rodar"} subtitle="Tu registro ha sido confirmado para Coatl Race. ¡Te esperamos el 12 de marzo!"></bx-inline-notification> ` : 
+                html` <bx-inline-notification hide-close-button .title=${"Listo para rodar"} subtitle="Tu registro ha sido confirmado para Coatl Race. ¡Te esperamos el 12 de marzo!"></bx-inline-notification> ` : 
                 nothing
             }
 
 			${ifDefined(this.status) && this.status === "pendiente" ? 
-                html` <bx-inline-notification kind="warning" title="Registro pendiente" subtitle="Tu solicitud será validada en un plazo máximo de 24 horas. Te notificaremos por correo electrónico cuando tu registro haya sido confirmado."></bx-inline-notification> ` : 
+                html` <bx-inline-notification hide-close-button kind="warning" title="Registro pendiente" subtitle="Tu solicitud será validada en un plazo máximo de 24 horas. Te notificaremos por correo electrónico cuando tu registro haya sido confirmado."></bx-inline-notification> ` : 
                 nothing
             }
 
