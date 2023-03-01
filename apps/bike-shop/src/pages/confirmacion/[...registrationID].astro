@@ -1,0 +1,68 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Banner from "../../components/Banner.astro";
+import Card from "../../components/Card.astro";
+
+const { registrationID } = Astro.params;
+const { pathname } = Astro.url;
+
+const [id, status] = registrationID?.split('/') || []; 
+console.log('current path:', pathname, id, status)
+---
+
+<Layout title="Coatl Race - Detalles de Registro">
+	<main data-id={id}>
+		<Banner title="Detalles de registro" href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Fhero_better_forest.jpg?alt=media&token=5196fb7b-1cd4-4fa3-9296-49283f02c61b" />
+
+		<section>
+			<div id="cardContainer">
+                
+                {status === "confirmado" ? 
+                    <bx-inline-notification hide-close-button title="Listo para rodar" subtitle="Tu registro ha sido confirmado para Coatl Race. ¡Te esperamos el 12 de marzo!"></bx-inline-notification> :
+                    <bx-inline-notification hide-close-button kind="warning" title="Registro pendiente" subtitle="Tu solicitud será validada en un plazo máximo de 24 horas. Te notificaremos por correo electrónico cuando tu registro haya sido confirmado."></bx-inline-notification>
+                }
+
+                <Card>
+					<registration-details registrationID={id}></registration-details>
+				</Card>                
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+    bx-inline-notification {
+        min-width: 100%;
+    }
+
+	h2 {
+		font-family: "JetBrains Mono";
+		font-weight: 900;
+	}
+
+	section {
+		margin-top: 24px;
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		align-items: center;
+	}
+
+	#cardContainer {
+		width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+	}
+
+	registration-details {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 24px;
+	}
+</style>
+
+<script>
+	import "../../components/registration-details";
+	import "@carbon/web-components/es/components/notification/index.js";
+</script>
