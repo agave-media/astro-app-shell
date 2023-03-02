@@ -1,0 +1,220 @@
+---
+import Layout from "../../layouts/Layout.astro"
+
+type Props = {}
+
+const {} = Astro.props
+const { default: qrCode } = await import(`./qr-code.svg?raw`);
+---
+
+<Layout title='Recepcion'>
+	<div class='content-container'>
+		<section class='content'>
+			<bx-breadcrumb>
+				<bx-breadcrumb-item>
+					<bx-breadcrumb-link href='/'>Inicio</bx-breadcrumb-link>
+				</bx-breadcrumb-item>
+				<bx-breadcrumb-item>
+					<bx-breadcrumb-link href='/recepcion'>Recepcion</bx-breadcrumb-link>
+				</bx-breadcrumb-item>
+				<bx-breadcrumb-item>
+					<bx-breadcrumb-link href='/recepcion/factura' aria-current='page'>Registro</bx-breadcrumb-link>
+				</bx-breadcrumb-item>
+			</bx-breadcrumb>
+
+			<h4 class="page-header">Registro de factura</h4>
+		</section>
+
+		<progress-indicator>
+			<section class='content' slot='ubpp'>
+				<form>
+					<bx-form-item>
+						<bx-date-picker name='fecha'>
+							<bx-date-picker-input kind='single' label-text='Fecha'></bx-date-picker-input>
+						</bx-date-picker>
+					</bx-form-item>
+
+					<bx-form-item>
+						<bx-input id='input-ubpp' type='text' name='ubpp' label-text='UBPP'></bx-input>
+					</bx-form-item>
+
+					<bx-form-item>
+						<bx-input
+							id='input-jefe-administrativo'
+							type='text'
+							name='jefe-administrativo'
+							label-text='Jefe administrativo'></bx-input>
+					</bx-form-item>
+
+					<bx-form-item>
+						<bx-input
+							id='input-delegado-inventarios'
+							type='text'
+							name='delegado-inventarios'
+							label-text='Delegado de inventarios'></bx-input>
+					</bx-form-item>
+
+					<div class='btn-container'>
+						<bx-btn>Siguiente</bx-btn>
+					</div>
+				</form>
+			</section>
+
+			<section class='content' slot='tipo'>
+				<form>
+					<bx-form-item reset-carbon>
+						<fieldset>
+							<legend>Tipo de afectacion</legend>
+							<bx-radio-tile name='tipo_afectacion'>Recursos propios</bx-radio-tile>
+							<bx-radio-tile name='tipo_afectacion'>Donacion</bx-radio-tile>
+							<bx-radio-tile name='tipo_afectacion'>Subsidio</bx-radio-tile>
+						</fieldset>
+					</bx-form-item>
+
+					<bx-form-item reset-carbon>
+						<fieldset>
+							<legend>Presupuesto</legend>
+							<bx-radio-tile name='presupuesto'>2021</bx-radio-tile>
+							<bx-radio-tile name='presupuesto'>2022</bx-radio-tile>
+							<bx-radio-tile name='presupuesto'>2023</bx-radio-tile>
+						</fieldset>
+					</bx-form-item>
+
+					<bx-form-item reset-carbon>
+						<fieldset>
+							<legend>Tipo de registro</legend>
+							<bx-radio-tile name='tipo_registro'>Manteniento</bx-radio-tile>
+							<bx-radio-tile name='tipo_registro'>Activo fijo</bx-radio-tile>
+							<bx-radio-tile name='tipo_registro'>Control economico</bx-radio-tile>
+							<bx-radio-tile name='tipo_registro'>Consumo</bx-radio-tile>
+						</fieldset>
+					</bx-form-item>
+
+					<div class='btn-container'>
+						<bx-btn kind='secondary'>Atras</bx-btn>
+						<bx-btn>Siguiente</bx-btn>
+					</div>
+				</form>
+			</section>
+
+			<section class='content' slot='facturas'>
+				<div class='factura-header-container'>
+					<h3 class='form-section-header'>Relacion de facturas</h3>
+
+					<bx-form-item reset-carbon>
+						<bx-selectable-tile name='factura-digital'>Factura digital</bx-selectable-tile>
+					</bx-form-item>
+				</div>
+				<form>
+                    <div class="factura-scanner-container">
+                        <div class="qr-icon-container">
+                            <Fragment set:html={qrCode} />
+                        </div>
+                    </div>
+					<!-- <div class='factura-uploader-container'>
+						<bx-form-item>
+							<bx-file-uploader helper-text='Subir archivo PDF del comprobante fiscal' label-text='PDF'>
+								<bx-file-drop-container accept='application/pdf'>
+									Arrastra y suelta archivo aquí o haz clic para cargar
+								</bx-file-drop-container>
+							</bx-file-uploader>
+						</bx-form-item>
+
+						<bx-form-item>
+							<bx-file-uploader helper-text='Subir archivo XML del comprobante fiscal' label-text='XML'>
+								<bx-file-drop-container accept='application/xml'>
+									Arrastra y suelta archivo aquí o haz clic para cargar
+								</bx-file-drop-container>
+							</bx-file-uploader>
+						</bx-form-item>
+					</div> -->
+
+					<bx-form-item>
+						<bx-input id='input-proyecto' type='text' name='proyecto' label-text='Proyecto'></bx-input>
+					</bx-form-item>
+
+					<bx-form-item>
+						<bx-input id='input-partida' type='text' name='partida' label-text='Partida'></bx-input>
+					</bx-form-item>
+
+                    <data-table></data-table>
+
+					<div class='btn-container'>
+						<bx-btn kind='secondary'>Atras</bx-btn>
+						<bx-btn>Siguiente</bx-btn>
+					</div>
+				</form>
+			</section>
+
+			<section class='content' slot='relacion'>
+				<form>
+					<bx-form-item>
+						<bx-file-uploader
+							helper-text='Subir relacion completa de archivos'
+							label-text='Relacion de archivos'
+						>
+							<bx-file-drop-container accept='application/pdf'>
+								Arrastra y suelta archivos aquí o haz clic para cargar
+							</bx-file-drop-container>
+						</bx-file-uploader>
+					</bx-form-item>
+
+					<div class='btn-container'>
+						<bx-btn kind='secondary'>Atras</bx-btn>
+						<bx-btn>Siguiente</bx-btn>
+					</div>
+				</form>
+			</section>
+		</progress-indicator>
+	</div>
+</Layout>
+
+<style>
+	.btn-container {
+		margin-top: 3em;
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.2em;
+	}
+
+	form {
+		display: grid;
+		gap: 2em;
+	}
+
+	fieldset {
+		display: flex;
+	}
+
+	.factura-header-container {
+		display: grid;
+		grid-template-columns: 1fr auto;
+	}
+
+	.factura-uploader-container {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+		justify-items: center;
+	}
+
+    .qr-icon-container {
+        height: 80px;
+        display: flex;
+    }
+</style>
+
+<script>
+	import "@carbon/web-components/es/components/breadcrumb/index.js"
+	import "../../components/progress-indicator"
+    import "../../components/data-table"
+
+	import "@carbon/web-components/es/components/button/button.js"
+	import "@carbon/web-components/es/components/form/form-item.js"
+	import "@carbon/web-components/es/components/input/input.js"
+	import "@carbon/web-components/es/components/notification/inline-notification.js"
+	import "@carbon/web-components/es/components/date-picker/index.js"
+	import "@carbon/web-components/es/components/tile/radio-tile.js"
+	import "@carbon/web-components/es/components/tile/selectable-tile.js"
+	import "@carbon/web-components/es/components/file-uploader/index.js"
+</script>

@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro"
+type Props = {}
+
+const {} = Astro.props
+---
+
+<Layout title='Registros'>
+	<div class='content-container'>
+		<section class='content'>
+			<bx-breadcrumb>
+				<bx-breadcrumb-item>
+					<bx-breadcrumb-link href='/'>Inicio</bx-breadcrumb-link>
+				</bx-breadcrumb-item>
+				<bx-breadcrumb-item>
+					<bx-breadcrumb-link href='/registros' aria-current='page'>Registros</bx-breadcrumb-link>
+				</bx-breadcrumb-item>
+			</bx-breadcrumb>
+
+			<h3>Registros</h3>
+		</section>
+
+		<data-table></data-table>
+	</div>
+</Layout>
+
+<style></style>
+<script>
+    import "../../components/data-table";
+	import "@carbon/web-components/es/components/breadcrumb/index.js"
+	import "@carbon/web-components/es/components/tile/clickable-tile.js"
+</script>

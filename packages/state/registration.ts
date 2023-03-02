@@ -1,5 +1,5 @@
 import { createMachine, interpret, assign } from "xstate";
-import { getUploadString, writeDoc } from "@db/clients/firebase.js";
+import { getUploadString, writeDoc, serverTimestamp } from "@db/clients/firebase.js";
 
 export interface RegistrationDetails {
 	email: string;
@@ -17,6 +17,7 @@ export interface RegistrationDetails {
 	comprobante?: File;
 	comprobanteHref?: string;
     confirmed?: boolean;
+    states?: any;
     id?: string;
 }
 
@@ -133,6 +134,12 @@ const registrationMachine = createMachine<RegistrationMachineContext, Registrati
                         const clonedRegistration = structuredClone(context.registrationDetails)
                         delete clonedRegistration.comprobante
                         clonedRegistration.comprobanteHref = imgUploadResult
+
+                        clonedRegistration.states = {
+                            createdAt: serverTimestamp(),
+                            confirmedAt: 0,
+                            rejectedAt: 0
+                        }
 
                         const result = await writeDoc("registrations", clonedRegistration);
                         console.log("write result:", result);

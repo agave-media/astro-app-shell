@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro"
+type Props = {}
+
+const {} = Astro.props
+---
+
+<Layout title='Recepcion'>
+	<div class='content-container'>
+		<section class='content'>
+			<bx-breadcrumb>
+				<bx-breadcrumb-item>
+					<bx-breadcrumb-link href='/'>Inicio</bx-breadcrumb-link>
+				</bx-breadcrumb-item>
+				<bx-breadcrumb-item>
+					<bx-breadcrumb-link href='/recepcion' aria-current='page'>Recepcion</bx-breadcrumb-link>
+				</bx-breadcrumb-item>
+			</bx-breadcrumb>
+
+			<h3>Recepcion de documentos</h3>
+		</section>
+
+		<bx-clickable-tile href="/recepcion/factura">Registro de factura</bx-clickable-tile>
+	</div>
+</Layout>
+
+<style></style>
+<script>
+	import "@carbon/web-components/es/components/breadcrumb/index.js"
+	import "@carbon/web-components/es/components/tile/clickable-tile.js"
+</script>

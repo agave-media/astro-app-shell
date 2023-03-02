@@ -1,7 +1,7 @@
 import { FirebaseApp, initializeApp } from "firebase/app";
 import type { Auth, Unsubscribe } from "firebase/auth";
 import { getInstance as getMachine } from "@state/machines/iam";
-import type { DocumentData, Firestore, Query } from "firebase/firestore";
+import { DocumentData, Firestore, Query, serverTimestamp } from "firebase/firestore";
 import type { FirebaseStorage } from "firebase/storage";
 import type { RegistrationDetails } from "@state/machines/registration";
 
@@ -25,6 +25,8 @@ const firebaseConfig = {
 };
 
 const promise = new Promise((res) => (resolve = res));
+
+export { serverTimestamp }
 
 export async function initialize() {
 	if (import.meta.env.SSR) return undefined;
@@ -95,6 +97,14 @@ export const queryDocs = async (path: string, searchQuery: string) => {
 
     return arr
 };
+
+export async function queryRegistros(key: string, cb: any, q?: Query<DocumentData>) {
+	let curFirestore = await getFirestore();
+	const { collection, onSnapshot, query, orderBy } = await import("firebase/firestore");
+	if (!q) q = query(collection(curFirestore, key), orderBy("states.createdAt", "desc"));
+	firestoreListeners[key] = onSnapshot(q, cb);
+	return firestoreListeners[key];
+}
 
 export async function attachFirestoreCollectionListener(key: string, cb: any, q?: Query<DocumentData>) {
 	let curFirestore = await getFirestore();
@@ -195,6 +205,8 @@ const iam = {
 	signOut,
 	fetchDoc,
     queryDocs,
+    queryRegistros,
+    serverTimestamp,
 	machine,
 };
 export default iam;
