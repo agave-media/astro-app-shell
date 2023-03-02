@@ -65,7 +65,7 @@ export class AppBottomNavigation extends LitElement {
 							</div>
 					</md-navigation-tab>
 
-					<md-navigation-tab
+					<!-- <md-navigation-tab
 						@click=${() => {
 							if (window.location.pathname !== "/nosotros") window.location.href = "/nosotros";
 						}}
@@ -76,7 +76,7 @@ export class AppBottomNavigation extends LitElement {
 							<div slot="inactiveIcon">
 								<md-icon>${tlalocIcon}</md-icon>
 							</div>
-					</md-navigation-tab>
+					</md-navigation-tab> -->
 				</md-navigation-bar>
 			</div>
 		`;

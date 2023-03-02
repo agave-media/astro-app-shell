@@ -154,7 +154,7 @@ export class AppDrawer extends LitElement {
 									</div>
 								</md-navigation-tab>
 
-								<md-navigation-tab
+								<!-- <md-navigation-tab
 									@click=${() => {
 										if (window.location.pathname !== "/nosotros") window.location.href = "/nosotros";
 									}}
@@ -166,18 +166,18 @@ export class AppDrawer extends LitElement {
 									<div slot="inactiveIcon">
 										<md-icon>${tlalocIcon}</md-icon>
 									</div>
-								</md-navigation-tab>
+								</md-navigation-tab> -->
 							</md-list>
 						</div>
 
-						<md-outlined-icon-button-toggle .selected=${this.colorScheme === "dark"} @input=${this._darkModeToggle}>
+						<!-- <md-outlined-icon-button-toggle .selected=${this.colorScheme === "dark"} @input=${this._darkModeToggle}>
                             <div>
                                 <md-icon>dark_mode</md-icon>
                             </div>
 							<div slot="selectedIcon">
 								<md-icon>light_mode</md-icon>
 							</div>
-						</md-outlined-icon-button-toggle>
+						</md-outlined-icon-button-toggle> -->
 					</div>
 				</div>
 			</drawer-component>
