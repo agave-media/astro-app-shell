@@ -6,7 +6,7 @@ import "../app-drawer/app-drawer";
 import "../app-header/app-header";
 import "../app-bottom-navigation/app-bottom-navigation";
 import "@material/web/fab/fab";
-import "@material/web/button/outlined-link-button";
+import "@material/web/button/filled-link-button";
 import "@material/web/icon/icon";
 import "@material/web/iconbutton/standard-icon-button";
 import "@material/web/iconbutton/standard-icon-button-toggle";
@@ -121,9 +121,9 @@ export class AppShell extends LitElement {
                     </div>
                 </md-standard-icon-button-toggle>
                 
-                <md-outlined-link-button href="/consulta" slot="trailing" label="Revisar boleto">
+                <md-filled-link-button href="/consulta" slot="trailing" label="Revisar boleto">
                     <md-icon slot="icon">bolt</md-icon>
-                </md-outlined-link-button>
+                </md-filled-link-button>
                 <!-- ${this.loggedIn ? html`
                     <md-outlined-button @click=${this.signOut} slot="trailing" label="MiSerial">
                         <md-icon slot="icon">bolt</md-icon>
