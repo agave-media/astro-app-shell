@@ -5,7 +5,6 @@ import SingleInfoCard from "../components/SingleInfoCard.astro";
 
 const { default: mountainTrailIcon } = await import(`@layout/components/icons/mountain_trail_icon.svg?raw`);
 const { default: rulesIcon } = await import(`@layout/components/icons/rules_icon.svg?raw`);
-const { default: medalIcon } = await import(`@layout/components/icons/medal_icon.svg?raw`);
 ---
 
 <Layout title="Coatl Race">
@@ -16,11 +15,13 @@ const { default: medalIcon } = await import(`@layout/components/icons/medal_icon
             <p>Este evento se lleva a cabo en Monte Tláloc, Estado de México. Una competencia de aproximadamente 22 kilometros y 6 pruebas especiales (3 de ellas completamente nuevas).</p>
     
             <div class="rewards-container">
-                <h2>
-                    TU INSCRIPCIÓN INCLUYE:
-                    
-                    <p class="rewards">
-                        <ul>
+                <image-loader href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Fcoatl_square.jpg?alt=media&token=1a3479d2-109e-43c7-a7d1-0097d0c55bf0"></image-loader>
+                
+                <div class="info-column">
+                    <h2>
+                        TU INSCRIPCIÓN INCLUYE:
+                        
+                        <ul class="rewards">
                             <li>Cronometraje con chip</li>
                             <li>Jersey conmemorativo</li>
                             <li>Hidratacíon</li>
@@ -28,25 +29,18 @@ const { default: medalIcon } = await import(`@layout/components/icons/medal_icon
                             <li>Medalla conmemorativa</li>
                             <li>Lift el día de la carrera</li>
                         </ul>
-                    </p>
-                </h2>
-    
-                <image-loader href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Fcoatl_square.jpg?alt=media&token=1a3479d2-109e-43c7-a7d1-0097d0c55bf0"></image-loader>
-            </div>
-    
-    
-            <div class="info-container">
-                <SingleInfoCard title="Ruta" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a quam rhoncus.">
-                    <Fragment set:html={mountainTrailIcon} />
-                </SingleInfoCard>
-                
-                <SingleInfoCard title="Reglamento" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a quam rhoncus.">
-                    <Fragment set:html={rulesIcon} />
-                </SingleInfoCard>
-    
-                <SingleInfoCard title="Resultados" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a quam rhoncus.">
-                    <Fragment set:html={medalIcon} />
-                </SingleInfoCard>
+                    </h2>
+
+                    <div class="info-container">
+                        <SingleInfoCard title="Reglamento" description="Familiarizate con el reglamento que deben seguir todos los participantes en la carrera." href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/reglamento%2FReglamento%20-%20SERIAL%20MTB%20TEXCOCO.pdf?alt=media&token=5ca77138-8cce-4ddf-b8f3-b689b7f39963">
+                            <Fragment set:html={rulesIcon} />
+                        </SingleInfoCard>
+        
+                        <SingleInfoCard title="Ruta" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a quam rhoncus.">
+                            <Fragment set:html={mountainTrailIcon} />
+                        </SingleInfoCard>
+                    </div>
+                </div>
             </div>
     
             <contact-section email="h.ochentay4@gmail.com" phoneNumber="55 7898 0582"></contact-section>
@@ -63,17 +57,16 @@ const { default: medalIcon } = await import(`@layout/components/icons/medal_icon
     section {
         display: flex;
         flex-direction: column;
-        gap: 72px;
+        gap: 120px;
         max-width: 120ch;
         align-self: center;
     }
 	
 	.info-container {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, 1fr);
-		gap: 50px;
+		gap: 24px;
         max-width: 600px;
-        margin: 40px auto;
+        margin: 32px auto 0;
 	}
 	
 	h2 {
@@ -90,7 +83,7 @@ const { default: medalIcon } = await import(`@layout/components/icons/medal_icon
 	}
 
 	.rewards {
-		margin-top: 12px;
+		margin-top: 8px;
 		font-size: 1rem;
 	}
 
@@ -103,12 +96,17 @@ const { default: medalIcon } = await import(`@layout/components/icons/medal_icon
 
 	.rewards-container {
 		display: grid;
+        gap: 48px;
 		grid-template-columns: 1fr 1fr;
 	}
 
     image-loader {
         border-radius: 8px;
         overflow: hidden;
+    }
+
+    .info-column {
+        margin-top: 16px;
     }
 
 	@media(max-width: 768px) {

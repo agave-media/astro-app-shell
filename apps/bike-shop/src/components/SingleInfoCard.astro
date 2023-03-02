@@ -1,5 +1,5 @@
 ---
-const { title, description } = Astro.props;
+const { title, description, href } = Astro.props;
 ---
 
 <div class="card-container">
@@ -8,7 +8,10 @@ const { title, description } = Astro.props;
 	</div>
 	<div class="info-container">
 		<header>
-			<h1>{title}</h1>
+            {href ? 
+                <bx-link target="_blank" href={href}><h1>{title}</h1></bx-link> :
+                <h1>{title}</h1>
+            }
 		</header>
 		<div class="description">
 			<p>{description}</p>
@@ -21,10 +24,11 @@ const { title, description } = Astro.props;
 	p {
 		margin: 0;
 		color: var(--md-sys-color-on-surface);
+        font-size: 0.9rem;
 	}
 
 	h1 {
-		font-size: 1.3rem;
+		font-size: 1.1rem;
 		text-transform: capitalize;
 	}
 
@@ -36,6 +40,7 @@ const { title, description } = Astro.props;
 
 	.card-container {
 		display: flex;
+        align-items: center;
 		gap: 8px;
 	}
 
@@ -47,9 +52,9 @@ const { title, description } = Astro.props;
 		border-radius: 6px;
 		background-color: var(--md-sys-color-primary);
 
-		width: 60px;
-		padding: 12px;
-		height: 60px;
+		width: 48px;
+		padding: 8px;
+		height: 48px;
 		fill: var(--md-sys-color-surface);
 
         flex-shrink: 0;
@@ -61,3 +66,7 @@ const { title, description } = Astro.props;
 		}
 	}
 </style>
+
+<script>
+    import "@carbon/web-components/es/components/link/index.js";
+</script>
