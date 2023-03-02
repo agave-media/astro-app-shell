@@ -123,7 +123,7 @@ export class RegistrationDetails extends LitElement {
             }
 
 			${ifDefined(this.status) && this.status === "pendiente" ? 
-                html` <bx-inline-notification hide-close-button kind="warning" title="Registro pendiente" subtitle="Tu solicitud será validada en un plazo máximo de 24 horas. Te notificaremos por correo electrónico cuando tu registro haya sido confirmado."></bx-inline-notification> ` : 
+                html` <bx-inline-notification hide-close-button kind="warning" title="Registro pendiente" subtitle="Tu solicitud será validada en un plazo máximo de 24 horas. Te notificaremos por correo electrónico cuando tu registro haya sido confirmado o consulta el status por medio del boton 'Revisar boleto'."></bx-inline-notification> ` : 
                 nothing
             }
 
