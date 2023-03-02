@@ -68,7 +68,7 @@ export class DataTable extends LitElement {
 	_computeStatusIcon(singleRegistro: RegistrationDetails) {
 		if (singleRegistro?.states?.confirmedAt?.seconds > 0) return html` <bx-btn kind="ghost" size="sm">${CheckmarkFilled({ slot: "icon", color: "#24a148" })}</bx-btn> `;
 		else if (singleRegistro?.states?.rejectedAt?.seconds > 0) return html` <bx-btn kind="ghost" size="sm">${ErrorIcon({ slot: "icon", color: "#da1e28" })}</bx-btn> `;
-		else return html` <bx-btn @click=${() => this.openRegistrationActionDialog(singleRegistro)} kind="ghost" size="sm">${Pending16({ slot: "icon", color: "#8d8d8d" })}</bx-btn> `;
+		else return html` <bx-btn @click=${() => this.openRegistrationActionDialog(singleRegistro)} kind="ghost" size="sm">${Pending16({ slot: "icon", color: "#6f6f6f" })}</bx-btn> `;
 	}
 
 	protected override firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
