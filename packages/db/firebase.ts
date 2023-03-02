@@ -9,7 +9,7 @@ let resolve: any,
 	firebaseInstance: FirebaseApp,
 	authInstance: Auth,
 	firestoreInstance: Firestore,
-    storageInstance: FirebaseStorage,
+	storageInstance: FirebaseStorage,
 	firestoreListeners: { [key: string]: Unsubscribe } = {},
 	authListener: Unsubscribe,
 	machine = getMachine();
@@ -26,7 +26,7 @@ const firebaseConfig = {
 
 const promise = new Promise((res) => (resolve = res));
 
-export { serverTimestamp }
+export { serverTimestamp };
 
 export async function initialize() {
 	if (import.meta.env.SSR) return undefined;
@@ -78,24 +78,24 @@ export const fetchDoc = async (path: string) => {
 
 export const queryDocs = async (path: string, searchQuery: string) => {
 	let curFirestore = await getFirestore();
-    
-    // Create a reference to the cities collection
-    const { collection, query, where, getDocs } = await import("firebase/firestore");
-    const ref = collection(curFirestore, path);
 
-    // Create a query against the collection.
-    const q = query(ref, where("email", "==", searchQuery));
+	// Create a reference to the cities collection
+	const { collection, query, where, getDocs } = await import("firebase/firestore");
+	const ref = collection(curFirestore, path);
 
-    const querySnapshot = await getDocs(q);
-    let arr = [] as RegistrationDetails[]
-    querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-        let curData = structuredClone(doc.data()) as RegistrationDetails
-        curData.id = doc.id
-        arr.push(curData)
-    });
+	// Create a query against the collection.
+	const q = query(ref, where("email", "==", searchQuery));
 
-    return arr
+	const querySnapshot = await getDocs(q);
+	let arr = [] as RegistrationDetails[];
+	querySnapshot.forEach((doc) => {
+		console.log(doc.id, " => ", doc.data());
+		let curData = structuredClone(doc.data()) as RegistrationDetails;
+		curData.id = doc.id;
+		arr.push(curData);
+	});
+
+	return arr;
 };
 
 export async function queryRegistros(key: string, cb: any, q?: Query<DocumentData>) {
@@ -114,23 +114,37 @@ export async function attachFirestoreCollectionListener(key: string, cb: any, q?
 	return firestoreListeners[key];
 }
 
+export const updateRegistrationStatus = async (regID: string, status: string) => {
+	const db = await getFirestore();
+
+	const { doc, updateDoc } = await import("firebase/firestore");
+
+	const updatedStatus = { confirmed: status === "confirmed" } as any;
+	if (status === "confirmed") updatedStatus["states.confirmedAt"] = serverTimestamp();
+	else if (status === "rejected") updatedStatus["states.rejectedAt"] = serverTimestamp();
+	console.log("updated status:", updatedStatus);
+
+	const ref = doc(db, `registrations/${regID}`);
+	return updateDoc(ref, updatedStatus);
+};
+
 export const incrementRegistrationCount = async (registrationType: string) => {
 	const db = await getFirestore();
 
 	const { doc, updateDoc, increment, getDoc } = await import("firebase/firestore");
-    
-    // Increment
-    const updatedCount: any = {}
-    updatedCount[registrationType] = increment(1)
-    const ref = doc(db, "config/registrationCount")
-    await updateDoc(ref, updatedCount);
-    
-    // Fetch updated count from DB
-    const docSnap = await getDoc(ref);
-    const parsedDoc = docSnap.data()
-    console.log('increment success:', parsedDoc)
-	
-    return parsedDoc?.[registrationType] as number;
+
+	// Increment
+	const updatedCount: any = {};
+	updatedCount[registrationType] = increment(1);
+	const ref = doc(db, "config/registrationCount");
+	await updateDoc(ref, updatedCount);
+
+	// Fetch updated count from DB
+	const docSnap = await getDoc(ref);
+	const parsedDoc = docSnap.data();
+	console.log("increment success:", parsedDoc);
+
+	return parsedDoc?.[registrationType] as number;
 };
 
 export const writeDoc = async (collectionName: string, docData: any) => {
@@ -204,10 +218,10 @@ export async function signOut() {
 export async function getUploadString(imgFile: File) {
 	const { ref, getDownloadURL, uploadBytes } = await import("firebase/storage");
 
-    // url-safe timestamp suffix for image file name
-    const imgSuffix = new Date().toISOString();
-    const sanitizedFileName = (`${imgFile.name}_${imgSuffix}`).replace(/\s/g, '_').replace(/:/g, '-').replace(/\./g, '-')
-    console.log('file name:', imgFile.name, sanitizedFileName)
+	// url-safe timestamp suffix for image file name
+	const imgSuffix = new Date().toISOString();
+	const sanitizedFileName = `${imgFile.name}_${imgSuffix}`.replace(/\s/g, "_").replace(/:/g, "-").replace(/\./g, "-");
+	console.log("file name:", imgFile.name, sanitizedFileName);
 
 	let curStorage = await getStorage();
 	let storageRef = ref(curStorage, `comprobantes/${sanitizedFileName}`);
@@ -223,10 +237,11 @@ const iam = {
 	signIn,
 	signOut,
 	fetchDoc,
-    queryDocs,
-    queryRegistros,
-    serverTimestamp,
-    incrementRegistrationCount,
+	queryDocs,
+	queryRegistros,
+	serverTimestamp,
+	incrementRegistrationCount,
+    updateRegistrationStatus,
 	machine,
 };
 export default iam;
