@@ -5,6 +5,8 @@ import "@carbon/web-components/es/components/data-table/index.js";
 import "@carbon/web-components/es/components/overflow-menu/index.js";
 import "@carbon/web-components/es/components/button/index.js";
 import Attachment16 from "@carbon/web-components/es/icons/attachment/16";
+import Pending16 from "@carbon/web-components/es/icons/pending/24";
+import CheckmarkFilled from "@carbon/web-components/es/icons/checkmark--filled/24";
 import { queryRegistros } from "@db/clients/firebase";
 import type { FieldValue, QuerySnapshot } from "firebase/firestore";
 import type { RegistrationDetails } from "@state/machines/registration";
@@ -37,6 +39,7 @@ export class DataTable extends LitElement {
 						<bx-table-header-cell>Grupo</bx-table-header-cell>
 						<bx-table-header-cell>Fecha</bx-table-header-cell>
 						<bx-table-header-cell>Comprobante</bx-table-header-cell>
+						<bx-table-header-cell>Status</bx-table-header-cell>
 					</bx-table-header-row>
 				</bx-table-head>
 				<bx-table-body>
@@ -51,6 +54,13 @@ export class DataTable extends LitElement {
 								<bx-table-cell>${this._computeDate(singleRegistro.states.createdAt)}</bx-table-cell>
 								<bx-table-cell class="bx--table-column-menu">
 									<bx-btn target="_blank" href=${singleRegistro?.comprobanteHref || ""} kind="tertiary" size="sm">${Attachment16({ slot: "icon" })}</bx-btn>
+								</bx-table-cell>
+								<bx-table-cell class="bx--table-column-menu">
+                                    ${singleRegistro.confirmed ? html`
+                                        <bx-btn kind="ghost" size="sm">${CheckmarkFilled({ slot: "icon" })}</bx-btn>
+                                    ` : html`
+                                        <bx-btn kind="ghost" size="sm">${Pending16({ slot: "icon" })}</bx-btn>
+                                    `}
 								</bx-table-cell>
 							</bx-table-row>
 						`
