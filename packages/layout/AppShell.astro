@@ -1,0 +1,43 @@
+---
+type Props = {}
+
+const {} = Astro.props
+
+const { default: connectionReceive } = await import(`./connection-receive.svg?raw`);
+const { default: reportData } = await import(`./report-data.svg?raw`);
+---
+
+<bx-header aria-label='MTB Dashboard'>
+	<bx-header-menu-button button-label-active='Close menu' button-label-inactive='Open menu'></bx-header-menu-button>
+	<bx-header-name href='/' prefix='MTB'>[Dashboard]</bx-header-name>
+</bx-header>
+
+<bx-side-nav usage-mode='regular' aria-label='Side navigation'>
+	<bx-side-nav-items>
+		<bx-side-nav-link href='/'>
+            <Fragment set:html={reportData} />
+            Resumen
+        </bx-side-nav-link>
+		<bx-side-nav-link href='/registros'>
+            <Fragment set:html={connectionReceive} />
+            Registros
+        </bx-side-nav-link>
+	</bx-side-nav-items>
+</bx-side-nav>
+
+<main class='bx--content ui-shell-content'>
+	<div class='bx--grid'>
+		<div class='bx--row'>
+			<div class='bx--offset-lg-3 bx--col-lg-13'>
+				<slot />
+			</div>
+		</div>
+	</div>
+</main>
+
+<style></style>
+
+<script>
+	import "@carbon/web-components/es/components/ui-shell/index.js"
+	import "./container.scss"
+</script>

@@ -1,0 +1,119 @@
+//
+// Copyright IBM Corp. 2020, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'carbon-components/scss/components/ui-shell/_content.scss';
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/layout/breakpoint';
+@import 'carbon-components/scss/components/ui-shell/functions';
+
+@import 'carbon-components/scss/globals/scss/css--helpers';
+@import 'carbon-components/scss/globals/scss/css--font-face';
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
+@import 'carbon-components/scss/globals/scss/component-tokens';
+@import 'carbon-components/src/components/tag/tag';
+@import 'carbon-components/src/components/notification/inline-notification';
+@import 'carbon-components/src/components/notification/toast-notification';
+
+// The default theme is "white" (White)
+:root, [reset-carbon] {
+    @include carbon--theme($carbon--theme--white, true) {
+        @include emit-component-tokens($tag-colors);
+        @include emit-component-tokens($notification-colors);
+    }
+}
+
+// Set the <html> theme attribute to "g10" to use the Gray 10 theme
+// <html theme="g10">
+:root[theme='g10'] {
+    @include carbon--theme($carbon--theme--g10, true) {
+        @include emit-component-tokens($tag-colors);
+        @include emit-component-tokens($notification-colors);
+    }
+}
+
+// Set the <html> theme attribute to "g90" to use the Gray 90 theme
+// <html theme="g90">
+:root[theme='g90'] {
+    @include carbon--theme($carbon--theme--g90, true) {
+        @include emit-component-tokens($tag-colors);
+        @include emit-component-tokens($notification-colors);
+    }
+}
+
+// Set the <html> theme attribute to "g100" to use the Gray 100 theme
+// <html theme="g100">
+:root[theme='g100'] {
+    @include carbon--theme($carbon--theme--g100, true) {
+        @include emit-component-tokens($tag-colors);
+        @include emit-component-tokens($notification-colors);
+    }
+}
+
+.container {
+    // Ref: https://github.com/carbon-design-system/carbon/blob/v10.10.0/packages/components/src/components/ui-shell/_side-nav.scss#L82
+    margin-top: 48px;
+    will-change: margin-left;
+    transition: margin-left 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+
+    @include carbon--breakpoint('lg') {
+        margin-left: mini-units(32);
+    }
+}
+
+.bx--body.container {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.bx--body.container {
+    background-color: var(--cds-ui-background, red);
+}
+
+.bx--content.ui-shell-content section.content {
+    background-color: var(--cds-ui-01, red);
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+div.content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+
+bx-breadcrumb-item::after {
+    margin-left: var(--cds-spacing-03, 0.5rem);
+    color: var(--cds-text-primary, #161616);
+    content: "/";
+}
+
+bx-breadcrumb-item:last-of-type::after {
+    content: "";
+}
+
+.bx--content.ui-shell-content {
+    margin: 0;
+    min-height: calc(100vh - 48px);
+    width: 100%;
+    padding: 1.5em;
+}
+
+/* stylelint-disable selector-type-no-unknown */
+bx-header~bx-side-nav {
+    margin-top: 3rem;
+    height: calc(100% - 3rem);
+}
+
+.page-header {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
