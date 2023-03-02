@@ -18,6 +18,7 @@ export interface RegistrationDetails {
 	comprobanteHref?: string;
     confirmed?: boolean;
     states?: any;
+    shortID?: string;
     id?: string;
 }
 

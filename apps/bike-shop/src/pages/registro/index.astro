@@ -210,7 +210,9 @@ import Layout from "../../layouts/Layout.astro";
 						<input id="hiddenDisclaimerCheckbox" required class="input" type="checkbox" name="disclaimer" />
 						<div>
 							En consideración de la presente, renuncio a cualquier derecho y reclamación por daños que yo pueda tener, en contra del comité organizador, grupos coordinadores y cualquier persona asociada con el evento, sus representantes, sucesores y asignados, los exonero de cualquier daño que pudiera sufrir antes, durante y después del evento, por considerarse riesgo deportivo. Adicionalmente, ninguna de las personas antes mencionadas, serán responsables por la pérdida de
-							artículos personales ni de cualquier forma de agravación en relación con dicho evento. Reconozco que he leído y comprometido mi propia responsabilidad y acepto las restricciones impuestas, así mismo acepto que he de cumplir apegado al <bx-link target="_blank" href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/reglamento%2FReglamento%20-%20SERIAL%20MTB%20TEXCOCO.pdf?alt=media&token=5ca77138-8cce-4ddf-b8f3-b689b7f39963">reglamento de operación vigente.</bx-link>
+							artículos personales ni de cualquier forma de agravación en relación con dicho evento. Reconozco que he leído y comprometido mi propia responsabilidad y acepto las restricciones impuestas, así mismo acepto que he de cumplir apegado al <bx-link target="_blank" href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/reglamento%2FReglamento%20-%20SERIAL%20MTB%20TEXCOCO.pdf?alt=media&token=5ca77138-8cce-4ddf-b8f3-b689b7f39963"
+								>reglamento de operación vigente.</bx-link
+							>
 						</div>
 					</div>
 
@@ -247,6 +249,8 @@ import Layout from "../../layouts/Layout.astro";
 	import type { MdCheckbox } from "@material/web/checkbox/checkbox";
 	import type { MdMenuItem } from "@material/web/menu/menu-item";
 	import { getInstance as getMachine } from "@state/machines/registration";
+	import { DateTime } from "luxon";
+    import { incrementRegistrationCount } from "@db/clients/firebase";
 
 	const registrationMachine = getMachine();
 	registrationMachine.onTransition(async (state) => {
@@ -458,6 +462,11 @@ import Layout from "../../layouts/Layout.astro";
 		//     });
 		// }
 
+		const shortDate = DateTime.local().toFormat("yyyyMMdd");
+        const incrementRes = await incrementRegistrationCount("REG_COATL")
+        const paddedIndex = pad(incrementRes)
+        const shortID = `REG_COATL/${shortDate}/${paddedIndex}`
+
 		registrationMachine.send({
 			type: "SUBMIT_REGISTRATION",
 			registrationDetails: {
@@ -471,6 +480,7 @@ import Layout from "../../layouts/Layout.astro";
 				fullNameEmergencyContact: data.fullNameEmergencyContact as string,
 				phoneEmergencyContact: data.phoneEmergencyContact as string,
 				placeOfOrigin: data.placeOfOrigin as string,
+                shortID: shortID as string,
 				comprobante: data.comprobante as File,
 			},
 		});
@@ -502,4 +512,10 @@ import Layout from "../../layouts/Layout.astro";
 		}
 		passwordInput.reportValidity();
 	});
+
+    function pad(num: number, size: number = 4) {
+        let parsedNum = num.toString();
+        while (parsedNum.length < size) parsedNum = "0" + parsedNum;
+        return parsedNum;
+    }
 </script>

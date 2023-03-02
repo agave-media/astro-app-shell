@@ -114,6 +114,25 @@ export async function attachFirestoreCollectionListener(key: string, cb: any, q?
 	return firestoreListeners[key];
 }
 
+export const incrementRegistrationCount = async (registrationType: string) => {
+	const db = await getFirestore();
+
+	const { doc, updateDoc, increment, getDoc } = await import("firebase/firestore");
+    
+    // Increment
+    const updatedCount: any = {}
+    updatedCount[registrationType] = increment(1)
+    const ref = doc(db, "config/registrationCount")
+    await updateDoc(ref, updatedCount);
+    
+    // Fetch updated count from DB
+    const docSnap = await getDoc(ref);
+    const parsedDoc = docSnap.data()
+    console.log('increment success:', parsedDoc)
+	
+    return parsedDoc?.[registrationType] as number;
+};
+
 export const writeDoc = async (collectionName: string, docData: any) => {
 	const db = await getFirestore();
 
@@ -207,6 +226,7 @@ const iam = {
     queryDocs,
     queryRegistros,
     serverTimestamp,
+    incrementRegistrationCount,
 	machine,
 };
 export default iam;
