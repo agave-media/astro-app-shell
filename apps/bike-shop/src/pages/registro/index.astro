@@ -105,6 +105,14 @@ import Layout from "../../layouts/Layout.astro";
         display: flex;
         flex-direction: column;
     }
+
+    md-outlined-text-field[disabled] {
+        pointer-events: none;
+    }
+
+    md-menu-item[disabled] {
+        display: none;
+    }
 </style>
 
 <Layout title="Coatl Race - Registro">
@@ -154,21 +162,34 @@ import Layout from "../../layouts/Layout.astro";
 					</md-outlined-segmented-button-set>
                     <input class="input" id="raceTypeInput" name="raceType" required>
 
-					<md-outlined-text-field required class="input" type="text" name="teamName" label="Nombre del equipo"></md-outlined-text-field>
-
 					<div class="dropdown-container">
-						<md-outlined-text-field placeholder="Selecciona una opcion" class="input" id="categoriasInput" label="Categoria" name="raceCategory" required></md-outlined-text-field>
+						<md-outlined-text-field disabled placeholder="Selecciona una opcion" class="input" id="categoriasInput" label="Categoria" name="raceCategory" required></md-outlined-text-field>
 
 						<md-menu fullwidth>
-							<md-menu-item data-value="avanzados" headline="Avanzados"></md-menu-item>
-							<md-menu-item data-value="master" headline="Master"></md-menu-item>
-							<md-menu-item data-value="intermedios" headline="Intermedios"></md-menu-item>
-							<md-menu-item data-value="hardtail" headline="Hardtail"></md-menu-item>
-							<md-menu-item data-value="principiantes" headline="Principiantes"></md-menu-item>
+                            <md-menu-item data-value="principiantes" headline="Principiantes"></md-menu-item>
+                            <md-menu-item data-value="hardtail" headline="Hardtail"></md-menu-item>
+                            <md-menu-item data-value="intermedios" headline="Intermedios"></md-menu-item>
+                            <md-menu-item data-value="avanzados" headline="Avanzados"></md-menu-item>
+                            <md-menu-item data-value="master" headline="Master" id="masterOption" disabled></md-menu-item>
+                        </md-menu>
+					</div>
+
+					<md-outlined-text-field required class="input" type="text" name="teamName" label="Nombre del equipo"></md-outlined-text-field>
+                    <md-outlined-text-field required class="input" type="text" name="placeOfOrigin" label="Lugar de procedencia"></md-outlined-text-field>
+
+					<div class="dropdown-container">
+						<md-outlined-text-field placeholder="Selecciona una talla" class="input" id="tallaInput" name="size" label="Talla" required></md-outlined-text-field>
+
+						<md-menu fullwidth>
+							<md-menu-item data-value="XS" headline="XS"></md-menu-item>
+							<md-menu-item data-value="S" headline="S"></md-menu-item>
+							<md-menu-item data-value="M" headline="M"></md-menu-item>
+							<md-menu-item data-value="L" headline="L"></md-menu-item>
+							<md-menu-item data-value="XL" headline="XL" disabled id="xlOption"></md-menu-item>
 						</md-menu>
 					</div>
 
-					<div class="dropdown-container">
+                    <div class="dropdown-container">
 						<md-outlined-text-field placeholder="Selecciona una opcion" class="input" id="tipoSangreInput" name="bloodType" label="Tipo de sangre" required></md-outlined-text-field>
 
 						<md-menu fullwidth>
@@ -183,26 +204,12 @@ import Layout from "../../layouts/Layout.astro";
 						</md-menu>
 					</div>
 
-					<div class="dropdown-container">
-						<md-outlined-text-field placeholder="Selecciona una talla" class="input" id="tallaInput" name="size" label="Talla" required></md-outlined-text-field>
-
-						<md-menu fullwidth>
-							<md-menu-item data-value="XS" headline="XS"></md-menu-item>
-							<md-menu-item data-value="S" headline="S"></md-menu-item>
-							<md-menu-item data-value="M" headline="M"></md-menu-item>
-							<md-menu-item data-value="L" headline="L"></md-menu-item>
-							<md-menu-item data-value="XL" headline="XL"></md-menu-item>
-						</md-menu>
-					</div>
-
-                    <md-outlined-text-field required class="input" type="text" name="placeOfOrigin" label="Lugar de procedencia"></md-outlined-text-field>
-
 					<div class="checkbox-container disclaimer-container">
 						<md-checkbox id="disclaimerCheckbox"></md-checkbox>
 						<input id="hiddenDisclaimerCheckbox" required class="input" type="checkbox" name="disclaimer" />
 						<div>
 							En consideración de la presente, renuncio a cualquier derecho y reclamación por daños que yo pueda tener, en contra del comité organizador, grupos coordinadores y cualquier persona asociada con el evento, sus representantes, sucesores y asignados, los exonero de cualquier daño que pudiera sufrir antes, durante y después del evento, por considerarse riesgo deportivo. Adicionalmente, ninguna de las personas antes mencionadas, serán responsables por la pérdida de
-							artículos personales ni de cualquier forma de agravación en relación con dicho evento. Reconozco que he leído y comprometido mi propia responsabilidad y acepto las restricciones impuestas, así mismo acepto que he de cumplir apegado al reglamento y lineamientos de operación vigente.
+							artículos personales ni de cualquier forma de agravación en relación con dicho evento. Reconozco que he leído y comprometido mi propia responsabilidad y acepto las restricciones impuestas, así mismo acepto que he de cumplir apegado al <bx-link target="_blank" href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/reglamento%2FReglamento%20-%20SERIAL%20MTB%20TEXCOCO.pdf?alt=media&token=5ca77138-8cce-4ddf-b8f3-b689b7f39963">reglamento</bx-link> de operación vigente.
 						</div>
 					</div>
 
@@ -230,6 +237,7 @@ import Layout from "../../layouts/Layout.astro";
 	import "@material/web/segmentedbuttonset/outlined-segmented-button-set";
 	import "@material/web/segmentedbutton/outlined-segmented-button";
 	import "@material/web/menu/menu";
+    import "@carbon/web-components/es/components/link/index.js";
 	import "@material/web/menu/menu-item";
 	import "../../components/image-loader";
 	import "../../components/comprobante-uploader";
@@ -253,8 +261,11 @@ import Layout from "../../layouts/Layout.astro";
 
 	// Form + checkbox references
 	const form = document.querySelector("form");
-
-	const disclaimerCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox");
+    
+	const masterSingleOption = document.querySelector("#masterOption");
+	const xlSingleOption = document.querySelector("#xlOption");
+    
+    const disclaimerCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox");
 	const disclaimerHiddenCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox + input") as HTMLInputElement;
 
 	const termsCheckbox = document.querySelector("md-checkbox#termsCheckbox");
@@ -295,6 +306,15 @@ import Layout from "../../layouts/Layout.astro";
         
         if (raceTypeInput && value) raceTypeInput.value = value
         validateInput(raceTypeInput)
+
+        categoriasInput.removeAttribute("disabled")
+        if (value === "varonil") {
+            masterSingleOption?.removeAttribute("disabled")
+            xlSingleOption?.removeAttribute("disabled")
+        } else {
+            masterSingleOption?.setAttribute("disabled", "")
+            xlSingleOption?.setAttribute("disabled", "")
+        }
     })
 
 	const slButton = document.querySelector("sl-button");
@@ -400,7 +420,7 @@ import Layout from "../../layouts/Layout.astro";
 			handleSubmit();
 		} else {
 			console.log("SUBMIT error:", event);
-			form.scrollIntoView({ behavior: "smooth", block: "start" });
+			// form.scrollIntoView({ behavior: "smooth", block: "start" });
 			registrationMachine.send({
 				type: "NOTIFY_FORM_ERROR",
 			});
