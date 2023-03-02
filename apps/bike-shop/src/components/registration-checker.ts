@@ -14,7 +14,7 @@ import type { MdOutlinedTextField } from "@material/web/textfield/outlined-text-
 @customElement("registration-checker")
 export class RegistrationChecker extends LitElement {
 	@property({ type: String })
-	status: string = "";
+	status: string = "idle";
 
 	@property({ type: Object })
 	registrationDetails: Registration;
@@ -22,11 +22,11 @@ export class RegistrationChecker extends LitElement {
 	@property({ type: Object })
 	searchResults: Registration[];
 
-    @query("form")
-    searchForm: HTMLFormElement
+	@query("form")
+	searchForm: HTMLFormElement;
 
-    @query("sl-button")
-    submitButton: HTMLButtonElement
+	@query("sl-button")
+	submitButton: HTMLButtonElement;
 
 	static override styles = css`
 		:host {
@@ -68,11 +68,11 @@ export class RegistrationChecker extends LitElement {
 		}
 
 		form {
-           display: flex;
-            flex-direction: column;
-            gap: 24px;
-    
-            width: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+
+			width: 100%;
 		}
 
 		bx-inline-notification {
@@ -80,9 +80,9 @@ export class RegistrationChecker extends LitElement {
 			margin: 0;
 		}
 
-        .btns {
-            align-self: flex-end;
-        }
+		.btns {
+			align-self: flex-end;
+		}
 
 		[hidden] {
 			display: none;
@@ -92,11 +92,11 @@ export class RegistrationChecker extends LitElement {
 	protected override render() {
 		return html`
 			<form @submit=${this.handleSubmit}>
-				<md-outlined-text-field required class="input" type="email" name="searchQuery" label="Buscar correo electronico"></md-outlined-text-field>
+				<md-outlined-text-field @keypress=${this.enterToSubmit} required class="input" type="email" name="searchQuery" label="Buscar correo electronico"></md-outlined-text-field>
 
 				<div class="btns light-theme">
 					<sl-button hidden type="submit">Buscar registro</sl-button>
-					<md-filled-button @click=${() => this.submitButton.click()} id="submitButton" type="submit" label="Buscar registro"></md-filled-button>
+					<md-filled-button ?disabled=${this.status === "loading"} @click=${() => this.submitButton.click()} id="submitButton" type="submit" label=${this.status === "loading" ? "Buscando..." : "Buscar registro"}></md-filled-button>
 				</div>
 			</form>
 
@@ -111,43 +111,55 @@ export class RegistrationChecker extends LitElement {
 			this.runningValidation(input);
 		});
 	}
-    
-    handleSubmit(event: Event) {
-        event.preventDefault();
-    
-        let isFormValid = this.searchForm.reportValidity();
-        console.log("isFormValid:", isFormValid);
-        if (isFormValid) {
-            console.log("SUBMIT success:", event);
-            this.handleSearch();
-        } else {
-            console.log("SUBMIT error:", event);
-        }
-    }
+
+	enterToSubmit(event: KeyboardEvent) {
+		if (event.key === "Enter" && this.status === "idle") {
+			console.log("enter to submit:", event);
+			this.submitButton.click();
+		}
+	}
+
+	handleSubmit(event: Event) {
+		event.preventDefault();
+
+		this.status = "loading";
+
+		let isFormValid = this.searchForm.reportValidity();
+		console.log("isFormValid:", isFormValid);
+		if (isFormValid) {
+			console.log("SUBMIT success:", event);
+			this.handleSearch();
+		} else {
+			console.log("SUBMIT error:", event);
+			this.status = "idle";
+		}
+	}
 
 	async handleSearch() {
-        // Get form data
+		// Get form data
 		const formData = new FormData(this.searchForm);
 		const data = Object.fromEntries(formData.entries());
 		console.log("data:", data);
 
-        if (data) {
-            const queryResults = (await queryDocs("registrations", data.searchQuery as string));
-            console.log("registration details:", queryResults);
-            this.searchResults = queryResults
+		if (data) {
+			const queryResults = await queryDocs("registrations", data.searchQuery as string);
+			console.log("registration details:", queryResults);
+			this.searchResults = queryResults;
 
-            if (queryResults.length && queryResults?.[0]?.id) {
-                window.location.replace(`/confirmacion/${queryResults[0].id}`)
-            }
-        }
+			if (queryResults.length && queryResults?.[0]?.id) {
+				window.location.replace(`/confirmacion/${queryResults[0].id}`);
+			} else {
+				this.status = "idle";
+			}
+		}
 	}
 
-    // Ensures errors are cleared when input is valid.
+	// Ensures errors are cleared when input is valid.
 	runningValidation(input: MdOutlinedTextField) {
 		input.addEventListener("input", () => {
 			this.validateInput(input);
 		});
-	};
+	}
 
 	validateInput(input: MdOutlinedTextField) {
 		const isInputValid = input.checkValidity();
