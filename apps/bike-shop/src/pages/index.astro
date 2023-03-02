@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "./home/Hero.astro";
 import SingleInfoCard from "../components/SingleInfoCard.astro";
 
-const { default: mountainTrailIcon } = await import(`@layout/components/icons/mountain_trail_icon.svg?raw`);
+// const { default: mountainTrailIcon } = await import(`@layout/components/icons/mountain_trail_icon.svg?raw`);
 const { default: rulesIcon } = await import(`@layout/components/icons/rules_icon.svg?raw`);
 ---
 
@@ -36,9 +36,9 @@ const { default: rulesIcon } = await import(`@layout/components/icons/rules_icon
                             <Fragment set:html={rulesIcon} />
                         </SingleInfoCard>
         
-                        <SingleInfoCard title="Ruta" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a quam rhoncus.">
+                        <!-- <SingleInfoCard title="Ruta" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a quam rhoncus.">
                             <Fragment set:html={mountainTrailIcon} />
-                        </SingleInfoCard>
+                        </SingleInfoCard> -->
                     </div>
                 </div>
             </div>
