@@ -1,0 +1,32 @@
+{
+	"name": "bike-admin",
+	"type": "module",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/lit": "^1.2.0",
+		"@astrojs/vercel": "^3.1.2",
+		"@carbon/web-components": "2.0.0-lit-v2-alpha",
+		"@db/clients": "*",
+		"@layout/components": "*",
+		"@state/machines": "*",
+		"@util/helpers": "*",
+		"@webcomponents/template-shadowroot": "^0.2.1",
+		"astro": "^2.0.14",
+		"firebase": "^9.17.1",
+		"lit": "2.6.1",
+		"luxon": "^3.2.1",
+		"xstate": "^4.36.0"
+	},
+	"devDependencies": {
+		"@types/luxon": "^3.2.0",
+		"sass": "^1.57.1"
+	}
+}
