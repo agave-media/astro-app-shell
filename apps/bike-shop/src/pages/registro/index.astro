@@ -100,9 +100,9 @@ import Layout from "../../layouts/Layout.astro";
 		flex-direction: column;
 	}
 
-    .serial-container {
-        margin-top: -24px;
-    }
+	.serial-container {
+		margin-top: -24px;
+	}
 
 	md-outlined-text-field[disabled] {
 		pointer-events: none;
@@ -112,24 +112,24 @@ import Layout from "../../layouts/Layout.astro";
 		display: none;
 	}
 
-    h1 {
+	h1 {
 		font-family: "JetBrains Mono";
 		text-align: center;
 		font-size: 2.5rem;
 		letter-spacing: 0.5px;
 	}
 
-    @media (max-width: 768px) {
-        h1 {
-            font-size: 2.2rem;
-        }
-    }
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 2.2rem;
+		}
+	}
 
-    @media (max-width: 480px) {
-        h1 {
-            font-size: 1.8rem;
-        }
-    }
+	@media (max-width: 480px) {
+		h1 {
+			font-size: 1.8rem;
+		}
+	}
 </style>
 
 <Layout title="Coatl Race - Registro">
@@ -173,15 +173,15 @@ import Layout from "../../layouts/Layout.astro";
 
 				<div>
 					<h4 class="subheader">4. INFORMACION DE CARRERA</h4>
-                    <md-outlined-segmented-button-set name="raceType">
-                        <md-outlined-segmented-button data-value="femenil" label="Femenil - $800" hasIcon></md-outlined-segmented-button>
-                        <md-outlined-segmented-button data-value="varonil" label="Varonil - $1050" hasIcon></md-outlined-segmented-button>
-                    </md-outlined-segmented-button-set>
-                    <input class="input" id="raceTypeInput" name="raceType" required />
+					<md-outlined-segmented-button-set name="raceType">
+						<md-outlined-segmented-button data-value="femenil" label="Femenil - $800" hasIcon></md-outlined-segmented-button>
+						<md-outlined-segmented-button data-value="varonil" label="Varonil - $1050" hasIcon></md-outlined-segmented-button>
+					</md-outlined-segmented-button-set>
+					<input class="input" id="raceTypeInput" name="raceType" required />
 
-                    <div class="checkbox-container serial-container">
+					<div class="checkbox-container serial-container">
 						<md-checkbox id="serialRegistrationCheckbox"></md-checkbox>
-						<input id="hiddenSerialRegistrationCheckbox" class="input" type="checkbox" name="reg_serial" />
+						<!-- <input id="hiddenSerialRegistrationCheckbox" class="input" type="checkbox" name="reg_serial" /> -->
 						<div>Acceso a todo el serial<span id="serialRegistrationPrice"></span></div>
 					</div>
 
@@ -272,7 +272,7 @@ import Layout from "../../layouts/Layout.astro";
 	import type { MdMenuItem } from "@material/web/menu/menu-item";
 	import { getInstance as getMachine } from "@state/machines/registration";
 	import { DateTime } from "luxon";
-    import { incrementRegistrationCount } from "@db/clients/firebase";
+	import { incrementRegistrationCount } from "@db/clients/firebase";
 
 	const registrationMachine = getMachine();
 	registrationMachine.onTransition(async (state) => {
@@ -308,8 +308,8 @@ import Layout from "../../layouts/Layout.astro";
 	const disclaimerCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox");
 	const disclaimerHiddenCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox + input") as HTMLInputElement;
 
-	const serialRegistrationCheckbox = document.querySelector("md-checkbox#serialRegistrationCheckbox");
-	const serialRegistrationHiddenCheckbox = document.querySelector("md-checkbox#serialRegistrationCheckbox + input") as HTMLInputElement;
+	const serialRegistrationCheckbox = document.querySelector("md-checkbox#serialRegistrationCheckbox") as MdCheckbox;
+	// const serialRegistrationHiddenCheckbox = document.querySelector("md-checkbox#serialRegistrationCheckbox + input") as HTMLInputElement;
 
 	const termsCheckbox = document.querySelector("md-checkbox#termsCheckbox");
 	const termsHiddenCheckbox = document.querySelector("md-checkbox#termsCheckbox + input") as HTMLInputElement;
@@ -355,12 +355,12 @@ import Layout from "../../layouts/Layout.astro";
 			masterSingleOption?.removeAttribute("disabled");
 			xlSingleOption?.removeAttribute("disabled");
 
-            serialRegistrationPrice.innerText = " - $2700"
+			serialRegistrationPrice.innerText = " - $2700";
 		} else {
-            masterSingleOption?.setAttribute("disabled", "");
+			masterSingleOption?.setAttribute("disabled", "");
 			xlSingleOption?.setAttribute("disabled", "");
 
-            serialRegistrationPrice.innerText = " - $2400"
+			serialRegistrationPrice.innerText = " - $2400";
 		}
 	});
 
@@ -492,10 +492,13 @@ import Layout from "../../layouts/Layout.astro";
 		//     });
 		// }
 
+		const regSerialOption = serialRegistrationCheckbox.checked;
+		const selectedRegistrationType = regSerialOption ? "REG_SERIAL" : "REG_COATL";
+
 		const shortDate = DateTime.local().toFormat("yyyyMMdd");
-        const incrementRes = await incrementRegistrationCount("REG_COATL")
-        const paddedIndex = pad(incrementRes)
-        const shortID = `REG_COATL/${shortDate}/${paddedIndex}`
+		const incrementRes = await incrementRegistrationCount(selectedRegistrationType);
+		const paddedIndex = pad(incrementRes);
+		const shortID = `${selectedRegistrationType}/${shortDate}/${paddedIndex}`;
 
 		registrationMachine.send({
 			type: "SUBMIT_REGISTRATION",
@@ -510,8 +513,8 @@ import Layout from "../../layouts/Layout.astro";
 				fullNameEmergencyContact: data.fullNameEmergencyContact as string,
 				phoneEmergencyContact: data.phoneEmergencyContact as string,
 				placeOfOrigin: data.placeOfOrigin as string,
-                reg_serial: (data.reg_serial === "on") as boolean,
-                shortID: shortID as string,
+				reg_serial: regSerialOption as boolean,
+				shortID: shortID as string,
 				comprobante: data.comprobante as File,
 			},
 		});
@@ -529,7 +532,7 @@ import Layout from "../../layouts/Layout.astro";
 	// Add checkbox change listener
 	disclaimerCheckbox?.addEventListener("change", () => _syncNativeCheckbox(disclaimerHiddenCheckbox));
 	termsCheckbox?.addEventListener("change", () => _syncNativeCheckbox(termsHiddenCheckbox));
-	serialRegistrationCheckbox?.addEventListener("change", () => _syncNativeCheckbox(serialRegistrationHiddenCheckbox));
+	// serialRegistrationCheckbox?.addEventListener("change", () => _syncNativeCheckbox(serialRegistrationHiddenCheckbox));
 
 	// Disable/enable password input
 	noAccountCheckbox?.addEventListener("change", (e) => {
@@ -545,9 +548,9 @@ import Layout from "../../layouts/Layout.astro";
 		passwordInput.reportValidity();
 	});
 
-    function pad(num: number, size: number = 4) {
-        let parsedNum = num.toString();
-        while (parsedNum.length < size) parsedNum = "0" + parsedNum;
-        return parsedNum;
-    }
+	function pad(num: number, size: number = 4) {
+		let parsedNum = num.toString();
+		while (parsedNum.length < size) parsedNum = "0" + parsedNum;
+		return parsedNum;
+	}
 </script>
