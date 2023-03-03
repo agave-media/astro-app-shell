@@ -18,7 +18,7 @@
 		"@layout/components": "*",
 		"@state/machines": "*",
 		"@util/helpers": "*",
-		"@webcomponents/template-shadowroot": "^0.2.1",
+		"@webcomponents/template-shadowroot": "^0.1.0",
 		"astro": "^2.0.14",
 		"firebase": "^9.17.1",
 		"lit": "2.6.1",
