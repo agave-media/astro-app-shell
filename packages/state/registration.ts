@@ -17,6 +17,7 @@ export interface RegistrationDetails {
 	comprobante?: File;
 	comprobanteHref?: string;
     confirmed?: boolean;
+    reg_serial?: boolean;
     states?: any;
     shortID?: string;
     id?: string;

@@ -59,6 +59,18 @@ const { href, title } = Astro.props;
         font-size: 42px;
         text-transform: uppercase;
     }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 28px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 22px;
+        }
+    }
 </style>
 
 <script>
