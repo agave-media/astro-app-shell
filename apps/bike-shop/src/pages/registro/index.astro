@@ -107,6 +107,10 @@ import Layout from "../../layouts/Layout.astro";
 		flex-direction: column;
 	}
 
+    .serial-container {
+        margin-top: -24px;
+    }
+
 	md-outlined-text-field[disabled] {
 		pointer-events: none;
 	}
@@ -157,11 +161,17 @@ import Layout from "../../layouts/Layout.astro";
 
 				<div>
 					<h4 class="subheader">4. INFORMACION DE CARRERA</h4>
-					<md-outlined-segmented-button-set name="raceType">
-						<md-outlined-segmented-button data-value="femenil" label="Femenil - $800" hasIcon></md-outlined-segmented-button>
-						<md-outlined-segmented-button data-value="varonil" label="Varonil - $1050" hasIcon></md-outlined-segmented-button>
-					</md-outlined-segmented-button-set>
-					<input class="input" id="raceTypeInput" name="raceType" required />
+                    <md-outlined-segmented-button-set name="raceType">
+                        <md-outlined-segmented-button data-value="femenil" label="Femenil - $800" hasIcon></md-outlined-segmented-button>
+                        <md-outlined-segmented-button data-value="varonil" label="Varonil - $1050" hasIcon></md-outlined-segmented-button>
+                    </md-outlined-segmented-button-set>
+                    <input class="input" id="raceTypeInput" name="raceType" required />
+
+                    <div class="checkbox-container serial-container">
+						<md-checkbox id="serialRegistrationCheckbox"></md-checkbox>
+						<input id="hiddenSerialRegistrationCheckbox" class="input" type="checkbox" name="reg_serial" />
+						<div>Acceso a todo el serial<span id="serialRegistrationPrice"></span></div>
+					</div>
 
 					<div class="dropdown-container">
 						<md-outlined-text-field disabled placeholder="Selecciona una opcion" class="input" id="categoriasInput" label="Categoria" name="raceCategory" required></md-outlined-text-field>
@@ -281,9 +291,13 @@ import Layout from "../../layouts/Layout.astro";
 
 	const masterSingleOption = document.querySelector("#masterOption");
 	const xlSingleOption = document.querySelector("#xlOption");
+	const serialRegistrationPrice = document.querySelector("#serialRegistrationPrice") as HTMLElement;
 
 	const disclaimerCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox");
 	const disclaimerHiddenCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox + input") as HTMLInputElement;
+
+	const serialRegistrationCheckbox = document.querySelector("md-checkbox#serialRegistrationCheckbox");
+	const serialRegistrationHiddenCheckbox = document.querySelector("md-checkbox#serialRegistrationCheckbox + input") as HTMLInputElement;
 
 	const termsCheckbox = document.querySelector("md-checkbox#termsCheckbox");
 	const termsHiddenCheckbox = document.querySelector("md-checkbox#termsCheckbox + input") as HTMLInputElement;
@@ -328,9 +342,13 @@ import Layout from "../../layouts/Layout.astro";
 		if (value === "varonil") {
 			masterSingleOption?.removeAttribute("disabled");
 			xlSingleOption?.removeAttribute("disabled");
+
+            serialRegistrationPrice.innerText = " - $2700"
 		} else {
-			masterSingleOption?.setAttribute("disabled", "");
+            masterSingleOption?.setAttribute("disabled", "");
 			xlSingleOption?.setAttribute("disabled", "");
+
+            serialRegistrationPrice.innerText = " - $2400"
 		}
 	});
 
@@ -480,6 +498,7 @@ import Layout from "../../layouts/Layout.astro";
 				fullNameEmergencyContact: data.fullNameEmergencyContact as string,
 				phoneEmergencyContact: data.phoneEmergencyContact as string,
 				placeOfOrigin: data.placeOfOrigin as string,
+                reg_serial: (data.reg_serial === "on") as boolean,
                 shortID: shortID as string,
 				comprobante: data.comprobante as File,
 			},
@@ -498,6 +517,7 @@ import Layout from "../../layouts/Layout.astro";
 	// Add checkbox change listener
 	disclaimerCheckbox?.addEventListener("change", () => _syncNativeCheckbox(disclaimerHiddenCheckbox));
 	termsCheckbox?.addEventListener("change", () => _syncNativeCheckbox(termsHiddenCheckbox));
+	serialRegistrationCheckbox?.addEventListener("change", () => _syncNativeCheckbox(serialRegistrationHiddenCheckbox));
 
 	// Disable/enable password input
 	noAccountCheckbox?.addEventListener("change", (e) => {
