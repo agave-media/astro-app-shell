@@ -29,13 +29,6 @@ import Layout from "../../layouts/Layout.astro";
 		align-items: stretch;
 	}
 
-	h1 {
-		font-family: "JetBrains Mono";
-		text-align: center;
-		font-size: 2.5rem;
-		letter-spacing: 0.5px;
-	}
-
 	.checkbox-container {
 		display: flex;
 		align-items: center;
@@ -118,6 +111,25 @@ import Layout from "../../layouts/Layout.astro";
 	md-menu-item[disabled] {
 		display: none;
 	}
+
+    h1 {
+		font-family: "JetBrains Mono";
+		text-align: center;
+		font-size: 2.5rem;
+		letter-spacing: 0.5px;
+	}
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 1.8rem;
+        }
+    }
 </style>
 
 <Layout title="Coatl Race - Registro">
