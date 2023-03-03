@@ -20,7 +20,7 @@
     "@astrojs/lit": "^1.2.0",
     "@astrojs/sitemap": "^1.0.1",
     "lit": "^2.6.1",
-    "@webcomponents/template-shadowroot": "^0.2.1",
+    "@webcomponents/template-shadowroot": "^0.1.0",
     "firebase": "^9.17.1",
     "xstate": "^4.36.0",
     "@shoelace-style/shoelace": "^2.1.0",
