@@ -1,25 +1,34 @@
 import * as functions from "firebase-functions";
 import * as postmark from "postmark";
 
-const client = new postmark.ServerClient("e6ace7e6-7e15-4271-8f0f-9e68dc3a0f74");
+const client = new postmark.ServerClient(`${process.env.POSTMARK_KEY?.toString()}`);
 
-exports.sendConfirmationEmail = functions.firestore.document("registrations/{id}").onCreate(async (snap, context) => {
-	const newRegistration = snap.data();
-	functions.logger.log("sending confirmation email:", newRegistration);
+exports.sendConfirmationEmail = functions.firestore.document("registrations/{id}").onUpdate(async (snap, context) => {
+	const prevRegistration = snap.before.data();
+    const updatedRegistration = snap.after.data();
+    functions.logger.log("--- registration updated ---");
+    functions.logger.log("prev registration:", prevRegistration.states);
+    functions.logger.log("updated registration:", updatedRegistration.states);
+
+    // Only send email when confirmedAt is set. Must be null before the update.
+    if (prevRegistration?.states?.confirmedAt || !updatedRegistration?.states?.confirmedAt) return null
 
     try {
-        const emailResponse = await client.sendEmailWithTemplate({
-            From: "krivera@agavemedia.io",
-            To: "krivera@agavemedia.io",
+        const emailPayload = {
+            From: "soporte@serialmtbtexcoco.com",
+            To: updatedRegistration.email,
             TemplateAlias: "registration_confirmation",
             TemplateModel: {
-                raceType: newRegistration.raceType,
-                raceCategory: newRegistration.raceCategory,
-                size: newRegistration.size,
-                id: newRegistration.id,
+                raceType: updatedRegistration.raceType,
+                raceCategory: updatedRegistration.raceCategory,
+                size: updatedRegistration.size,
+                id: context.params.id,
             },
-        });
-        functions.logger.log('email response:', emailResponse)
+        }
+        functions.logger.log("Sending email:", emailPayload)
+        
+        const emailResponse = await client.sendEmailWithTemplate(emailPayload);
+        functions.logger.log('email sent response:', emailResponse)
         
         if (emailResponse?.Message === "OK") return Promise.resolve(true)
         return Promise.resolve(false);
