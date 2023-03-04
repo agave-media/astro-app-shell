@@ -244,7 +244,7 @@ const iam = {
 	initialize,
 	getInstance,
 	getAuth,
-    getAnalytics,
+	getAnalytics,
 	attachAuthListener,
 	signIn,
 	signOut,
@@ -253,7 +253,7 @@ const iam = {
 	queryRegistros,
 	serverTimestamp,
 	incrementRegistrationCount,
-    updateRegistrationStatus,
+	updateRegistrationStatus,
 	machine,
 };
 export default iam;
