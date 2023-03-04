@@ -3,12 +3,14 @@ import type { Auth, Unsubscribe } from "firebase/auth";
 import { getInstance as getMachine } from "@state/machines/iam";
 import { DocumentData, Firestore, Query, serverTimestamp } from "firebase/firestore";
 import type { FirebaseStorage } from "firebase/storage";
+import type { Analytics } from "firebase/analytics";
 import type { RegistrationDetails } from "@state/machines/registration";
 
 let resolve: any,
 	firebaseInstance: FirebaseApp,
 	authInstance: Auth,
 	firestoreInstance: Firestore,
+	analyticsInstance: Analytics,
 	storageInstance: FirebaseStorage,
 	firestoreListeners: { [key: string]: Unsubscribe } = {},
 	authListener: Unsubscribe,
@@ -55,6 +57,15 @@ export async function getStorage() {
 	await getInstance();
 	storageInstance = getStorage();
 	return storageInstance;
+}
+
+export async function getAnalytics() {
+	if (analyticsInstance) return analyticsInstance;
+
+	const { getAnalytics } = await import("firebase/analytics");
+	await getInstance();
+	analyticsInstance = getAnalytics(firebaseInstance);
+	return analyticsInstance;
 }
 
 export async function getFirestore() {
@@ -233,6 +244,7 @@ const iam = {
 	initialize,
 	getInstance,
 	getAuth,
+	getAnalytics,
 	attachAuthListener,
 	signIn,
 	signOut,
@@ -241,7 +253,7 @@ const iam = {
 	queryRegistros,
 	serverTimestamp,
 	incrementRegistrationCount,
-    updateRegistrationStatus,
+	updateRegistrationStatus,
 	machine,
 };
 export default iam;
