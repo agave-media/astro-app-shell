@@ -4,16 +4,17 @@ export interface Props {
 	subtitle: string;
 	href?: string;
 	videoHref?: string;
+	videoPoster?: string;
 }
 
-const { href, videoHref } = Astro.props;
+const { href, videoHref, videoPoster } = Astro.props;
 ---
 
 <section>
 	{
 		videoHref ? (
-			<video playsinline autoplay muted loop>
-				<source src={videoHref} type="video/mp4" />
+			<video playsinline autoplay muted loop poster={videoPoster}>
+				<source src={videoHref}  type="video/mp4" />
 			</video>
 		) : (
 			<img class="overlay" src={href} />
