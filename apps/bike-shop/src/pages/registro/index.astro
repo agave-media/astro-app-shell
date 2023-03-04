@@ -267,6 +267,7 @@ import Layout from "../../layouts/Layout.astro";
 	import "../../components/image-loader";
 	import "../../components/comprobante-uploader";
 	import type { MdOutlinedTextField } from "@material/web/textfield/outlined-text-field";
+	import type { MdFilledButton } from "@material/web/button/filled-button";
 	import type { MdMenu } from "@material/web/menu/menu";
 	import type { MdCheckbox } from "@material/web/checkbox/checkbox";
 	import type { MdMenuItem } from "@material/web/menu/menu-item";
@@ -289,11 +290,12 @@ import Layout from "../../layouts/Layout.astro";
 			console.log("REGISTRATION ERROR:", state.context);
 
 			mdButton?.removeAttribute("disabled");
+            mdButton.label = "Enviar registro";
 		}
 	});
 
 	const slButton = document.querySelector("sl-button");
-	const mdButton = document.querySelector("#submitButton");
+	const mdButton = document.querySelector("#submitButton") as MdFilledButton;
 	mdButton?.addEventListener("click", () => {
 		slButton?.click();
 	});
@@ -454,7 +456,8 @@ import Layout from "../../layouts/Layout.astro";
 	form?.addEventListener("submit", async (event) => {
 		event.preventDefault();
 
-		mdButton?.setAttribute("disabled", "");
+		mdButton.setAttribute("disabled", "");
+        mdButton.label = "Enviando...";
 
 		let isFormValid = form.reportValidity();
 		console.log("isFormValid:", isFormValid);
@@ -470,6 +473,7 @@ import Layout from "../../layouts/Layout.astro";
 			});
 
 			mdButton?.removeAttribute("disabled");
+            mdButton.label = "Enviar registro";
 		}
 	});
 
