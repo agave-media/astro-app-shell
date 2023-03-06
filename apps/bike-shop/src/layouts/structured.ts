@@ -41,7 +41,7 @@ const generateSchema = () => {
                 "@type": "Offer",
                 "name": "Inscripción - Coatl Race",
                 "url": "https://serialmtbtexcoco.com/registro",
-                "price": "1050",
+                "price": "950",
                 "priceCurrency": "MXN",
                 "availability": "https://schema.org/InStock",
                 "validFrom": "2023-03-12T07:00-05:00"
