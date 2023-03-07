@@ -34,6 +34,7 @@ export class DataTable extends LitElement {
 			<bx-table>
 				<bx-table-head>
 					<bx-table-header-row>
+						<bx-table-header-cell>ID</bx-table-header-cell>
 						<bx-table-header-cell>Correo</bx-table-header-cell>
 						<bx-table-header-cell>Nombre</bx-table-header-cell>
 						<bx-table-header-cell>Categoria</bx-table-header-cell>
@@ -48,6 +49,7 @@ export class DataTable extends LitElement {
 						this?.registros?.length ? this.registros : [],
 						(singleRegistro) => html`
 							<bx-table-row>
+								<bx-table-cell>${singleRegistro.shortID}</bx-table-cell>
 								<bx-table-cell>${singleRegistro.email}</bx-table-cell>
 								<bx-table-cell>${singleRegistro.fullName}</bx-table-cell>
 								<bx-table-cell>${singleRegistro.raceType}</bx-table-cell>
