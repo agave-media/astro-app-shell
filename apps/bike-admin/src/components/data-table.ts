@@ -39,6 +39,7 @@ export class DataTable extends LitElement {
 						<bx-table-header-cell>Nombre</bx-table-header-cell>
 						<bx-table-header-cell>Categoria</bx-table-header-cell>
 						<bx-table-header-cell>Grupo</bx-table-header-cell>
+						<bx-table-header-cell>Talla</bx-table-header-cell>
 						<bx-table-header-cell>Fecha</bx-table-header-cell>
 						<bx-table-header-cell>Comprobante</bx-table-header-cell>
 						<bx-table-header-cell>Status</bx-table-header-cell>
@@ -54,6 +55,7 @@ export class DataTable extends LitElement {
 								<bx-table-cell>${singleRegistro.fullName}</bx-table-cell>
 								<bx-table-cell>${singleRegistro.raceType}</bx-table-cell>
 								<bx-table-cell>${singleRegistro.raceCategory}</bx-table-cell>
+								<bx-table-cell>${singleRegistro?.size?.toUpperCase() || "S/N"}</bx-table-cell>
 								<bx-table-cell>${this._computeDate(singleRegistro.states.createdAt)}</bx-table-cell>
 								<bx-table-cell class="bx--table-column-menu">
 									<bx-btn target="_blank" href=${singleRegistro?.comprobanteHref || ""} kind="tertiary" size="sm">${Attachment16({ slot: "icon" })}</bx-btn>
