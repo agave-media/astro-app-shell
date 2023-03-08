@@ -9,7 +9,7 @@ export interface RegistrationDetails {
 	raceType: string;
 	raceCategory: string;
 	bloodType: string;
-	size: string;
+	size?: string;
 	ageGroup?: string;
 	fullNameEmergencyContact?: string;
 	phoneEmergencyContact?: string;
