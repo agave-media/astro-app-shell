@@ -174,16 +174,10 @@ import Layout from "../../layouts/Layout.astro";
 				<div>
 					<h4 class="subheader">4. INFORMACION DE CARRERA</h4>
 					<md-outlined-segmented-button-set name="raceType">
-						<md-outlined-segmented-button data-value="femenil" label="Femenil - $800" hasIcon></md-outlined-segmented-button>
-						<md-outlined-segmented-button data-value="varonil" label="Varonil - $950" hasIcon></md-outlined-segmented-button>
+						<md-outlined-segmented-button data-value="femenil" label="Femenil - $650" hasIcon></md-outlined-segmented-button>
+						<md-outlined-segmented-button data-value="varonil" label="Varonil - $750" hasIcon></md-outlined-segmented-button>
 					</md-outlined-segmented-button-set>
 					<input class="input" id="raceTypeInput" name="raceType" required />
-
-					<div class="checkbox-container serial-container">
-						<md-checkbox id="serialRegistrationCheckbox"></md-checkbox>
-						<!-- <input id="hiddenSerialRegistrationCheckbox" class="input" type="checkbox" name="reg_serial" /> -->
-						<div>Acceso a todo el serial<span id="serialRegistrationPrice"></span></div>
-					</div>
 
 					<div class="dropdown-container">
 						<md-outlined-text-field disabled placeholder="Selecciona una opcion" class="input" id="categoriasInput" label="Categoria" name="raceCategory" required></md-outlined-text-field>
@@ -200,7 +194,7 @@ import Layout from "../../layouts/Layout.astro";
 					<md-outlined-text-field required class="input" type="text" name="teamName" label="Nombre del equipo"></md-outlined-text-field>
 					<md-outlined-text-field required class="input" type="text" name="placeOfOrigin" label="Lugar de procedencia"></md-outlined-text-field>
 
-					<div class="dropdown-container">
+					<!-- <div class="dropdown-container">
 						<md-outlined-text-field placeholder="Selecciona una talla" class="input" id="tallaInput" name="size" label="Talla" required></md-outlined-text-field>
 
 						<md-menu fullwidth>
@@ -210,7 +204,7 @@ import Layout from "../../layouts/Layout.astro";
 							<md-menu-item data-value="L" headline="L"></md-menu-item>
 							<md-menu-item data-value="XL" headline="XL" disabled id="xlOption"></md-menu-item>
 						</md-menu>
-					</div>
+					</div> -->
 
 					<div class="dropdown-container">
 						<md-outlined-text-field placeholder="Selecciona una opcion" class="input" id="tipoSangreInput" name="bloodType" label="Tipo de sangre" required></md-outlined-text-field>
@@ -310,7 +304,7 @@ import Layout from "../../layouts/Layout.astro";
 	const disclaimerCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox");
 	const disclaimerHiddenCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox + input") as HTMLInputElement;
 
-	const serialRegistrationCheckbox = document.querySelector("md-checkbox#serialRegistrationCheckbox") as MdCheckbox;
+	// const serialRegistrationCheckbox = document.querySelector("md-checkbox#serialRegistrationCheckbox") as MdCheckbox;
 	// const serialRegistrationHiddenCheckbox = document.querySelector("md-checkbox#serialRegistrationCheckbox + input") as HTMLInputElement;
 
 	const termsCheckbox = document.querySelector("md-checkbox#termsCheckbox");
@@ -324,8 +318,23 @@ import Layout from "../../layouts/Layout.astro";
 	const tipoSangreInput = document.querySelector("md-outlined-text-field#tipoSangreInput") as MdOutlinedTextField;
 	const tipoSangreMenu = document.querySelector("#tipoSangreInput + md-menu") as MdMenu;
 
-	const tallaInput = document.querySelector("md-outlined-text-field#tallaInput") as MdOutlinedTextField;
-	const tallaMenu = document.querySelector("#tallaInput + md-menu") as MdMenu;
+	// const tallaInput = document.querySelector("md-outlined-text-field#tallaInput") as MdOutlinedTextField;
+	// const tallaMenu = document.querySelector("#tallaInput + md-menu") as MdMenu;
+    // tallaInput?.addEventListener("click", () => {
+	// 	console.log("click");
+	// 	if (tallaMenu) {
+	// 		tallaMenu.anchor = tallaInput;
+	// 		tallaMenu.show();
+	// 	}
+	// });
+	// tallaMenu?.addEventListener("close-menu", (event) => {
+	// 	let target = event.target as MdMenuItem;
+	// 	let { value } = target.dataset;
+	// 	if (value) {
+	// 		tallaInput.value = value;
+	// 		validateInput(tallaInput);
+	// 	}
+	// });
 
 	const fileUploaderInput = document.querySelector("#comprobanteInput") as HTMLInputElement;
 	const fileUploader = document.querySelector("comprobante-uploader") as HTMLInputElement;
@@ -396,22 +405,6 @@ import Layout from "../../layouts/Layout.astro";
 		if (value) {
 			tipoSangreInput.value = value;
 			validateInput(tipoSangreInput);
-		}
-	});
-
-	tallaInput?.addEventListener("click", () => {
-		console.log("click");
-		if (tallaMenu) {
-			tallaMenu.anchor = tallaInput;
-			tallaMenu.show();
-		}
-	});
-	tallaMenu?.addEventListener("close-menu", (event) => {
-		let target = event.target as MdMenuItem;
-		let { value } = target.dataset;
-		if (value) {
-			tallaInput.value = value;
-			validateInput(tallaInput);
 		}
 	});
 
@@ -496,7 +489,8 @@ import Layout from "../../layouts/Layout.astro";
 		//     });
 		// }
 
-		const regSerialOption = serialRegistrationCheckbox.checked;
+		// const regSerialOption = serialRegistrationCheckbox.checked;
+		const regSerialOption = false;
 		const selectedRegistrationType = regSerialOption ? "REG_SERIAL" : "REG_COATL";
 
 		const shortDate = DateTime.local().toFormat("yyyyMMdd");
@@ -513,7 +507,6 @@ import Layout from "../../layouts/Layout.astro";
 				raceType: (data.raceType || "") as string,
 				raceCategory: data.raceCategory as string,
 				bloodType: data.bloodType as string,
-				size: data.size as string,
 				fullNameEmergencyContact: data.fullNameEmergencyContact as string,
 				phoneEmergencyContact: data.phoneEmergencyContact as string,
 				placeOfOrigin: data.placeOfOrigin as string,
