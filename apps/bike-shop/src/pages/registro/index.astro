@@ -179,12 +179,6 @@ import Layout from "../../layouts/Layout.astro";
 					</md-outlined-segmented-button-set>
 					<input class="input" id="raceTypeInput" name="raceType" required />
 
-					<div class="checkbox-container serial-container">
-						<md-checkbox id="serialRegistrationCheckbox"></md-checkbox>
-						<!-- <input id="hiddenSerialRegistrationCheckbox" class="input" type="checkbox" name="reg_serial" /> -->
-						<div>Acceso a todo el serial<span id="serialRegistrationPrice"></span></div>
-					</div>
-
 					<div class="dropdown-container">
 						<md-outlined-text-field disabled placeholder="Selecciona una opcion" class="input" id="categoriasInput" label="Categoria" name="raceCategory" required></md-outlined-text-field>
 
@@ -310,7 +304,7 @@ import Layout from "../../layouts/Layout.astro";
 	const disclaimerCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox");
 	const disclaimerHiddenCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox + input") as HTMLInputElement;
 
-	const serialRegistrationCheckbox = document.querySelector("md-checkbox#serialRegistrationCheckbox") as MdCheckbox;
+	// const serialRegistrationCheckbox = document.querySelector("md-checkbox#serialRegistrationCheckbox") as MdCheckbox;
 	// const serialRegistrationHiddenCheckbox = document.querySelector("md-checkbox#serialRegistrationCheckbox + input") as HTMLInputElement;
 
 	const termsCheckbox = document.querySelector("md-checkbox#termsCheckbox");
@@ -495,7 +489,8 @@ import Layout from "../../layouts/Layout.astro";
 		//     });
 		// }
 
-		const regSerialOption = serialRegistrationCheckbox.checked;
+		// const regSerialOption = serialRegistrationCheckbox.checked;
+		const regSerialOption = false;
 		const selectedRegistrationType = regSerialOption ? "REG_SERIAL" : "REG_COATL";
 
 		const shortDate = DateTime.local().toFormat("yyyyMMdd");
