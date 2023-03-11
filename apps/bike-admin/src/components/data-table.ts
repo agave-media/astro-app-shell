@@ -37,12 +37,14 @@ export class DataTable extends LitElement {
 						<bx-table-header-cell>ID</bx-table-header-cell>
 						<bx-table-header-cell>Correo</bx-table-header-cell>
 						<bx-table-header-cell>Nombre</bx-table-header-cell>
+						<bx-table-header-cell>Equipo</bx-table-header-cell>
 						<bx-table-header-cell>Categoria</bx-table-header-cell>
 						<bx-table-header-cell>Grupo</bx-table-header-cell>
 						<bx-table-header-cell>Talla</bx-table-header-cell>
 						<bx-table-header-cell>Fecha</bx-table-header-cell>
 						<bx-table-header-cell>Comprobante</bx-table-header-cell>
 						<bx-table-header-cell>Status</bx-table-header-cell>
+
 					</bx-table-header-row>
 				</bx-table-head>
 				<bx-table-body>
@@ -53,6 +55,7 @@ export class DataTable extends LitElement {
 								<bx-table-cell>${singleRegistro.shortID}</bx-table-cell>
 								<bx-table-cell>${singleRegistro.email}</bx-table-cell>
 								<bx-table-cell>${singleRegistro.fullName}</bx-table-cell>
+								<bx-table-cell>${singleRegistro.teamName}</bx-table-cell>
 								<bx-table-cell>${singleRegistro.raceType}</bx-table-cell>
 								<bx-table-cell>${singleRegistro.raceCategory}</bx-table-cell>
 								<bx-table-cell>${singleRegistro?.size?.toUpperCase() || "S/N"}</bx-table-cell>
