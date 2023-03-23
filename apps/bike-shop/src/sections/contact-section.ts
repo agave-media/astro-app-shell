@@ -116,7 +116,7 @@ export class ContactSection extends LitElement {
 				<div class="left">
 					<div class="text-info">
 						<h1>Como llegar</h1>
-						<p>Monte Tláloc, Estado de México</p>
+						<p>Auditiorio ejidal San Miguel Tlaixpan, Texcoco, Estado de México</p>
 					</div>
 					<div class="contact-info">
 						<a class="contact-links" target="_blank" href=${`mailto: ${this?.email}`} rel="noreferrer">
@@ -132,8 +132,8 @@ export class ContactSection extends LitElement {
 				</div>
 				<div class="right">
 					<sl-card>
-                        <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d470.22999567451785!2d-98.7913189!3d19.4624655!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1dd020ac05093%3A0x19b556cec9581527!2sPluma%20Tlaloc!5e0!3m2!1sen!2smx!4v1677191226527!5m2!1sen!2smx" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-					</sl-card>
+                        <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60182.34813029637!2d-98.87680457159868!3d19.481558785152107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1dd12c67ae2d5%3A0xff6348f026a87ec7!2sAuditorio%20De%20San%20Miguel%20Tlaixpan!5e0!3m2!1ses-419!2smx!4v1679605101605!5m2!1ses-419!2smx" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </sl-card>
 				</div>
 			</section>
 		`;
