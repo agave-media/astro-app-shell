@@ -102,7 +102,7 @@ export class AppHeader extends LitElement {
 						if (window.location.pathname !== "/") window.location.href = "/";
 					}}
 					class="logo-container">
-					<img src=${this.logo} alt="Coatl Race logo" />
+					<img src=${this.logo} alt="Reto Tláloc logo" />
 				</div>
 
 				<div class="trailing-container">

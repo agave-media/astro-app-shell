@@ -118,7 +118,7 @@ export class RegistrationDetails extends LitElement {
 	protected override render() {
 		return html`
 			${ifDefined(this.status) && this.status === "confirmado" ? 
-                html` <bx-inline-notification hide-close-button .title=${"Listo para rodar"} subtitle="Tu registro ha sido confirmado para Coatl Race. ¡Te esperamos el 12 de marzo!"></bx-inline-notification> ` : 
+                html` <bx-inline-notification hide-close-button .title=${"Listo para rodar"} subtitle="Tu registro ha sido confirmado para Reto Tláloc. ¡Te esperamos el 23 de abril!"></bx-inline-notification> ` : 
                 nothing
             }
 
