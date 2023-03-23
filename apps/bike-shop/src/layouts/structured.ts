@@ -2,58 +2,58 @@ const generateSchema = () => {
     const eventSchema = {
         "@context": "https://schema.org",
         "@type": "SportsEvent",
-        "name": "Coatl Race",
-        "startDate": "2023-03-12T07:00-05:00",
-        "endDate": "2023-03-12T17:00-05:00",
+        "name": "Reto Tláloc",
+        "startDate": "2023-04-23T07:00-05:00",
+        "endDate": "2023-04-23T17:00-05:00",
         "inLanguage": "es-MX",
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
         "eventStatus": "https://schema.org/EventScheduled",
-        "keywords": ["mtb", "coatl race", "xc texcoco", "enduro", "serial enduro 2023"],
+        "keywords": ["mtb", "reto tláloc", "xc texcoco", "enduro"],
         "sport": "https://en.wikipedia.org/wiki/Enduro_(mountain_biking)",
-        "description": "Este evento se lleva a cabo en Monte Tláloc, Estado de México. Una competencia de aproximadamente 22 kilometros y 6 pruebas especiales (3 de ellas completamente nuevas).",
+        "description": "El Reto Tláloc 4ta Edición se llevará a cabo el próximo 23 de abril en el auditorio ejidal de San Miguel Tlaixpan y contará con tres categorías: avanzado, intermedio y principiante.",
         "location": {
             "@type": "Place",
-            "name": "La Pluma de San Pablo Ixayoc, Monte Tláloc",
-            "hasMap": "https://goo.gl/maps/TfUV44eLVrxjdWCDA",
+            "name": "Auditiorio de San Miguel Tlaixpan",
+            "hasMap": "https://goo.gl/maps/LNmAVK4wh5kNCZhA9",
             "telephone": "+52 55 7898 0582",
             "publicAccess": true,
             "geo": {
                 "@type": "GeoCoordinates",
-                "latitude": "19.4624655",
-                "longitude": "-98.7913189",
-                "elevation": "3,000 m"
+                "latitude": "19.51096955909249",
+                "longitude": "-98.81362086189998",
+                "elevation": "2,4000 m"
             },
             "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "San Pablo Ixayoc",
-                "addressLocality": "Texcoco",
+                "streetAddress": "Av Nezahualcóyotl 20",
+                "addressLocality": "San Miguel Tlaixpan, Texcoco",
                 "postalCode": "56249",
                 "addressRegion": "Edo. Méx.",
                 "addressCountry": "MX"
             }
         },
         "image": [
-            "https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Fcoatl_race.png?alt=media&token=1ff3d92a-9f01-4ac2-88ee-dce08870d7cc",
-            "https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Fcoatl_banner.jpg?alt=media&token=be5f14de-22b2-4297-8efb-68ce00756426"
+            "https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Ftlaloc_logo.png?alt=media&token=f168eaec-8e48-4836-bf18-6a673da7e232",
+            "https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/gallery%2Ftlaloc_galeria_1.jpg?alt=media&token=014e90f1-0a15-411b-b3d5-91b06468cfd0"
         ],
         "offers": [
             {
                 "@type": "Offer",
-                "name": "Inscripción - Coatl Race",
+                "name": "Inscripción - Reto Tláloc (Elite)",
                 "url": "https://serialmtbtexcoco.com/registro",
-                "price": "750",
+                "price": "550",
                 "priceCurrency": "MXN",
                 "availability": "https://schema.org/InStock",
-                "validFrom": "2023-03-12T07:00-05:00"
+                "validFrom": "2023-04-23T07:00-05:00"
             },
             {
                 "@type": "Offer",
-                "name": "Inscripción - Serial Enduro 2023",
+                "name": "Inscripción - Reto Tláloc (Básico)",
                 "url": "https://serialmtbtexcoco.com/registro",
-                "price": "2700",
+                "price": "300",
                 "priceCurrency": "MXN",
                 "availability": "https://schema.org/InStock",
-                "validFrom": "2023-03-12T07:00-05:00"
+                "validFrom": "2023-04-23T07:00-05:00"
             }
         ],
         "organizer": {
