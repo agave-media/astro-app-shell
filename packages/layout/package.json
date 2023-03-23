@@ -6,7 +6,7 @@
         "@util/helpers": "*",
         "tsconfig": "*",
         "lit": "^2.6.1",
-        "@material/web": "^1.0.0-pre.3",
+        "@material/web": "^1.0.0-pre.5",
         "@carbon/web-components": "2.0.0-lit-v2-alpha"
     }
 }
