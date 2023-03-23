@@ -1,38 +1,56 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "./home/Hero.astro";
+import Hero from "../components/Hero.astro";
 import SingleInfoCard from "../components/SingleInfoCard.astro";
 
 // const { default: mountainTrailIcon } = await import(`@layout/components/icons/mountain_trail_icon.svg?raw`);
 const { default: rulesIcon } = await import(`@layout/components/icons/rules_icon.svg?raw`);
 ---
 
-<Layout title="Coatl Race">
+<Layout title="Reto Tláloc">
 	<main>
-		<Hero videoHref="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/videos%2Fintro_promo_480.mp4?alt=media&token=ff5356c0-53cd-4a4f-9edf-730e3f414e4b" title="Serial MTB Texcoco" subtitle="La mejor experiencia de ciclismo de montaña en Texcoco" videoPoster="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/videos%2Fintro_video_background_small.jpg?alt=media&token=ec48409e-12cb-41e1-ae6f-c4771b06ee57" />
+		<Hero videoHref="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/videos%2Ftlaloc_export_720_low.mp4?alt=media&token=18b85f0e-2d81-44aa-b5e8-ac7c30451869" title="Serial MTB Texcoco" subtitle="La mejor experiencia de ciclismo de montaña en Texcoco" videoPoster="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/videos%2Ftlaloc_export_poster.jpg?alt=media&token=f1dd8f4d-5650-4dd5-ad34-dd673178c121s" />
 
         <section>
-            <p>Este evento se lleva a cabo en Monte Tláloc, Estado de México. Una competencia de aproximadamente 22 kilometros y 6 pruebas especiales (3 de ellas completamente nuevas).</p>
+
+            <div class="intro-container">
+                <p>¡Bienvenidos al Reto Tláloc 4ta Edición! Este reto está diseñado para ciclistas de nivel avanzado, intermedio y principiante que buscan desafiarse a sí mismos y explorar rutas de Monte Tláloc.</p>
+                <p>El Reto Tláloc 4ta Edición se llevará a cabo el próximo 23 de abril en el auditorio ejidal de San Miguel Tlaixpan y contará con tres categorías: avanzado, intermedio y principiante. Cada categoría tendrá un recorrido único y desafiante que pondrá a prueba tus habilidades y resistencia en diferentes niveles.</p>
+                <!-- <p>El recorrido para la categoría avanzado consta de 60 km, con subidas demandantes y bajadas en veredas que pondrán a prueba tus habilidades técnicas. La categoría intermedio, por su parte, contará con un recorrido de 30 km, con subidas y descensos moderados y terrenos variados. Finalmente, la categoría principiante tendrá un recorrido de 15 km, diseñado para aquellos que se están iniciando en el mundo del ciclismo de montaña.</p>
+                <p>Durante el recorrido, los participantes podrán disfrutar de hermosas vistas panorámicas de los 7 pueblos de la montaña, con paisajes naturales y zonas arqueológicas. Además, habrá puntos de hidratación y asistencia técnica en diferentes puntos del recorrido para garantizar la seguridad y el bienestar de los participantes.</p>
+                <p>Al finalizar el recorrido, los participantes podrán disfrutar de una celebración en la meta, con música, comida y bebidas para celebrar su logro y compartir con otros amantes del ciclismo de montaña.</p>
+                <p>¡No te pierdas la oportunidad de participar en el Reto Tláloc 4ta Edición y desafiarte a ti mismo en una de las regiones más hermosas del Estado de México! Regístrate ahora y prepárate para un día inolvidable de ciclismo de montaña.</p> -->
+            </div>
     
             <div class="rewards-container">
-                <image-loader href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Fcoatl_square.jpg?alt=media&token=1a3479d2-109e-43c7-a7d1-0097d0c55bf0"></image-loader>
+                <image-loader href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/gallery%2Ftlaloc_galeria_1.jpg?alt=media&token=014e90f1-0a15-411b-b3d5-91b06468cfd0"></image-loader>
                 
                 <div class="info-column">
                     <h2>
-                        TU INSCRIPCIÓN INCLUYE:
+                        PAQUETE ELITE:
                         
                         <ul class="rewards">
-                            <li>Cronometraje con chip</li>
-                            <li>Jersey conmemorativo</li>
-                            <li>Hidratacíon</li>
+                            <li>Jersey</li>
+                            <li>Medalla</li>
                             <li>Bandana</li>
-                            <li>Medalla conmemorativa</li>
-                            <li>Lift el día de la carrera</li>
+                            <li>Hidratacíon</li>
+                            <li>Número de participante</li>
+                        </ul>
+                    </h2>
+                    
+                    <h2>
+                        PAQUETE BÁSICO:
+                        
+                        <ul class="rewards">
+                            <li>Medalla</li>
+                            <li>Bandana</li>
+                            <li>Hidratacíon</li>
+                            <li>Número de participante</li>
                         </ul>
                     </h2>
 
                     <div class="info-container">
-                        <SingleInfoCard title="Reglamento" description="Familiarizate con el reglamento que deben seguir todos los participantes en la carrera." href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/reglamento%2FReglamento%20-%20SERIAL%20MTB%20TEXCOCO.pdf?alt=media&token=26ebe37d-72f6-40ea-9b99-d1e05aa0c967">
+                        <SingleInfoCard title="Reglamento" description="Familiarizate con el reglamento que deben seguir todos los participantes del reto." href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/reglamento%2FReglamento%20-%20Reto%20Tlaloc.pdf?alt=media&token=8014e31a-326d-4c02-b993-d783f7612623">
                             <Fragment set:html={rulesIcon} />
                         </SingleInfoCard>
         
@@ -66,7 +84,7 @@ const { default: rulesIcon } = await import(`@layout/components/icons/rules_icon
 		display: grid;
 		gap: 24px;
         max-width: 600px;
-        margin: 32px auto 0;
+        margin: 0 auto;
 	}
 	
 	h2 {
@@ -80,6 +98,7 @@ const { default: rulesIcon } = await import(`@layout/components/icons/rules_icon
 		letter-spacing: 1px;
 		font-weight: 300;
 		margin: 0;
+        text-align: center;
 	}
 
 	.rewards {
@@ -97,7 +116,7 @@ const { default: rulesIcon } = await import(`@layout/components/icons/rules_icon
 	.rewards-container {
 		display: grid;
         gap: 48px;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 3fr 2fr;
 	}
 
     image-loader {
@@ -106,7 +125,15 @@ const { default: rulesIcon } = await import(`@layout/components/icons/rules_icon
     }
 
     .info-column {
-        margin-top: 16px;
+        gap: 32px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .intro-container {
+        gap: 24px;
+        display: flex;
+        flex-direction: column;
     }
 
 	@media(max-width: 768px) {
