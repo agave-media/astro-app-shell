@@ -67,7 +67,7 @@ import Layout from "../../layouts/Layout.astro";
 
 	image-loader {
 		width: 100%;
-		max-width: 80ch;
+		max-width: 120ch;
 		margin: 0 auto;
 		z-index: 1;
 	}
@@ -132,14 +132,14 @@ import Layout from "../../layouts/Layout.astro";
 	}
 </style>
 
-<Layout title="Coatl Race - Registro">
+<Layout title="Reto Tláloc - Registro">
 	<main>
 		<div class="banner">
-			<image-loader href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Fcoatl_long.jpg?alt=media&token=a58aa96b-62b4-44bb-bc90-3c7335ad34d3"></image-loader>
+			<image-loader href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Ftlaloc%2Fportada_tlaloc.jpg?alt=media&token=b23e4754-cb1b-485c-b3c2-4a60ac4d9cf9"></image-loader>
 		</div>
 
 		<section>
-			<h1>Registro - Coatl Race</h1>
+			<h1>Registro - Reto Tláloc</h1>
 
 			<form class="form">
 				<div>
@@ -174,8 +174,8 @@ import Layout from "../../layouts/Layout.astro";
 				<div>
 					<h4 class="subheader">4. INFORMACION DE CARRERA</h4>
 					<md-outlined-segmented-button-set name="raceType">
-						<md-outlined-segmented-button data-value="femenil" label="Femenil - $650" hasIcon></md-outlined-segmented-button>
-						<md-outlined-segmented-button data-value="varonil" label="Varonil - $750" hasIcon></md-outlined-segmented-button>
+						<md-outlined-segmented-button data-value="basico" label="Básico - $300" hasIcon></md-outlined-segmented-button>
+						<md-outlined-segmented-button data-value="elite" label="Elite - $550" hasIcon></md-outlined-segmented-button>
 					</md-outlined-segmented-button-set>
 					<input class="input" id="raceTypeInput" name="raceType" required />
 
@@ -184,40 +184,38 @@ import Layout from "../../layouts/Layout.astro";
 
 						<md-menu fullwidth>
 							<md-menu-item data-value="principiantes" headline="Principiantes"></md-menu-item>
-							<md-menu-item data-value="hardtail" headline="Hardtail"></md-menu-item>
 							<md-menu-item data-value="intermedios" headline="Intermedios"></md-menu-item>
 							<md-menu-item data-value="avanzados" headline="Avanzados"></md-menu-item>
-							<md-menu-item data-value="master" headline="Master" id="masterOption" disabled></md-menu-item>
+						</md-menu>
+					</div>
+
+					<div class="dropdown-container">
+						<md-outlined-text-field disabled placeholder="Selecciona una talla" class="input" id="tallaInput" name="size" label="Talla" required></md-outlined-text-field>
+
+						<md-menu fullwidth>
+							<md-menu-item data-value="Extra Chico" headline="Extra Chico"></md-menu-item>
+							<md-menu-item data-value="Chico" headline="Chico"></md-menu-item>
+							<md-menu-item data-value="Mediano" headline="Mediano"></md-menu-item>
+							<md-menu-item data-value="Grande" headline="Grande"></md-menu-item>
+							<md-menu-item data-value="Extra Grande" headline="Extra Grande"></md-menu-item>
 						</md-menu>
 					</div>
 
 					<md-outlined-text-field required class="input" type="text" name="teamName" label="Nombre del equipo"></md-outlined-text-field>
 					<md-outlined-text-field required class="input" type="text" name="placeOfOrigin" label="Lugar de procedencia"></md-outlined-text-field>
 
-					<!-- <div class="dropdown-container">
-						<md-outlined-text-field placeholder="Selecciona una talla" class="input" id="tallaInput" name="size" label="Talla" required></md-outlined-text-field>
-
-						<md-menu fullwidth>
-							<md-menu-item data-value="XS" headline="XS"></md-menu-item>
-							<md-menu-item data-value="S" headline="S"></md-menu-item>
-							<md-menu-item data-value="M" headline="M"></md-menu-item>
-							<md-menu-item data-value="L" headline="L"></md-menu-item>
-							<md-menu-item data-value="XL" headline="XL" disabled id="xlOption"></md-menu-item>
-						</md-menu>
-					</div> -->
-
 					<div class="dropdown-container">
 						<md-outlined-text-field placeholder="Selecciona una opcion" class="input" id="tipoSangreInput" name="bloodType" label="Tipo de sangre" required></md-outlined-text-field>
 
 						<md-menu fullwidth>
-							<md-menu-item data-value="o_plus" headline="O+"></md-menu-item>
-							<md-menu-item data-value="o_neg" headline="O-"></md-menu-item>
-							<md-menu-item data-value="a_plus" headline="A+"></md-menu-item>
-							<md-menu-item data-value="a_neg" headline="A-"></md-menu-item>
-							<md-menu-item data-value="b_plus" headline="B+"></md-menu-item>
-							<md-menu-item data-value="b_neg" headline="B-"></md-menu-item>
-							<md-menu-item data-value="ab_plus" headline="AB+"></md-menu-item>
-							<md-menu-item data-value="ab_neg" headline="AB-"></md-menu-item>
+							<md-menu-item data-value="O+" headline="O+"></md-menu-item>
+							<md-menu-item data-value="O-" headline="O-"></md-menu-item>
+							<md-menu-item data-value="A+" headline="A+"></md-menu-item>
+							<md-menu-item data-value="A-" headline="A-"></md-menu-item>
+							<md-menu-item data-value="B+" headline="B+"></md-menu-item>
+							<md-menu-item data-value="B-" headline="B-"></md-menu-item>
+							<md-menu-item data-value="AB+" headline="AB+"></md-menu-item>
+							<md-menu-item data-value="AB-" headline="AB-"></md-menu-item>
 						</md-menu>
 					</div>
 
@@ -226,7 +224,7 @@ import Layout from "../../layouts/Layout.astro";
 						<input id="hiddenDisclaimerCheckbox" required class="input" type="checkbox" name="disclaimer" />
 						<div>
 							En consideración de la presente, renuncio a cualquier derecho y reclamación por daños que yo pueda tener, en contra del comité organizador, grupos coordinadores y cualquier persona asociada con el evento, sus representantes, sucesores y asignados, los exonero de cualquier daño que pudiera sufrir antes, durante y después del evento, por considerarse riesgo deportivo. Adicionalmente, ninguna de las personas antes mencionadas, serán responsables por la pérdida de
-							artículos personales ni de cualquier forma de agravación en relación con dicho evento. Reconozco que he leído y comprometido mi propia responsabilidad y acepto las restricciones impuestas, así mismo acepto que he de cumplir apegado al <bx-link target="_blank" href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/reglamento%2FReglamento%20-%20SERIAL%20MTB%20TEXCOCO.pdf?alt=media&token=5ca77138-8cce-4ddf-b8f3-b689b7f39963"
+							artículos personales ni de cualquier forma de agravación en relación con dicho evento. Reconozco que he leído y comprometido mi propia responsabilidad y acepto las restricciones impuestas, así mismo acepto que he de cumplir apegado al <bx-link target="_blank" href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/reglamento%2FReglamento%20-%20Reto%20Tlaloc.pdf?alt=media&token=8014e31a-326d-4c02-b993-d783f7612623"
 								>reglamento de operación vigente.</bx-link
 							>
 						</div>
@@ -284,7 +282,7 @@ import Layout from "../../layouts/Layout.astro";
 			console.log("REGISTRATION ERROR:", state.context);
 
 			mdButton?.removeAttribute("disabled");
-            mdButton.label = "Enviar registro";
+			mdButton.label = "Enviar registro";
 		}
 	});
 
@@ -296,10 +294,6 @@ import Layout from "../../layouts/Layout.astro";
 
 	// Form + checkbox references
 	const form = document.querySelector("form");
-
-	const masterSingleOption = document.querySelector("#masterOption");
-	const xlSingleOption = document.querySelector("#xlOption");
-	const serialRegistrationPrice = document.querySelector("#serialRegistrationPrice") as HTMLElement;
 
 	const disclaimerCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox");
 	const disclaimerHiddenCheckbox = document.querySelector("md-checkbox#disclaimerCheckbox + input") as HTMLInputElement;
@@ -318,23 +312,23 @@ import Layout from "../../layouts/Layout.astro";
 	const tipoSangreInput = document.querySelector("md-outlined-text-field#tipoSangreInput") as MdOutlinedTextField;
 	const tipoSangreMenu = document.querySelector("#tipoSangreInput + md-menu") as MdMenu;
 
-	// const tallaInput = document.querySelector("md-outlined-text-field#tallaInput") as MdOutlinedTextField;
-	// const tallaMenu = document.querySelector("#tallaInput + md-menu") as MdMenu;
-    // tallaInput?.addEventListener("click", () => {
-	// 	console.log("click");
-	// 	if (tallaMenu) {
-	// 		tallaMenu.anchor = tallaInput;
-	// 		tallaMenu.show();
-	// 	}
-	// });
-	// tallaMenu?.addEventListener("close-menu", (event) => {
-	// 	let target = event.target as MdMenuItem;
-	// 	let { value } = target.dataset;
-	// 	if (value) {
-	// 		tallaInput.value = value;
-	// 		validateInput(tallaInput);
-	// 	}
-	// });
+	const tallaInput = document.querySelector("md-outlined-text-field#tallaInput") as MdOutlinedTextField;
+	const tallaMenu = document.querySelector("#tallaInput + md-menu") as MdMenu;
+	tallaInput?.addEventListener("click", () => {
+		console.log("click");
+		if (tallaMenu) {
+			tallaMenu.anchor = tallaInput;
+			tallaMenu.show();
+		}
+	});
+	tallaMenu?.addEventListener("close-menu", (event) => {
+		let target = event.target as MdMenuItem;
+		let { value } = target.dataset;
+		if (value) {
+			tallaInput.value = value;
+			validateInput(tallaInput);
+		}
+	});
 
 	const fileUploaderInput = document.querySelector("#comprobanteInput") as HTMLInputElement;
 	const fileUploader = document.querySelector("comprobante-uploader") as HTMLInputElement;
@@ -356,22 +350,22 @@ import Layout from "../../layouts/Layout.astro";
 	raceTypeSegmentedButtonSet?.addEventListener("segmented-button-set-selection", (e) => {
 		let target = e?.detail?.button as MdMenuItem;
 		let { value } = target.dataset;
-		console.log("race type select:", value);
+		console.log("race type select:", value, e);
 
 		if (raceTypeInput && value) raceTypeInput.value = value;
 		validateInput(raceTypeInput);
 
 		categoriasInput.removeAttribute("disabled");
-		if (value === "varonil") {
-			masterSingleOption?.removeAttribute("disabled");
-			xlSingleOption?.removeAttribute("disabled");
-
-			serialRegistrationPrice.innerText = " - $2700";
+		if (value === "elite") {
+			tallaInput?.removeAttribute("disabled");
+			// masterSingleOption?.removeAttribute("disabled");
+			// xlSingleOption?.removeAttribute("disabled");
+			// serialRegistrationPrice.innerText = " - $2700";
 		} else {
-			masterSingleOption?.setAttribute("disabled", "");
-			xlSingleOption?.setAttribute("disabled", "");
-
-			serialRegistrationPrice.innerText = " - $2400";
+			tallaInput?.setAttribute("disabled", "");
+			// masterSingleOption?.setAttribute("disabled", "");
+			// xlSingleOption?.setAttribute("disabled", "");
+			// serialRegistrationPrice.innerText = " - $2400";
 		}
 	});
 
@@ -450,7 +444,7 @@ import Layout from "../../layouts/Layout.astro";
 		event.preventDefault();
 
 		mdButton.setAttribute("disabled", "");
-        mdButton.label = "Enviando...";
+		mdButton.label = "Enviando...";
 
 		let isFormValid = form.reportValidity();
 		console.log("isFormValid:", isFormValid);
@@ -466,7 +460,7 @@ import Layout from "../../layouts/Layout.astro";
 			});
 
 			mdButton?.removeAttribute("disabled");
-            mdButton.label = "Enviar registro";
+			mdButton.label = "Enviar registro";
 		}
 	});
 
@@ -489,10 +483,9 @@ import Layout from "../../layouts/Layout.astro";
 		//     });
 		// }
 
-		// const regSerialOption = serialRegistrationCheckbox.checked;
-		const regSerialOption = false;
-		const selectedRegistrationType = regSerialOption ? "REG_SERIAL" : "REG_COATL";
+		const selectedRegistrationType = "REG_TLALOC";
 
+		// Consider moving this to CF - on db create.
 		const shortDate = DateTime.local().toFormat("yyyyMMdd");
 		const incrementRes = await incrementRegistrationCount(selectedRegistrationType);
 		const paddedIndex = pad(incrementRes);
@@ -510,7 +503,7 @@ import Layout from "../../layouts/Layout.astro";
 				fullNameEmergencyContact: data.fullNameEmergencyContact as string,
 				phoneEmergencyContact: data.phoneEmergencyContact as string,
 				placeOfOrigin: data.placeOfOrigin as string,
-				reg_serial: regSerialOption as boolean,
+				reg_serial: false,
 				shortID: shortID as string,
 				comprobante: data.comprobante as File,
 			},

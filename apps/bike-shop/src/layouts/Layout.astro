@@ -7,7 +7,7 @@ export interface Props {
 	title: string;
 }
 
-const { title = "Coatl Race", state = "loading" } = Astro.props;
+const { title = "Reto Tláloc", state = "loading" } = Astro.props;
 const { default: tlalocLoader } = await import(`@layout/components/tlaloc_loader.svg?raw`);
 ---
 
@@ -33,7 +33,7 @@ const { default: tlalocLoader } = await import(`@layout/components/tlaloc_loader
 		<div id="loadingOverlay">
 			<Fragment set:html={tlalocLoader} />
 		</div>
-		<app-shell logo="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/icons%2Fcoatl.png?alt=media&token=5467b4e8-4034-4e81-a3e5-ded260d1d89e">
+		<app-shell logo="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Ftlaloc_logo.png?alt=media&token=f168eaec-8e48-4836-bf18-6a673da7e232">
 			<slot />
 		</app-shell>
 	</body>

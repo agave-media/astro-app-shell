@@ -111,7 +111,7 @@ export class AppShell extends LitElement {
 	protected override render() {
 		return html`
 			<app-drawer .colorScheme=${this.colorScheme} .logo=${this.logo} .railopen=${this._railopen} .wideview=${this._wideview} @open-changed=${this._drawerOpenChanged}></app-drawer>
-			<app-header @open-drawer=${this.toggleDrawer} .logo=${this.logo} class="toolbar-top" id="header" title="Coatl Race">
+			<app-header @open-drawer=${this.toggleDrawer} .logo=${this.logo} class="toolbar-top" id="header" title="Reto Tláloc">
 				<md-standard-icon-button-toggle .selected=${!this._railopen} @click=${() => this.toggleRail()} slot="icon">
                     <div>
                         <md-icon>menu_open</md-icon>

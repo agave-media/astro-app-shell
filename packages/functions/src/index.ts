@@ -17,7 +17,7 @@ exports.sendConfirmationEmail = functions.firestore.document("registrations/{id}
         const emailPayload = {
             From: "soporte@serialmtbtexcoco.com",
             To: updatedRegistration.email,
-            TemplateAlias: "registration_confirmation",
+            TemplateAlias: "registration_confirmation-tlaloc",
             TemplateModel: {
                 raceType: updatedRegistration.raceType,
                 raceCategory: updatedRegistration.raceCategory,
