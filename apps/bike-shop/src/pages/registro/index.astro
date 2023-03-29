@@ -162,7 +162,7 @@ import Layout from "../../layouts/Layout.astro";
 						<div>No quiero crear una cuenta.</div>
 					</div> -->
 
-					<!-- <md-outlined-text-field required class="input" type="tel" name="phone" label="Telefono"></md-outlined-text-field> -->
+					<md-outlined-text-field required class="input" type="tel" name="phone" label="Telefono"></md-outlined-text-field>
 				</div>
 
 				<div>
@@ -498,6 +498,7 @@ import Layout from "../../layouts/Layout.astro";
 				fullName: data.fullName as string,
 				teamName: data.teamName as string,
 				raceType: (data.raceType || "") as string,
+				phone: (data.phone || "") as string,
 				raceCategory: data.raceCategory as string,
 				bloodType: data.bloodType as string,
 				fullNameEmergencyContact: data.fullNameEmergencyContact as string,

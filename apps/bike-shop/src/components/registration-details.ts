@@ -144,7 +144,7 @@ export class RegistrationDetails extends LitElement {
                 </h4>
 
 				<h4>
-					Grupo
+					Paquete
 					<p>${this.registrationDetails?.raceType}</p>
 				</h4>
 
