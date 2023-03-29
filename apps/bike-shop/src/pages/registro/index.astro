@@ -495,6 +495,7 @@ import Layout from "../../layouts/Layout.astro";
 			type: "SUBMIT_REGISTRATION",
 			registrationDetails: {
 				email: data.email as string,
+				size: (data.size||"") as string,
 				fullName: data.fullName as string,
 				teamName: data.teamName as string,
 				raceType: (data.raceType || "") as string,
