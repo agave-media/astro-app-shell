@@ -34,7 +34,7 @@ const generateSchema = () => {
         },
         "image": [
             "https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/logos%2Ftlaloc_logo.png?alt=media&token=f168eaec-8e48-4836-bf18-6a673da7e232",
-            "https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/gallery%2Ftlaloc_galeria_1.jpg?alt=media&token=014e90f1-0a15-411b-b3d5-91b06468cfd0"
+            "https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/banners%2Ftlaloc%2Fportada_tlaloc.jpg?alt=media&token=b23e4754-cb1b-485c-b3c2-4a60ac4d9cf9"
         ],
         "offers": [
             {
