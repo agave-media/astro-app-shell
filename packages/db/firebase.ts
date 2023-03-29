@@ -147,7 +147,7 @@ export const incrementRegistrationCount = async (registrationType: string) => {
 	// Increment
 	const updatedCount: any = {};
 	updatedCount[registrationType] = increment(1);
-	const ref = doc(db, "config/registrationCount");
+	const ref = doc(db, "config/registrationTlaloc");
 	await updateDoc(ref, updatedCount);
 
 	// Fetch updated count from DB
