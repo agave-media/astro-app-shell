@@ -81,7 +81,7 @@ export class DataTable extends LitElement {
 		else return html` <bx-btn @click=${() => this.openRegistrationActionDialog(singleRegistro)} kind="ghost" size="sm">${Pending16({ slot: "icon", color: "#6f6f6f" })}</bx-btn> `;
 	}
 	_resendConfirmation(singleRegistro: RegistrationDetails){
-		if (singleRegistro?.states?.confirmedAt?.seconds > 0) return html` <bx-btn @click=${() => this.openRegistrationActionDialog(singleRegistro)} kind="ghost" size="sm">${Email({slot:'icon'})}</bx-btn> `;
+		if (singleRegistro?.states?.confirmedAt?.seconds > 0) return html` <bx-btn @click=${() => this.openResendEmail(singleRegistro)} kind="ghost" size="sm">${Email({slot:'icon'})}</bx-btn> `;
 		else return html`<bx-btn disabled kind="ghost" size="sm">${Email({slot:'icon'})}</bx-btn>`
 	}
 	protected override firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
@@ -108,5 +108,10 @@ export class DataTable extends LitElement {
 	openRegistrationActionDialog(registro: RegistrationDetails) {
 		console.log("opening registration...");
 		this.dispatchEvent(new CustomEvent("open-registration-dialog", { detail: registro, bubbles: true, composed: true }));
+	}
+
+	openResendEmail(registro: RegistrationDetails){
+		console.log('open resend dialog')
+		this.dispatchEvent(new CustomEvent("open-resend-confirmation", { detail: registro, bubbles: true, composed: true }))
 	}
 }
