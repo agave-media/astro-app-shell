@@ -7,6 +7,7 @@ import "@carbon/web-components/es/components/button/index.js";
 import Attachment16 from "@carbon/web-components/es/icons/attachment/16";
 import Pending16 from "@carbon/web-components/es/icons/pending/24";
 import CheckmarkFilled from "@carbon/web-components/es/icons/checkmark--filled/24";
+import Email from "@carbon/web-components/es/icons/email/24"
 import ErrorIcon from "@carbon/web-components/es/icons/error/24";
 import { queryRegistros } from "@db/clients/firebase";
 import type { QuerySnapshot } from "firebase/firestore";
@@ -44,6 +45,7 @@ export class DataTable extends LitElement {
 						<bx-table-header-cell>Fecha</bx-table-header-cell>
 						<bx-table-header-cell>Comprobante</bx-table-header-cell>
 						<bx-table-header-cell>Status</bx-table-header-cell>
+						<bx-table-header-cell>Reenvio</bx-table-header-cell>
 
 					</bx-table-header-row>
 				</bx-table-head>
@@ -64,6 +66,7 @@ export class DataTable extends LitElement {
 									<bx-btn target="_blank" href=${singleRegistro?.comprobanteHref || ""} kind="tertiary" size="sm">${Attachment16({ slot: "icon" })}</bx-btn>
 								</bx-table-cell>
 								<bx-table-cell class="bx--table-column-menu">${this._computeStatusIcon(singleRegistro)}</bx-table-cell>
+								<bx-table-cell class="bx--table-column-menu">${this._resendConfirmation(singleRegistro)}</bx-table-cell>
 							</bx-table-row>
 						`
 					)}
@@ -77,7 +80,10 @@ export class DataTable extends LitElement {
 		else if (singleRegistro?.states?.rejectedAt?.seconds > 0) return html` <bx-btn kind="ghost" size="sm">${ErrorIcon({ slot: "icon", color: "#da1e28" })}</bx-btn> `;
 		else return html` <bx-btn @click=${() => this.openRegistrationActionDialog(singleRegistro)} kind="ghost" size="sm">${Pending16({ slot: "icon", color: "#6f6f6f" })}</bx-btn> `;
 	}
-
+	_resendConfirmation(singleRegistro: RegistrationDetails){
+		if (singleRegistro?.states?.confirmedAt?.seconds > 0) return html` <bx-btn @click=${() => this.openRegistrationActionDialog(singleRegistro)} kind="ghost" size="sm">${Email({slot:'icon'})}</bx-btn> `;
+		else return html`<bx-btn disabled kind="ghost" size="sm">${Email({slot:'icon'})}</bx-btn>`
+	}
 	protected override firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		queryRegistros("registrations", (docs: QuerySnapshot) => {
 			let arr = [] as RegistrationDetails[];
