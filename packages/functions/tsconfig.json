@@ -1,5 +1,4 @@
 {
-    "extends": "tsconfig/strictest",
     "compilerOptions": {
         "module": "commonjs",
         "outDir": "lib",

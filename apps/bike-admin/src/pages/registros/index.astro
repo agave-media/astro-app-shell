@@ -6,6 +6,7 @@ const {} = Astro.props;
 ---
 
 <confirmation-dialog></confirmation-dialog>
+<resend-confirmation></resend-confirmation>
 
 <Layout title="Registros">
 	<div class="content-container">
@@ -28,6 +29,7 @@ const {} = Astro.props;
 
 <script>
 	import "../../components/confirmation-dialog";
+	import '../../components/resend-confirmation'
 	import "../../components/data-table";
 	import "@carbon/web-components/es/components/breadcrumb/index.js";
 	import "@carbon/web-components/es/components/tile/clickable-tile.js";
@@ -40,6 +42,14 @@ const {} = Astro.props;
 		if (confirmationDialogEl) {
 			confirmationDialogEl.registration = e.detail;
 			confirmationDialogEl.open = true;
+		}
+	});
+
+	const resendConfirmationEl = document.querySelector("resend-confirmation");
+	dataTableEl?.addEventListener('open-resend-confirmation', (e:any)=>{
+		if (resendConfirmationEl) {
+			resendConfirmationEl.registration = e.detail;
+			resendConfirmationEl.open = true;
 		}
 	});
 </script>
