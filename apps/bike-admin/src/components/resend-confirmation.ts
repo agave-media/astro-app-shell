@@ -2,25 +2,26 @@ import { html, css, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import "@carbon/web-components/es/components/modal/index.js";
 import type { RegistrationDetails } from "@state/machines/registration";
+import { updateRegistrationStatus } from "@db/clients/firebase";
 
 declare global {
-	interface HTMLElementTagNameMap {
-		"resend-confirmation": ResendConfirmation;
-	}
+    interface HTMLElementTagNameMap {
+        "resend-confirmation": ResendConfirmation;
+    }
 }
 
 @customElement("resend-confirmation")
 export class ResendConfirmation extends LitElement {
     @property({ type: Boolean })
-	open: boolean = false;
+    open: boolean = false;
 
-	@property({ type: String })
-	state: string = "idle";
+    @property({ type: String })
+    state: string = "idle";
 
-	@property({ type: Object })
-	registration: RegistrationDetails | undefined;
+    @property({ type: Object })
+    registration: RegistrationDetails | undefined;
 
-	static override styles = css`
+    static override styles = css`
 		:host {
 			display: block;
 		}
@@ -31,8 +32,8 @@ export class ResendConfirmation extends LitElement {
 		}
 	`;
 
-protected override render() {
-    return html`
+    protected override render() {
+        return html`
         <bx-modal @bx-modal-closed=${() => this.open = false} ?open=${this.open}>
             <bx-modal-header>
                 <bx-modal-close-button></bx-modal-close-button>
@@ -41,25 +42,25 @@ protected override render() {
             </bx-modal-header>
             <bx-modal-body><p>Se reenviará un correo a ${this.registration?.email}. Esta seguro de realizar la siguiente accion</p></bx-modal-body>
             <bx-modal-footer>
-                <bx-modal-footer-button ?disabled=${this.state !== "idle"} kind="primary">${this.state === "sending" ? "Enviando..." : "Enviar email"}</bx-modal-footer-button>
+                <bx-modal-footer-button @click=${this.approveRegistration} ?disabled=${this.state !== "idle"} kind="primary">${this.state === "sending" ? "Enviando..." : "Enviar email"}</bx-modal-footer-button>
             </bx-modal-footer>
         </bx-modal>
     `;
-}
-
-/* async resendConfirmation(){
-    this.state = "sending"
-    if (this.registration?.id) {
-        try {
-            await ResendEmailConfirmation(this.registration.id)
-            this.state = "idle"
-            this.open = false
-        } catch (err) {
-            console.log("cant resend :", err)
-            this.state = "idle"
-        }
     }
 
-} */
+    async approveRegistration() {
+        this.state = "sending"
+
+        if (this.registration?.id) {
+            try {
+                await updateRegistrationStatus(this.registration.id, "resent")
+                this.state = "idle"
+                this.open = false
+            } catch (err) {
+                console.log("error approving reg:", err)
+                this.state = "idle"
+            }
+        }
+    }
 
 }
