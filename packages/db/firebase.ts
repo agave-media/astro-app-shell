@@ -130,9 +130,13 @@ export const updateRegistrationStatus = async (regID: string, status: string) =>
 
 	const { doc, updateDoc } = await import("firebase/firestore");
 
-	const updatedStatus = { confirmed: status === "confirmed" } as any;
-	if (status === "confirmed") updatedStatus["states.confirmedAt"] = serverTimestamp();
+	const updatedStatus = {} as any;
+	if (status === "confirmed") {
+        updatedStatus.confirmed = true
+        updatedStatus["states.confirmedAt"] = serverTimestamp();
+    }
 	else if (status === "rejected") updatedStatus["states.rejectedAt"] = serverTimestamp();
+	else if (status === "resent") updatedStatus["states.resentAt"] = serverTimestamp();
 	console.log("updated status:", updatedStatus);
 
 	const ref = doc(db, `registrations/${regID}`);
