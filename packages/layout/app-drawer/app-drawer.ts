@@ -5,9 +5,9 @@ import "./drawer-component";
 import "@material/web/list/list";
 import "@material/web/navigationtab/navigation-tab";
 import "@material/web/icon/icon";
-import "@material/web/iconbutton/outlined-icon-button-toggle";
+import "@material/web/iconbutton/outlined-icon-button";
 import { tlalocIcon } from "../tlaloc_icon";
-import type { MdOutlinedIconButtonToggle } from "@material/web/iconbutton/outlined-icon-button-toggle";
+import type { MdOutlinedIconButton } from "@material/web/iconbutton/outlined-icon-button";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -95,7 +95,7 @@ export class AppDrawer extends LitElement {
 		md-navigation-tab {
 			width: 80px;
 		}
-		md-outlined-icon-button-toggle {
+		md-outlined-icon-button {
 			align-self: center;
 			margin-bottom: 16px;
 		}
@@ -170,14 +170,14 @@ export class AppDrawer extends LitElement {
 							</md-list>
 						</div>
 
-						<!-- <md-outlined-icon-button-toggle .selected=${this.colorScheme === "dark"} @input=${this._darkModeToggle}>
+						<md-outlined-icon-button .selected=${this.colorScheme === "dark"} @input=${this._darkModeToggle}>
                             <div>
                                 <md-icon>dark_mode</md-icon>
                             </div>
 							<div slot="selectedIcon">
 								<md-icon>light_mode</md-icon>
 							</div>
-						</md-outlined-icon-button-toggle> -->
+						</md-outlined-icon-button>
 					</div>
 				</div>
 			</drawer-component>
@@ -206,7 +206,7 @@ export class AppDrawer extends LitElement {
 	}
 
 	_darkModeToggle(e: CustomEvent) {
-        const { selected } = e.target as MdOutlinedIconButtonToggle
+        const { selected } = e.target as MdOutlinedIconButton
         this.dispatchEvent(new CustomEvent("dark-mode-toggle", { detail: { selected }, bubbles: true, composed: true }));
 	}
 }

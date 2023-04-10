@@ -25,7 +25,7 @@ const { href, videoHref, videoPoster } = Astro.props;
 		<h1>Reto Tláloc</h1>
 		<h3>4ta edición - 23 de abril</h3>
 
-		<md-filled-link-button href="/registro" label="Registrate ahora"></md-filled-link-button>
+		<md-filled-button href="/registro" label="Registrate ahora"></md-filled-button>
 	</div>
 </section>
 
@@ -40,7 +40,7 @@ const { href, videoHref, videoPoster } = Astro.props;
 		justify-content: center;
 	}
 
-	md-filled-link-button {
+	md-filled-button {
 		margin-top: 32px;
 	}
 
@@ -107,7 +107,7 @@ const { href, videoHref, videoPoster } = Astro.props;
 	}
 
 	@media (max-width: 768px) {
-		md-filled-link-button {
+		md-filled-button {
 			align-self: center;
 		}
 
@@ -123,5 +123,5 @@ const { href, videoHref, videoPoster } = Astro.props;
 </style>
 
 <script>
-	import "@material/web/button/filled-link-button";
+	import "@material/web/button/filled-button";
 </script>
