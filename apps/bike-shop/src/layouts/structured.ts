@@ -41,7 +41,7 @@ const generateSchema = () => {
                 "@type": "Offer",
                 "name": "Inscripción - Reto Tláloc (Elite)",
                 "url": "https://serialmtbtexcoco.com/registro",
-                "price": "550",
+                "price": "650",
                 "priceCurrency": "MXN",
                 "availability": "https://schema.org/InStock",
                 "validFrom": "2023-04-23T07:00-05:00"
@@ -50,7 +50,7 @@ const generateSchema = () => {
                 "@type": "Offer",
                 "name": "Inscripción - Reto Tláloc (Básico)",
                 "url": "https://serialmtbtexcoco.com/registro",
-                "price": "300",
+                "price": "400",
                 "priceCurrency": "MXN",
                 "availability": "https://schema.org/InStock",
                 "validFrom": "2023-04-23T07:00-05:00"
