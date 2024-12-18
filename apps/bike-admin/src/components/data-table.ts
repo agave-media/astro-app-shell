@@ -9,16 +9,14 @@ import Pending16 from "@carbon/web-components/es/icons/pending/24";
 import CheckmarkFilled from "@carbon/web-components/es/icons/checkmark--filled/24";
 import Email from "@carbon/web-components/es/icons/email/24"
 import ErrorIcon from "@carbon/web-components/es/icons/error/24";
-import { queryRegistros } from "@db/clients/firebase";
 import { fetchProducts } from "@db/clients/turso";
-import type { QuerySnapshot } from "firebase/firestore";
-import type { RegistrationDetails } from "@state/machines/registration";
+import type { Producto } from "@state/machines/producto";
 import { DateTime } from "luxon";
 
 @customElement("data-table")
 export class DataTable extends LitElement {
 	@property({ type: Array })
-	registros: RegistrationDetails[] = [];
+	productos: Producto[] = [];
 
 	static override styles = css`
 		:host {
@@ -38,38 +36,72 @@ export class DataTable extends LitElement {
 			<cds-table>
 				<cds-table-head>
 					<cds-table-header-row>
-						<cds-table-header-cell>ID</cds-table-header-cell>
-						<cds-table-header-cell>Correo</cds-table-header-cell>
-						<cds-table-header-cell>Nombre</cds-table-header-cell>
-						<cds-table-header-cell>Equipo</cds-table-header-cell>
-						<cds-table-header-cell>Categoria</cds-table-header-cell>
-						<cds-table-header-cell>Grupo</cds-table-header-cell>
-						<cds-table-header-cell>Talla</cds-table-header-cell>
-						<cds-table-header-cell>Fecha</cds-table-header-cell>
-						<cds-table-header-cell>Comprobante</cds-table-header-cell>
-						<cds-table-header-cell>Status</cds-table-header-cell>
-						<cds-table-header-cell>Reenvio</cds-table-header-cell>
-
+					<cds-table-header-cell>id</cds-table-header-cell>
+						<cds-table-header-cell>nombre</cds-table-header-cell>
+						<cds-table-header-cell>descripción</cds-table-header-cell>
+						<cds-table-header-cell>categoria</cds-table-header-cell>
+						<cds-table-header-cell>SubCategoria</cds-table-header-cell>
+						<cds-table-header-cell>StockActual</cds-table-header-cell>
+						<cds-table-header-cell>stockMinimo </cds-table-header-cell>
+						<cds-table-header-cell>Costo</cds-table-header-cell>
+						<cds-table-header-cell>precioPublico</cds-table-header-cell>
+						<cds-table-header-cell>precioMayorista</cds-table-header-cell>
+						<cds-table-header-cell>Costo</cds-table-header-cell>
+						<cds-table-header-cell>precioPublico</cds-table-header-cell>
+						<cds-table-header-cell>precioMayorista</cds-table-header-cell>
+						<cds-table-header-cell>precioFF</cds-table-header-cell>
+						<cds-table-header-cell>sku</cds-table-header-cell>
+						<cds-table-header-cell>marca</cds-table-header-cell>
+						<cds-table-header-cell>codigoDeBarras</cds-table-header-cell>
+						<cds-table-header-cell>fabricacionLote</cds-table-header-cell>
+						<cds-table-header-cell>caducidadLote</cds-table-header-cell>
+						<cds-table-header-cell>lote</cds-table-header-cell>
+						<cds-table-header-cell>recetaMedica</cds-table-header-cell>
+						<cds-table-header-cell>impuestos</cds-table-header-cell>
+						<cds-table-header-cell>catalogoEnLinea</cds-table-header-cell>
+						<cds-table-header-cell>claveSAT</cds-table-header-cell>
+						<cds-table-header-cell>iva</cds-table-header-cell>
+						<cds-table-header-cell>ieps</cds-table-header-cell>
+						<cds-table-header-cell>identificador</cds-table-header-cell>
+						<cds-table-header-cell>unidad</cds-table-header-cell>
+						<cds-table-header-cell>variantes</cds-table-header-cell>
 					</cds-table-header-row>
 				</cds-table-head>
 				<cds-table-body>
 					${repeat(
-						this?.registros?.length ? this.registros : [],
-						(singleRegistro) => html`
+						this?.productos?.length ? this.productos : [],
+						(singleProduct) => html`
 							<cds-table-row>
-								<cds-table-cell>${singleRegistro.shortID}</cds-table-cell>
-								<cds-table-cell>${singleRegistro.email}</cds-table-cell>
-								<cds-table-cell>${singleRegistro.fullName}</cds-table-cell>
-								<cds-table-cell>${singleRegistro.teamName}</cds-table-cell>
-								<cds-table-cell>${singleRegistro.raceType}</cds-table-cell>
-								<cds-table-cell>${singleRegistro.raceCategory}</cds-table-cell>
-								<cds-table-cell>${singleRegistro?.size?.toUpperCase() || "S/N"}</cds-table-cell>
-								<cds-table-cell>${this._computeDate(singleRegistro.states.createdAt)}</cds-table-cell>
+								<cds-table-cell>${singleProduct.id}</cds-table-cell>
+								<cds-table-cell>${singleProduct.nombre}</cds-table-cell>
+								<cds-table-cell>${singleProduct.descripcion}</cds-table-cell>
+								<cds-table-cell>${singleProduct.categoria}</cds-table-cell>
+								<cds-table-cell>${singleProduct.subcategoria}</cds-table-cell>
+								<cds-table-cell>${singleProduct.stockActual}</cds-table-cell>
+								<cds-table-cell>${singleProduct.stockMinimo}</cds-table-cell>
+								<cds-table-cell>${singleProduct.costo}</cds-table-cell>
+								<cds-table-cell>${singleProduct.precioPublico}</cds-table-cell>
+								<cds-table-cell>${singleProduct.precioMayorista}</cds-table-cell>
+								<cds-table-cell>${singleProduct.precioFF}</cds-table-cell>
+								<cds-table-cell>${singleProduct.sku}</cds-table-cell>
+								<cds-table-cell>${singleProduct.marca}</cds-table-cell>
+								<cds-table-cell>${singleProduct.codigoDeBarras}</cds-table-cell>
+								<cds-table-cell>${singleProduct.fabricacionLote}</cds-table-cell>
+								<cds-table-cell>${singleProduct.caducidadLote}</cds-table-cell>
+								<cds-table-cell>${singleProduct.lote}</cds-table-cell>
+								<cds-table-cell>${singleProduct.recetaMedica}</cds-table-cell>
+								<cds-table-cell>${singleProduct.impuestos}</cds-table-cell>
+								<cds-table-cell>${singleProduct.catalogoEnLinea}</cds-table-cell>
+								<cds-table-cell>${singleProduct.claveSAT}</cds-table-cell>
+								<cds-table-cell>${singleProduct.iva}</cds-table-cell>
+								<cds-table-cell>${singleProduct.ieps}</cds-table-cell>
+								<cds-table-cell>${singleProduct.identificador}</cds-table-cell>
+								<cds-table-cell>${singleProduct.unidad}</cds-table-cell>
+								<cds-table-cell>${singleProduct.variantes}</cds-table-cell>
 								<cds-table-cell class="cds--table-column-menu">
-									<cds-btn target="_blank" href=${singleRegistro?.comprobanteHref || ""} kind="tertiary" size="sm">${Attachment16({ slot: "icon" })}</cds-btn>
+									<cds-btn target="_blank" href=${singleProduct?.imagen || ""} kind="tertiary" size="sm">${Attachment16({ slot: "icon" })}</cds-btn>
 								</cds-table-cell>
-								<cds-table-cell class="cds--table-column-menu">${this._computeStatusIcon(singleRegistro)}</cds-table-cell>
-								<cds-table-cell class="cds--table-column-menu">${this._resendConfirmation(singleRegistro)}</cds-table-cell>
+								<cds-table-cell class="cds--table-column-menu">${this.updateImage(singleProduct)}</cds-table-cell>
 							</cds-table-row>
 						`
 					)}
@@ -78,21 +110,15 @@ export class DataTable extends LitElement {
 		`;
 	}
 
-	_computeStatusIcon(singleRegistro: RegistrationDetails) {
-		if (singleRegistro?.states?.confirmedAt?.seconds > 0) return html` <cds-btn kind="ghost" size="sm">${CheckmarkFilled({ slot: "icon", color: "#24a148" })}</cds-btn> `;
-		else if (singleRegistro?.states?.rejectedAt?.seconds > 0) return html` <cds-btn kind="ghost" size="sm">${ErrorIcon({ slot: "icon", color: "#da1e28" })}</cds-btn> `;
-		else return html` <cds-btn @click=${() => this.openRegistrationActionDialog(singleRegistro)} kind="ghost" size="sm">${Pending16({ slot: "icon", color: "#6f6f6f" })}</cds-btn> `;
-	}
-
-	_resendConfirmation(singleRegistro: RegistrationDetails){
-		if (singleRegistro?.states?.confirmedAt?.seconds > 0) return html` <cds-btn @click=${() => this.openResendEmail(singleRegistro)} kind="ghost" size="sm">${Email({slot:'icon'})}</cds-btn> `;
+	/*_resendConfirmation(singleProduct: Producto){
+		if (singleProduct?.states?.confirmedAt?.seconds > 0) return html` <cds-btn @click=${() => this.openResendEmail(singleProduct)} kind="ghost" size="sm">${Email({slot:'icon'})}</cds-btn> `;
 		else return html`<cds-btn disabled kind="ghost" size="sm">${Email({slot:'icon'})}</cds-btn>`
-	}
+	}*/
 	
     protected override async firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): Promise<void> {
 		const data = await fetchProducts()
         console.log("products:", data);
-        this.registros = data;
+        this.productos = data;
 	}
 
 	_computeDate(curDate: any) {
@@ -109,5 +135,9 @@ export class DataTable extends LitElement {
 	openResendEmail(registro: RegistrationDetails){
 		console.log('open resend dialog')
 		this.dispatchEvent(new CustomEvent("open-resend-confirmation", { detail: registro, bubbles: true, composed: true }))
+	}
+
+	updateImage(singleProduct : Producto){
+
 	}
 }
