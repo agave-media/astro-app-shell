@@ -7,12 +7,12 @@ import "@carbon/web-components/es/components/button/index.js";
 import Attachment16 from "@carbon/web-components/es/icons/attachment/16";
 import Pending16 from "@carbon/web-components/es/icons/pending/24";
 import CheckmarkFilled from "@carbon/web-components/es/icons/checkmark--filled/24";
-import Email from "@carbon/web-components/es/icons/email/24"
+import Edit16 from "@carbon/web-components/es/icons/edit/16";
 import ErrorIcon from "@carbon/web-components/es/icons/error/24";
 import { fetchProducts } from "@db/clients/turso";
 import type { Producto } from "@state/machines/producto";
 import { DateTime } from "luxon";
-
+  
 @customElement("data-table")
 export class DataTable extends LitElement {
 	@property({ type: Array })
@@ -24,6 +24,11 @@ export class DataTable extends LitElement {
             scroll-behavior: auto;
             overflow-y: auto;
 		}
+
+        .cds--table-column-menu > div {
+            display: flex;
+            gap: 8px;
+        }
 	`;
 
 	protected override render() {
@@ -36,35 +41,16 @@ export class DataTable extends LitElement {
 			<cds-table>
 				<cds-table-head>
 					<cds-table-header-row>
-					<cds-table-header-cell>id</cds-table-header-cell>
-						<cds-table-header-cell>nombre</cds-table-header-cell>
-						<cds-table-header-cell>descripción</cds-table-header-cell>
-						<cds-table-header-cell>categoria</cds-table-header-cell>
-						<cds-table-header-cell>SubCategoria</cds-table-header-cell>
-						<cds-table-header-cell>StockActual</cds-table-header-cell>
-						<cds-table-header-cell>stockMinimo </cds-table-header-cell>
+						<cds-table-header-cell>ID</cds-table-header-cell>
+						<cds-table-header-cell>Nombre</cds-table-header-cell>
+						<cds-table-header-cell>Categoria</cds-table-header-cell>
+						<cds-table-header-cell>Sub-categoria</cds-table-header-cell>
+						<cds-table-header-cell>Stock</cds-table-header-cell>
 						<cds-table-header-cell>Costo</cds-table-header-cell>
-						<cds-table-header-cell>precioPublico</cds-table-header-cell>
-						<cds-table-header-cell>precioMayorista</cds-table-header-cell>
-						<cds-table-header-cell>Costo</cds-table-header-cell>
-						<cds-table-header-cell>precioPublico</cds-table-header-cell>
-						<cds-table-header-cell>precioMayorista</cds-table-header-cell>
-						<cds-table-header-cell>precioFF</cds-table-header-cell>
-						<cds-table-header-cell>sku</cds-table-header-cell>
-						<cds-table-header-cell>marca</cds-table-header-cell>
-						<cds-table-header-cell>codigoDeBarras</cds-table-header-cell>
-						<cds-table-header-cell>fabricacionLote</cds-table-header-cell>
-						<cds-table-header-cell>caducidadLote</cds-table-header-cell>
-						<cds-table-header-cell>lote</cds-table-header-cell>
-						<cds-table-header-cell>recetaMedica</cds-table-header-cell>
-						<cds-table-header-cell>impuestos</cds-table-header-cell>
-						<cds-table-header-cell>catalogoEnLinea</cds-table-header-cell>
-						<cds-table-header-cell>claveSAT</cds-table-header-cell>
-						<cds-table-header-cell>iva</cds-table-header-cell>
-						<cds-table-header-cell>ieps</cds-table-header-cell>
-						<cds-table-header-cell>identificador</cds-table-header-cell>
-						<cds-table-header-cell>unidad</cds-table-header-cell>
-						<cds-table-header-cell>variantes</cds-table-header-cell>
+						<!-- <cds-table-header-cell>Catalogo en linea</cds-table-header-cell> -->
+						<cds-table-header-cell>Unidad</cds-table-header-cell>
+						<cds-table-header-cell>Variantes</cds-table-header-cell>
+						<cds-table-header-cell>Imagen</cds-table-header-cell>
 					</cds-table-header-row>
 				</cds-table-head>
 				<cds-table-body>
@@ -72,36 +58,20 @@ export class DataTable extends LitElement {
 						this?.productos?.length ? this.productos : [],
 						(singleProduct) => html`
 							<cds-table-row>
-								<cds-table-cell>${singleProduct.id}</cds-table-cell>
+								<cds-table-cell>${singleProduct.identificador}</cds-table-cell>
 								<cds-table-cell>${singleProduct.nombre}</cds-table-cell>
-								<cds-table-cell>${singleProduct.descripcion}</cds-table-cell>
 								<cds-table-cell>${singleProduct.categoria}</cds-table-cell>
 								<cds-table-cell>${singleProduct.subcategoria}</cds-table-cell>
 								<cds-table-cell>${singleProduct.stockActual}</cds-table-cell>
-								<cds-table-cell>${singleProduct.stockMinimo}</cds-table-cell>
 								<cds-table-cell>${singleProduct.costo}</cds-table-cell>
-								<cds-table-cell>${singleProduct.precioPublico}</cds-table-cell>
-								<cds-table-cell>${singleProduct.precioMayorista}</cds-table-cell>
-								<cds-table-cell>${singleProduct.precioFF}</cds-table-cell>
-								<cds-table-cell>${singleProduct.sku}</cds-table-cell>
-								<cds-table-cell>${singleProduct.marca}</cds-table-cell>
-								<cds-table-cell>${singleProduct.codigoDeBarras}</cds-table-cell>
-								<cds-table-cell>${singleProduct.fabricacionLote}</cds-table-cell>
-								<cds-table-cell>${singleProduct.caducidadLote}</cds-table-cell>
-								<cds-table-cell>${singleProduct.lote}</cds-table-cell>
-								<cds-table-cell>${singleProduct.recetaMedica}</cds-table-cell>
-								<cds-table-cell>${singleProduct.impuestos}</cds-table-cell>
-								<cds-table-cell>${singleProduct.catalogoEnLinea}</cds-table-cell>
-								<cds-table-cell>${singleProduct.claveSAT}</cds-table-cell>
-								<cds-table-cell>${singleProduct.iva}</cds-table-cell>
-								<cds-table-cell>${singleProduct.ieps}</cds-table-cell>
-								<cds-table-cell>${singleProduct.identificador}</cds-table-cell>
 								<cds-table-cell>${singleProduct.unidad}</cds-table-cell>
 								<cds-table-cell>${singleProduct.variantes}</cds-table-cell>
 								<cds-table-cell class="cds--table-column-menu">
-									<cds-btn target="_blank" href=${singleProduct?.imagen || ""} kind="tertiary" size="sm">${Attachment16({ slot: "icon" })}</cds-btn>
+                                    <div>
+                                        <cds-button target="_blank" href=${singleProduct?.imagen || ""} kind="primary" size="sm">${Attachment16({ slot: "icon" })}</cds-button>
+                                        <cds-button kind="secondary" @click=${() => this.openResendEmail(singleProduct)} size="sm">${Edit16({ slot: "icon" })}</cds-button>
+                                    </div>
 								</cds-table-cell>
-								<cds-table-cell class="cds--table-column-menu">${this.updateImage(singleProduct)}</cds-table-cell>
 							</cds-table-row>
 						`
 					)}
@@ -135,9 +105,5 @@ export class DataTable extends LitElement {
 	openResendEmail(registro: RegistrationDetails){
 		console.log('open resend dialog')
 		this.dispatchEvent(new CustomEvent("open-resend-confirmation", { detail: registro, bubbles: true, composed: true }))
-	}
-
-	updateImage(singleProduct : Producto){
-
 	}
 }
