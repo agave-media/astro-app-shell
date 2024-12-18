@@ -8,7 +8,7 @@ import "../app-bottom-navigation/app-bottom-navigation";
 import "@material/web/fab/fab";
 import "@material/web/button/outlined-button";
 import "@material/web/icon/icon";
-import "@material/web/iconbutton/standard-icon-button";
+import "@material/web/iconbutton/icon-button";
 import { getInstance as getSettingsInstance } from "@state/machines/settings";
 import singleton from "@db/clients/firebase.js";
 
@@ -111,16 +111,17 @@ export class AppShell extends LitElement {
 		return html`
 			<app-drawer .colorScheme=${this.colorScheme} .logo=${this.logo} .railopen=${this._railopen} .wideview=${this._wideview} @open-changed=${this._drawerOpenChanged}></app-drawer>
 			<app-header @open-drawer=${this.toggleDrawer} .logo=${this.logo} class="toolbar-top" id="header" title="Reto Tláloc">
-				<md-standard-icon-button .selected=${!this._railopen} @click=${() => this.toggleRail()} slot="icon">
+				<md-icon-button .selected=${!this._railopen} @click=${() => this.toggleRail()} slot="icon">
                     <div>
                         <md-icon>menu_open</md-icon>
                     </div>
                     <div slot="selectedIcon">
                         <md-icon>menu</md-icon>
                     </div>
-                </md-standard-icon-button>
+                </md-icon-button>
                 
-                <md-outlined-button class="secondary" href="/consulta" slot="trailing" label="Revisar boleto">
+                <md-outlined-button class="secondary" href="/consulta" slot="trailing">
+                    Revisar boleto    
                     <md-icon slot="icon">bolt</md-icon>
                 </md-outlined-button>
                 <!-- ${this.loggedIn ? html`

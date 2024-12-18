@@ -34,6 +34,7 @@ import Layout from "../../layouts/Layout.astro";
 		align-items: center;
 		position: relative;
 		font-size: 14px;
+        gap: 12px;
 	}
 
 	.dropdown-container {
@@ -79,10 +80,6 @@ import Layout from "../../layouts/Layout.astro";
 
 	.disclaimer-container {
 		align-items: flex-start;
-	}
-
-	.disclaimer-container > div {
-		margin-top: 10px;
 	}
 
 	#raceTypeInput,
@@ -175,7 +172,7 @@ import Layout from "../../layouts/Layout.astro";
 					<h4 class="subheader">4. INFORMACION DE CARRERA</h4>
 					<md-outlined-segmented-button-set name="raceType">
 						<md-outlined-segmented-button data-value="basico" label="Básico - $400" hasIcon></md-outlined-segmented-button>
-						<md-outlined-segmented-button disabled data-value="elite" label="Elite - $650" hasIcon></md-outlined-segmented-button>
+						<md-outlined-segmented-button data-value="elite" label="Elite - $650" hasIcon></md-outlined-segmented-button>
 					</md-outlined-segmented-button-set>
 					<input class="input" id="raceTypeInput" name="raceType" required />
 
@@ -183,9 +180,9 @@ import Layout from "../../layouts/Layout.astro";
 						<md-outlined-text-field disabled placeholder="Selecciona una opcion" class="input" id="categoriasInput" label="Categoria" name="raceCategory" required></md-outlined-text-field>
 
 						<md-menu fullwidth>
-							<md-menu-item data-value="principiantes" headline="Principiantes"></md-menu-item>
-							<md-menu-item data-value="intermedios" headline="Intermedios"></md-menu-item>
-							<md-menu-item data-value="avanzados" headline="Avanzados"></md-menu-item>
+							<md-menu-item data-value="principiantes">Principiantes</md-menu-item>
+							<md-menu-item data-value="intermedios">Intermedios</md-menu-item>
+							<md-menu-item data-value="avanzados">Avanzados</md-menu-item>
 						</md-menu>
 					</div>
 
@@ -193,11 +190,11 @@ import Layout from "../../layouts/Layout.astro";
 						<md-outlined-text-field disabled placeholder="Selecciona una talla" class="input" id="tallaInput" name="size" label="Talla" required></md-outlined-text-field>
 
 						<md-menu fullwidth>
-							<md-menu-item data-value="Extra Chico" headline="Extra Chico"></md-menu-item>
-							<md-menu-item data-value="Chico" headline="Chico"></md-menu-item>
-							<md-menu-item data-value="Mediano" headline="Mediano"></md-menu-item>
-							<md-menu-item data-value="Grande" headline="Grande"></md-menu-item>
-							<md-menu-item data-value="Extra Grande" headline="Extra Grande"></md-menu-item>
+							<md-menu-item data-value="Extra Chico">Extra Chico</md-menu-item>
+							<md-menu-item data-value="Chico">Chico</md-menu-item>
+							<md-menu-item data-value="Mediano">Mediano</md-menu-item>
+							<md-menu-item data-value="Grande">Grande</md-menu-item>
+							<md-menu-item data-value="Extra Grande">Extra Grande</md-menu-item>
 						</md-menu>
 					</div>
 
@@ -208,14 +205,14 @@ import Layout from "../../layouts/Layout.astro";
 						<md-outlined-text-field placeholder="Selecciona una opcion" class="input" id="tipoSangreInput" name="bloodType" label="Tipo de sangre" required></md-outlined-text-field>
 
 						<md-menu fullwidth>
-							<md-menu-item data-value="O+" headline="O+"></md-menu-item>
-							<md-menu-item data-value="O-" headline="O-"></md-menu-item>
-							<md-menu-item data-value="A+" headline="A+"></md-menu-item>
-							<md-menu-item data-value="A-" headline="A-"></md-menu-item>
-							<md-menu-item data-value="B+" headline="B+"></md-menu-item>
-							<md-menu-item data-value="B-" headline="B-"></md-menu-item>
-							<md-menu-item data-value="AB+" headline="AB+"></md-menu-item>
-							<md-menu-item data-value="AB-" headline="AB-"></md-menu-item>
+							<md-menu-item data-value="O+">O+</md-menu-item>
+							<md-menu-item data-value="O-">O-</md-menu-item>
+							<md-menu-item data-value="A+">A+</md-menu-item>
+							<md-menu-item data-value="A-">A-</md-menu-item>
+							<md-menu-item data-value="B+">B+</md-menu-item>
+							<md-menu-item data-value="B-">B-</md-menu-item>
+							<md-menu-item data-value="AB+">AB+</md-menu-item>
+							<md-menu-item data-value="AB-">AB-</md-menu-item>
 						</md-menu>
 					</div>
 
@@ -224,8 +221,8 @@ import Layout from "../../layouts/Layout.astro";
 						<input id="hiddenDisclaimerCheckbox" required class="input" type="checkbox" name="disclaimer" />
 						<div>
 							En consideración de la presente, renuncio a cualquier derecho y reclamación por daños que yo pueda tener, en contra del comité organizador, grupos coordinadores y cualquier persona asociada con el evento, sus representantes, sucesores y asignados, los exonero de cualquier daño que pudiera sufrir antes, durante y después del evento, por considerarse riesgo deportivo. Adicionalmente, ninguna de las personas antes mencionadas, serán responsables por la pérdida de
-							artículos personales ni de cualquier forma de agravación en relación con dicho evento. Reconozco que he leído y comprometido mi propia responsabilidad y acepto las restricciones impuestas, así mismo acepto que he de cumplir apegado al <bx-link target="_blank" href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/reglamento%2FReglamento%20-%20Reto%20Tlaloc.pdf?alt=media&token=8014e31a-326d-4c02-b993-d783f7612623"
-								>reglamento de operación vigente.</bx-link
+							artículos personales ni de cualquier forma de agravación en relación con dicho evento. Reconozco que he leído y comprometido mi propia responsabilidad y acepto las restricciones impuestas, así mismo acepto que he de cumplir apegado al <cds-link target="_blank" href="https://firebasestorage.googleapis.com/v0/b/serial-mtb-texcoco.appspot.com/o/reglamento%2FReglamento%20-%20Reto%20Tlaloc.pdf?alt=media&token=8014e31a-326d-4c02-b993-d783f7612623"
+								>reglamento de operación vigente.</cds-link
 							>
 						</div>
 					</div>
@@ -239,7 +236,7 @@ import Layout from "../../layouts/Layout.astro";
 
 				<div class="btns">
 					<sl-button hidden type="submit">Submit</sl-button>
-					<md-filled-button id="submitButton" type="submit" label="Enviar registro"></md-filled-button>
+					<md-filled-button id="submitButton" type="submit">Enviar registro</md-filled-button>
 				</div>
 			</form>
 		</section>
@@ -251,8 +248,8 @@ import Layout from "../../layouts/Layout.astro";
 	import "@material/web/checkbox/checkbox";
 	import "@material/web/button/filled-button";
 	import "@shoelace-style/shoelace/dist/components/button/button.js";
-	import "@material/web/segmentedbuttonset/outlined-segmented-button-set";
-	import "@material/web/segmentedbutton/outlined-segmented-button";
+	import "@material/web/labs/segmentedbuttonset/outlined-segmented-button-set";
+	import "@material/web/labs/segmentedbutton/outlined-segmented-button";
 	import "@material/web/menu/menu";
 	import "@carbon/web-components/es/components/link/index.js";
 	import "@material/web/menu/menu-item";
@@ -308,6 +305,7 @@ import Layout from "../../layouts/Layout.astro";
 
 	const categoriasInput = document.querySelector("md-outlined-text-field#categoriasInput") as MdOutlinedTextField;
 	const categoriasMenu = document.querySelector("#categoriasInput + md-menu") as MdMenu;
+    console.log('menus:', categoriasInput, categoriasMenu)
 
 	const tipoSangreInput = document.querySelector("md-outlined-text-field#tipoSangreInput") as MdOutlinedTextField;
 	const tipoSangreMenu = document.querySelector("#tipoSangreInput + md-menu") as MdMenu;
@@ -317,7 +315,7 @@ import Layout from "../../layouts/Layout.astro";
 	tallaInput?.addEventListener("click", () => {
 		console.log("click");
 		if (tallaMenu) {
-			tallaMenu.anchor = tallaInput;
+			tallaMenu.anchorElement = tallaInput;
 			tallaMenu.show();
 		}
 	});
@@ -372,7 +370,7 @@ import Layout from "../../layouts/Layout.astro";
 	categoriasInput?.addEventListener("click", () => {
 		console.log("click");
 		if (categoriasMenu) {
-			categoriasMenu.anchor = categoriasInput;
+			categoriasMenu.anchorElement = categoriasInput;
 			categoriasMenu.show();
 		}
 	});
@@ -389,7 +387,7 @@ import Layout from "../../layouts/Layout.astro";
 	tipoSangreInput?.addEventListener("click", () => {
 		console.log("click");
 		if (tipoSangreMenu) {
-			tipoSangreMenu.anchor = tipoSangreInput;
+			tipoSangreMenu.anchorElement = tipoSangreInput;
 			tipoSangreMenu.show();
 		}
 	});

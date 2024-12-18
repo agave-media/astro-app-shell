@@ -109,10 +109,14 @@ export const queryDocs = async (path: string, searchQuery: string) => {
 	return arr;
 };
 
+export async function queryProducts() {
+	// Use turso library
+}
+
 export async function queryRegistros(key: string, cb: any, q?: Query<DocumentData>) {
 	let curFirestore = await getFirestore();
-	const { collection, onSnapshot, query, orderBy } = await import("firebase/firestore");
-	if (!q) q = query(collection(curFirestore, key), orderBy("states.createdAt", "desc"));
+	const { collection, onSnapshot, query, orderBy, limit } = await import("firebase/firestore");
+	if (!q) q = query(collection(curFirestore, key), orderBy("states.createdAt", "desc"), limit(20));
 	firestoreListeners[key] = onSnapshot(q, cb);
 	return firestoreListeners[key];
 }

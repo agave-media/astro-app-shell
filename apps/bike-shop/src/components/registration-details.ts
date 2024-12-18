@@ -72,7 +72,7 @@ export class RegistrationDetails extends LitElement {
             font-size: 20px;
         }
 
-		bx-link {
+		cds-link {
 			font-style: normal;
 			text-transform: none;
 		}
@@ -87,7 +87,7 @@ export class RegistrationDetails extends LitElement {
             background-color: var(--md-sys-color-surface-variant);
         }
 
-        bx-inline-notification {
+        cds-inline-notification {
             min-width: 100%;
             margin: 0;
         }
@@ -118,12 +118,12 @@ export class RegistrationDetails extends LitElement {
 	protected override render() {
 		return html`
 			${ifDefined(this.status) && this.status === "confirmado" ? 
-                html` <bx-inline-notification hide-close-button .title=${"Listo para rodar"} subtitle="Tu registro ha sido confirmado para Reto Tláloc. ¡Te esperamos el 23 de abril!"></bx-inline-notification> ` : 
+                html` <cds-inline-notification hide-close-button .title=${"Listo para rodar"} subtitle="Tu registro ha sido confirmado para Reto Tláloc. ¡Te esperamos el 23 de abril!"></cds-inline-notification> ` : 
                 nothing
             }
 
 			${ifDefined(this.status) && this.status === "pendiente" ? 
-                html` <bx-inline-notification hide-close-button kind="warning" title="Registro pendiente" subtitle="Tu solicitud será validada en un plazo máximo de 24 horas. Te notificaremos por correo electrónico cuando tu registro haya sido confirmado o consulta el status por medio del boton 'Revisar boleto'."></bx-inline-notification> ` : 
+                html` <cds-inline-notification hide-close-button kind="warning" title="Registro pendiente" subtitle="Tu solicitud será validada en un plazo máximo de 24 horas. Te notificaremos por correo electrónico cuando tu registro haya sido confirmado o consulta el status por medio del boton 'Revisar boleto'."></cds-inline-notification> ` : 
                 nothing
             }
 
@@ -156,7 +156,7 @@ export class RegistrationDetails extends LitElement {
                             <md-icon>attach_file</md-icon>
                             <div>Comprobante de pago</div>
                         </div>
-                        <bx-link target="_blank" href=${ifDefined(this.registrationDetails?.comprobanteHref)}>Ver archivo</bx-link>
+                        <cds-link target="_blank" href=${ifDefined(this.registrationDetails?.comprobanteHref)}>Ver archivo</cds-link>
                     </div>
 				</h4>
 			</div>

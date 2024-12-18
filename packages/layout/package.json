@@ -5,9 +5,9 @@
     "dependencies": {
         "@util/helpers": "*",
         "tsconfig": "*",
-        "lit": "^2.6.1",
-        "@material/web": "^1.0.0-pre.5",
-        "@carbon/web-components": "2.0.0-lit-v2-alpha"
+        "lit": "^3.2.1",
+        "@material/web": "^2.2.0",
+        "@carbon/web-components": "^2.19.0"
     }
 }
   

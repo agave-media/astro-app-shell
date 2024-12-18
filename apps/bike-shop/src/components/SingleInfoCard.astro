@@ -9,7 +9,7 @@ const { title, description, href } = Astro.props;
 	<div class="info-container">
 		<header>
             {href ? 
-                <bx-link target="_blank" href={href}><h1>{title}</h1></bx-link> :
+                <cds-link target="_blank" href={href}><h1>{title}</h1></cds-link> :
                 <h1>{title}</h1>
             }
 		</header>

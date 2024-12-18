@@ -3,7 +3,7 @@ import { customElement } from "lit/decorators/custom-element.js";
 import { property } from "lit/decorators/property.js";
 import "./drawer-component";
 import "@material/web/list/list";
-import "@material/web/navigationtab/navigation-tab";
+import "@material/web/labs/navigationtab/navigation-tab";
 import "@material/web/icon/icon";
 import "@material/web/iconbutton/outlined-icon-button";
 import { tlalocIcon } from "../tlaloc_icon";
@@ -118,10 +118,10 @@ export class AppDrawer extends LitElement {
 									}}
 									?active=${window.location.pathname === "/"}
 									.label=${"Inicio"}>
-									<div slot="activeIcon">
+									<div slot="active-icon">
 										<md-icon>directions_bike</md-icon>
 									</div>
-									<div slot="inactiveIcon">
+									<div slot="inactive-icon">
 										<md-icon>directions_bike</md-icon>
 									</div>
 								</md-navigation-tab>
@@ -146,10 +146,10 @@ export class AppDrawer extends LitElement {
 									}}
 									?active=${window.location.pathname.includes("/registro")}
 									.label=${"Registro"}>
-									<div slot="activeIcon">
+									<div slot="active-icon">
 										<md-icon>badge</md-icon>
 									</div>
-									<div slot="inactiveIcon">
+									<div slot="inactive-icon">
 										<md-icon>badge</md-icon>
 									</div>
 								</md-navigation-tab>

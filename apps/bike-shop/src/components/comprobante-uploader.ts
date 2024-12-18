@@ -21,16 +21,16 @@ export class ComprobanteUploader extends LitElement {
 
 	protected override render() {
 		return html`
-			<bx-file-uploader helper-text="Sólo se permiten archivos .jpg, .png, y .pdf">
-				<bx-file-drop-container @bx-file-drop-container-changed=${this._handleUpload} accept="image/jpeg image/png application/pdf">Arrastra tu comprobante de pago aquí o haz clic para subirlo</bx-file-drop-container>
-			</bx-file-uploader>
+			<cds-file-uploader helper-text="Sólo se permiten archivos .jpg, .png, y .pdf">
+				<cds-file-drop-container @cds-file-drop-container-changed=${this._handleUpload} accept="image/jpeg image/png application/pdf">Arrastra tu comprobante de pago aquí o haz clic para subirlo</cds-file-drop-container>
+			</cds-file-uploader>
 
 			${repeat(
 				this.files,
 				(singleFile) => html`
-					<bx-file-uploader-item @bx-file-uploader-item-deleted=${this._clearFiles} state="editing">
+					<cds-file-uploader-item @cds-file-uploader-item-deleted=${this._clearFiles} state="editing">
 						<div @click=${() => this._openFilePreview(singleFile)} class="file-name">${singleFile.name}</div>
-					</bx-file-uploader-item>
+					</cds-file-uploader-item>
 				`
 			)}
 		`;

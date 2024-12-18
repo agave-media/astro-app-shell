@@ -11,22 +11,21 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/lit": "^1.2.0",
-		"@astrojs/vercel": "^3.1.2",
-		"@carbon/web-components": "2.0.0-lit-v2-alpha",
+		"@astrojs/vercel": "^8.0.1",
+		"@carbon/web-components": "^2.19.0",
 		"@db/clients": "*",
 		"@layout/components": "*",
 		"@state/machines": "*",
 		"@util/helpers": "*",
-		"@webcomponents/template-shadowroot": "^0.1.0",
-		"astro": "^2.0.14",
-		"firebase": "^9.17.1",
-		"lit": "2.6.1",
-		"luxon": "^3.2.1",
+		"@webcomponents/template-shadowroot": "^0.2.1",
+		"astro": "^5.0.9",
+		"firebase": "^11.1.0",
+		"lit": "^3.2.1",
+		"luxon": "^3.5.0",
 		"xstate": "^4.36.0"
 	},
 	"devDependencies": {
-		"@types/luxon": "^3.2.0",
-		"sass": "^1.57.1"
+		"@types/luxon": "^3.4.2",
+		"sass": "^1.58.3"
 	}
 }

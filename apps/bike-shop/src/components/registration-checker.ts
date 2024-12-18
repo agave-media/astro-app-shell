@@ -62,7 +62,7 @@ export class RegistrationChecker extends LitElement {
 			font-style: normal;
 		}
 
-		bx-link {
+		cds-link {
 			font-style: normal;
 			text-transform: none;
 		}
@@ -75,7 +75,7 @@ export class RegistrationChecker extends LitElement {
 			width: 100%;
 		}
 
-		bx-inline-notification {
+		cds-inline-notification {
 			min-width: 100%;
 			margin: 0;
 		}
@@ -96,11 +96,11 @@ export class RegistrationChecker extends LitElement {
 
 				<div class="btns light-theme">
 					<sl-button hidden type="submit">Buscar registro</sl-button>
-					<md-filled-button ?disabled=${this.status === "loading"} @click=${() => this.submitButton.click()} id="submitButton" type="submit" label=${this.status === "loading" ? "Buscando..." : "Buscar registro"}></md-filled-button>
+					<md-filled-button ?disabled=${this.status === "loading"} @click=${() => this.submitButton.click()} id="submitButton" type="submit">${this.status === "loading" ? "Buscando..." : "Buscar registro"}</md-filled-button>
 				</div>
 			</form>
 
-			${this.searchResults && this.searchResults.length === 0 ? html` <bx-inline-notification hide-close-button kind="error" .title=${"No se encontro correo"} subtitle="Lo sentimos, no se encontró un registro con esa dirección de correo electrónico. Por favor, verifica que la dirección sea correcta."></bx-inline-notification> ` : nothing}
+			${this.searchResults && this.searchResults.length === 0 ? html` <cds-inline-notification hide-close-button kind="error" .title=${"No se encontro correo"} subtitle="Lo sentimos, no se encontró un registro con esa dirección de correo electrónico. Por favor, verifica que la dirección sea correcta."></cds-inline-notification> ` : nothing}
 		`;
 	}
 

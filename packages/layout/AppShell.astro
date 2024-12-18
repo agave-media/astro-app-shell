@@ -7,28 +7,28 @@ const { default: connectionReceive } = await import(`./connection-receive.svg?ra
 const { default: reportData } = await import(`./report-data.svg?raw`);
 ---
 
-<bx-header aria-label='MTB Dashboard'>
-	<bx-header-menu-button button-label-active='Close menu' button-label-inactive='Open menu'></bx-header-menu-button>
-	<bx-header-name href='/' prefix='MTB'>[Dashboard]</bx-header-name>
-</bx-header>
+<cds-header aria-label='MTB Dashboard'>
+	<cds-header-menu-button button-label-active='Close menu' button-label-inactive='Open menu'></cds-header-menu-button>
+	<cds-header-name href='/' prefix='MTB'>[Dashboard]</cds-header-name>
+</cds-header>
 
-<bx-side-nav usage-mode='regular' aria-label='Side navigation'>
-	<bx-side-nav-items>
-		<bx-side-nav-link href='/'>
+<cds-side-nav usage-mode='regular' aria-label='Side navigation'>
+	<cds-side-nav-items>
+		<cds-side-nav-link href='/'>
             <Fragment set:html={reportData} />
             Resumen
-        </bx-side-nav-link>
-		<bx-side-nav-link href='/registros'>
+        </cds-side-nav-link>
+		<cds-side-nav-link href='/registros'>
             <Fragment set:html={connectionReceive} />
             Registros
-        </bx-side-nav-link>
-	</bx-side-nav-items>
-</bx-side-nav>
+        </cds-side-nav-link>
+	</cds-side-nav-items>
+</cds-side-nav>
 
-<main class='bx--content ui-shell-content'>
-	<div class='bx--grid'>
-		<div class='bx--row'>
-			<div class='bx--offset-lg-3 bx--col-lg-13'>
+<main class='cds-content ui-shell-content'>
+	<div class='cds-grid'>
+		<div class='cds-row'>
+			<div class='cds--offset-lg-3 cds--col-lg-13'>
 				<slot />
 			</div>
 		</div>

@@ -26,7 +26,7 @@ export class ConfirmationDialog extends LitElement {
 			display: block;
 		}
 
-		bx-modal[open] {
+		cds-modal[open] {
 			opacity: 1;
 			visibility: inherit;
 		}
@@ -34,18 +34,18 @@ export class ConfirmationDialog extends LitElement {
 
 	protected override render() {
 		return html`
-			<bx-modal @bx-modal-closed=${() => this.open = false} ?open=${this.open}>
-				<bx-modal-header>
-					<bx-modal-close-button></bx-modal-close-button>
-					<bx-modal-label>${this.registration?.shortID}</bx-modal-label>
-					<bx-modal-heading>Actualizar registro</bx-modal-heading>
-				</bx-modal-header>
-				<bx-modal-body><p>El registro sera actualizado y se enviará un correo a ${this.registration?.email}. Por favor, revise su selección antes de continuar.</p></bx-modal-body>
-				<bx-modal-footer>
-					<bx-modal-footer-button ?disabled=${this.state !== "idle"} @click=${this.rejectRegistration} kind="danger">${this.state === "rejecting" ? "Rechazando..." : "Rechazar"}</bx-modal-footer-button>
-					<bx-modal-footer-button ?disabled=${this.state !== "idle"} @click=${this.approveRegistration} kind="primary">${this.state === "approving" ? "Aprobando..." : "Aprobar registro"}</bx-modal-footer-button>
-				</bx-modal-footer>
-			</bx-modal>
+			<cds-modal @cds-modal-closed=${() => this.open = false} ?open=${this.open}>
+				<cds-modal-header>
+					<cds-modal-close-button></cds-modal-close-button>
+					<cds-modal-label>${this.registration?.shortID}</cds-modal-label>
+					<cds-modal-heading>Actualizar registro</cds-modal-heading>
+				</cds-modal-header>
+				<cds-modal-body><p>El registro sera actualizado y se enviará un correo a ${this.registration?.email}. Por favor, revise su selección antes de continuar.</p></cds-modal-body>
+				<cds-modal-footer>
+					<cds-modal-footer-button ?disabled=${this.state !== "idle"} @click=${this.rejectRegistration} kind="danger">${this.state === "rejecting" ? "Rechazando..." : "Rechazar"}</cds-modal-footer-button>
+					<cds-modal-footer-button ?disabled=${this.state !== "idle"} @click=${this.approveRegistration} kind="primary">${this.state === "approving" ? "Aprobando..." : "Aprobar registro"}</cds-modal-footer-button>
+				</cds-modal-footer>
+			</cds-modal>
 		`;
 	}
 

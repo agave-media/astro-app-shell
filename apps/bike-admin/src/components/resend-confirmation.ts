@@ -26,7 +26,7 @@ export class ResendConfirmation extends LitElement {
 			display: block;
 		}
 
-		bx-modal[open] {
+		cds-modal[open] {
 			opacity: 1;
 			visibility: inherit;
 		}
@@ -34,17 +34,17 @@ export class ResendConfirmation extends LitElement {
 
     protected override render() {
         return html`
-        <bx-modal @bx-modal-closed=${() => this.open = false} ?open=${this.open}>
-            <bx-modal-header>
-                <bx-modal-close-button></bx-modal-close-button>
-                <bx-modal-label>${this.registration?.shortID}</bx-modal-label>
-                <bx-modal-heading>Reenvio de email de confirmacion</bx-modal-heading>
-            </bx-modal-header>
-            <bx-modal-body><p>Se reenviará un correo a ${this.registration?.email}. Esta seguro de realizar la siguiente accion</p></bx-modal-body>
-            <bx-modal-footer>
-                <bx-modal-footer-button @click=${this.approveRegistration} ?disabled=${this.state !== "idle"} kind="primary">${this.state === "sending" ? "Enviando..." : "Enviar email"}</bx-modal-footer-button>
-            </bx-modal-footer>
-        </bx-modal>
+        <cds-modal @cds-modal-closed=${() => this.open = false} ?open=${this.open}>
+            <cds-modal-header>
+                <cds-modal-close-button></cds-modal-close-button>
+                <cds-modal-label>${this.registration?.shortID}</cds-modal-label>
+                <cds-modal-heading>Reenvio de email de confirmacion</cds-modal-heading>
+            </cds-modal-header>
+            <cds-modal-body><p>Se reenviará un correo a ${this.registration?.email}. Esta seguro de realizar la siguiente accion</p></cds-modal-body>
+            <cds-modal-footer>
+                <cds-modal-footer-button @click=${this.approveRegistration} ?disabled=${this.state !== "idle"} kind="primary">${this.state === "sending" ? "Enviando..." : "Enviar email"}</cds-modal-footer-button>
+            </cds-modal-footer>
+        </cds-modal>
     `;
     }
 

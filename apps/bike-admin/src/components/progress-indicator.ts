@@ -15,11 +15,11 @@ export class ProgressIndicator extends LitElement {
 			display: block;
 		}
 
-		bx-progress-step {
+		cds-progress-step {
 			flex-shrink: 0;
 		}
 
-		bx-progress-indicator {
+		cds-progress-indicator {
 			overflow-x: auto;
 			padding-bottom: 2em;
 		}
@@ -27,28 +27,28 @@ export class ProgressIndicator extends LitElement {
 
 	protected override render() {
 		return html`
-			<bx-progress-indicator @click=${this.onStepClick}>
-				<bx-progress-step
+			<cds-progress-indicator @click=${this.onStepClick}>
+				<cds-progress-step
 					data-name="ubpp"
 					.labelText=${"UBPP"}
 					.secondaryLabelText=${"UBPP y delegado"}
-				></bx-progress-step>
-				<bx-progress-step
+				></cds-progress-step>
+				<cds-progress-step
 					data-name="tipo"
 					.labelText=${"Tipo"}
 					.secondaryLabelText=${"Tipo de registro"}
-				></bx-progress-step>
-				<bx-progress-step
+				></cds-progress-step>
+				<cds-progress-step
 					data-name="facturas"
 					.labelText=${"Facturas"}
 					.secondaryLabelText=${"Validar facturas"}
-				></bx-progress-step>
-				<bx-progress-step
+				></cds-progress-step>
+				<cds-progress-step
 					data-name="relacion"
 					.labelText=${"Relacion"}
 					.secondaryLabelText=${"Subir relacion"}
-				></bx-progress-step>
-			</bx-progress-indicator>
+				></cds-progress-step>
+			</cds-progress-indicator>
 
 			${this.activeStep === "ubpp" ?     html`<slot @slotchange=${this.onSlotChange} name="ubpp"></slot>` : nothing}
 			${this.activeStep === "tipo" ?     html`<slot @slotchange=${this.onSlotChange} name="tipo"></slot>` : nothing}
@@ -61,7 +61,7 @@ export class ProgressIndicator extends LitElement {
         let target = e.target as HTMLSlotElement
         let content = target.assignedElements()[0] as HTMLElement
         if (content && content.slot === 'tipo') {
-            const curRadioTiles = content.querySelectorAll("bx-radio-tile")
+            const curRadioTiles = content.querySelectorAll("cds-radio-tile")
             console.log('curRadioTiles:', curRadioTiles)
         }
     }

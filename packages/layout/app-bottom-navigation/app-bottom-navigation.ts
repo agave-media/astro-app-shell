@@ -1,7 +1,7 @@
 import { css, html, LitElement, PropertyValueMap } from "lit";
 import { customElement } from "lit/decorators/custom-element.js";
-import "@material/web/navigationbar/navigation-bar";
-import "@material/web/navigationtab/navigation-tab";
+import "@material/web/labs/navigationbar/navigation-bar";
+import "@material/web/labs/navigationtab/navigation-tab";
 import "@material/web/icon/icon";
 import { tlalocIcon } from "../tlaloc_icon";
 
