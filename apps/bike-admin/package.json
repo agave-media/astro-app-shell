@@ -22,7 +22,8 @@
 		"firebase": "^11.1.0",
 		"lit": "^3.2.1",
 		"luxon": "^3.5.0",
-		"xstate": "^4.36.0"
+		"xstate": "^4.36.0",
+        "@libsql/client": "^0.14.0"
 	},
 	"devDependencies": {
 		"@types/luxon": "^3.4.2",

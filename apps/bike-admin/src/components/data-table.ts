@@ -10,6 +10,7 @@ import CheckmarkFilled from "@carbon/web-components/es/icons/checkmark--filled/2
 import Email from "@carbon/web-components/es/icons/email/24"
 import ErrorIcon from "@carbon/web-components/es/icons/error/24";
 import { queryRegistros } from "@db/clients/firebase";
+import { fetchProducts } from "@db/clients/turso";
 import type { QuerySnapshot } from "firebase/firestore";
 import type { RegistrationDetails } from "@state/machines/registration";
 import { DateTime } from "luxon";
@@ -82,22 +83,16 @@ export class DataTable extends LitElement {
 		else if (singleRegistro?.states?.rejectedAt?.seconds > 0) return html` <cds-btn kind="ghost" size="sm">${ErrorIcon({ slot: "icon", color: "#da1e28" })}</cds-btn> `;
 		else return html` <cds-btn @click=${() => this.openRegistrationActionDialog(singleRegistro)} kind="ghost" size="sm">${Pending16({ slot: "icon", color: "#6f6f6f" })}</cds-btn> `;
 	}
+
 	_resendConfirmation(singleRegistro: RegistrationDetails){
 		if (singleRegistro?.states?.confirmedAt?.seconds > 0) return html` <cds-btn @click=${() => this.openResendEmail(singleRegistro)} kind="ghost" size="sm">${Email({slot:'icon'})}</cds-btn> `;
 		else return html`<cds-btn disabled kind="ghost" size="sm">${Email({slot:'icon'})}</cds-btn>`
 	}
-	protected override firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-		queryRegistros("registrations", (docs: QuerySnapshot) => {
-			let arr = [] as RegistrationDetails[];
-			docs.forEach((doc) => {
-				console.log(doc.id, " => ", doc.data());
-				let curData = structuredClone(doc.data()) as RegistrationDetails;
-				curData.id = doc.id;
-				arr.push(curData);
-			});
-			console.log("registrations:", docs, arr);
-			this.registros = arr;
-		});
+	
+    protected override async firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): Promise<void> {
+		const data = await fetchProducts()
+        console.log("products:", data);
+        this.registros = data;
 	}
 
 	_computeDate(curDate: any) {
