@@ -21,9 +21,7 @@ export class ImageUploader extends LitElement {
 
 	protected override render() {
 		return html`
-			<cds-file-uploader helper-text="Sólo se permiten archivos .jpg, .png, y .pdf">
-				<cds-file-drop-container @cds-file-drop-container-changed=${this._handleUpload} accept="image/jpeg image/png application/pdf">Arrastra tu comprobante de pago aquí o haz clic para subirlo</cds-file-drop-container>
-			</cds-file-uploader>
+			<cds-file-uploader-drop-container multiple @cds-file-uploader-drop-container-changed=${this._handleUpload} accept="image/jpeg image/png application/pdf">Arrastra tu comprobante de pago aquí o haz clic para subirlo</cds-file-uploader-drop-container>
 
 			${repeat(
 				this.files,

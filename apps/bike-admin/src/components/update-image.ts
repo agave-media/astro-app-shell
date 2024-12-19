@@ -31,6 +31,17 @@ export class UpdateImage extends LitElement {
 			opacity: 1;
 			visibility: inherit;
 		}
+
+        cds-modal-body > div {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        image-uploader {
+            align-self: center;
+        }
 	`;
 
     protected override render() {
@@ -38,12 +49,14 @@ export class UpdateImage extends LitElement {
         <cds-modal @cds-modal-closed=${() => this.open = false} ?open=${this.open}>
             <cds-modal-header>
                 <cds-modal-close-button></cds-modal-close-button>
-                <cds-modal-label>${this.producto?.id}</cds-modal-label>
+                <cds-modal-label>${this.producto?.nombre}</cds-modal-label>
                 <cds-modal-heading>Actualización de Imagen</cds-modal-heading>
             </cds-modal-header>
             <cds-modal-body>
-                <image-uploader></image-uploader>
-                <p>Se actualizará la imagen del producto ${this.producto?.nombre}. ¿Está seguro de realizar esta acción?</p>
+                <div>
+                    <p>Se actualizará la imagen del producto ${this.producto?.nombre}. ¿Está seguro de realizar esta acción?</p>
+                    <image-uploader></image-uploader>
+                </div>
             </cds-modal-body>
             <cds-modal-footer>
                 <cds-modal-footer-button @click=${this.approveRegistration} ?disabled=${this.state !== "idle"} kind="primary">${this.state === "sending" ? "Enviando..." : "Actualizar"}</cds-modal-footer-button>
