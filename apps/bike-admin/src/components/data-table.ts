@@ -102,8 +102,8 @@ export class DataTable extends LitElement {
 		this.dispatchEvent(new CustomEvent("open-registration-dialog", { detail: registro, bubbles: true, composed: true }));
 	}
 
-	openResendEmail(registro: RegistrationDetails){
+	openResendEmail(singleProduct: Producto){
 		console.log('open resend dialog')
-		this.dispatchEvent(new CustomEvent("open-resend-confirmation", { detail: registro, bubbles: true, composed: true }))
+		this.dispatchEvent(new CustomEvent("open-resend-confirmation", { detail: singleProduct, bubbles: true, composed: true }))
 	}
 }
