@@ -1,7 +1,7 @@
 import { html, css, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import "@carbon/web-components/es/components/modal/index.js";
-import { updateRegistrationStatus } from "@db/clients/firebase";
+import { getUploadString } from "@db/clients/firebase";
 import type { Producto } from "@state/machines/producto";
 import "./image-uploader";
 
@@ -59,22 +59,33 @@ export class UpdateImage extends LitElement {
                 </div>
             </cds-modal-body>
             <cds-modal-footer>
-                <cds-modal-footer-button @click=${this.approveRegistration} ?disabled=${this.state !== "idle"} kind="primary">${this.state === "sending" ? "Enviando..." : "Actualizar"}</cds-modal-footer-button>
+                <cds-modal-footer-button @click=${this.updateImages} ?disabled=${this.state !== "idle"} kind="primary">${this.state === "sending" ? "Actualizando..." : "Actualizar"}</cds-modal-footer-button>
             </cds-modal-footer>
         </cds-modal>
     `;
     }
 
-    async approveRegistration() {
+    async updateImages() {
         this.state = "sending"
 
-        if (this.registration?.id) {
+        const imageUploaderEl = this.shadowRoot?.querySelector("image-uploader")
+        if (imageUploaderEl && this.producto?.identificador) {
+            let files = imageUploaderEl.files
+            const fileHrefArr = []
             try {
-                await updateRegistrationStatus(this.registration.id, "resent")
+                for (const singleFile of files) {
+                    console.log('uploading file:', singleFile)
+                    let curFileHref = await getUploadString(singleFile, this.producto.identificador)
+                    fileHrefArr.push(curFileHref)
+                }
+                console.log('file href arr:', fileHrefArr)
+
+                // Update product details with new images
+
                 this.state = "idle"
                 this.open = false
             } catch (err) {
-                console.log("error approving reg:", err)
+                console.log("error uploading files:", err)
                 this.state = "idle"
             }
         }

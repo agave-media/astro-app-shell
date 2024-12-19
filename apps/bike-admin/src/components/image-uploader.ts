@@ -4,6 +4,12 @@ import { customElement } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat.js";
 import "@carbon/web-components/es/components/file-uploader/index.js";
 
+declare global {
+    interface HTMLElementTagNameMap {
+        "image-uploader": ImageUploader;
+    }
+}
+
 @customElement("image-uploader")
 export class ImageUploader extends LitElement {
 	@property({ type: String })

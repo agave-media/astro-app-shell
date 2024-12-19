@@ -234,7 +234,7 @@ export async function signOut() {
 	return signOut(curAuth);
 }
 
-export async function getUploadString(imgFile: File) {
+export async function getUploadString(imgFile: File, identificador: string) {
 	const { ref, getDownloadURL, uploadBytes } = await import("firebase/storage");
 
 	// url-safe timestamp suffix for image file name
@@ -243,7 +243,7 @@ export async function getUploadString(imgFile: File) {
 	console.log("file name:", imgFile.name, sanitizedFileName);
 
 	let curStorage = await getStorage();
-	let storageRef = ref(curStorage, `comprobantes/${sanitizedFileName}`);
+	let storageRef = ref(curStorage, `productos/${identificador}/${sanitizedFileName}`);
 	let uploadRes = await uploadBytes(storageRef, imgFile);
 	return await getDownloadURL(uploadRes.ref);
 }

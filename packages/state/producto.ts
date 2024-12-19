@@ -22,10 +22,10 @@ export interface Producto {
     claveSAT? : string;
     iva? : number;
     ieps? : number;
-    identificador? : string;
+    identificador : string;
     unidad? : string;
     variantes : Variante[];
-    imagen? : string;
+    imagenes? : string[];
 }
 
 export interface Variante {
