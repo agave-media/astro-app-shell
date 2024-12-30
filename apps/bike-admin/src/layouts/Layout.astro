@@ -8,7 +8,7 @@ const { title } = Astro.props
 ---
 
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='en' theme="g90">
 	<head>
 		<meta charset='UTF-8' />
 		<meta name='viewport' content='width=device-width' />
@@ -19,7 +19,7 @@ const { title } = Astro.props
 		<link rel='stylesheet' href='https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/next/plex.css' />
 	</head>
 	<body>
-		<div id='main-content' data-floating-menu-container class='cds-body container'>
+		<div id='main-content' data-floating-menu-container>
 			<AppShell>
 				<slot />
 			</AppShell>
@@ -37,11 +37,5 @@ const { title } = Astro.props
 	code {
 		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono,
 			Courier New, monospace;
-	}
-
-	html,
-	body,
-	#main-content {
-		position: relative;
 	}
 </style>

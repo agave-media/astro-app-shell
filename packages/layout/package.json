@@ -7,7 +7,8 @@
         "tsconfig": "*",
         "lit": "^3.2.1",
         "@material/web": "^2.2.0",
-        "@carbon/web-components": "^2.19.0"
+        "@carbon/web-components": "^2.19.0",
+        "@carbon/icons": "^11.53.0"
     }
 }
   

@@ -1,34 +1,31 @@
 ---
-type Props = {}
+type Props = {};
 
-const {} = Astro.props
-
-const { default: connectionReceive } = await import(`./connection-receive.svg?raw`);
-const { default: reportData } = await import(`./report-data.svg?raw`);
+const {} = Astro.props;
 ---
 
-<cds-header aria-label='MTB Dashboard'>
-	<cds-header-menu-button button-label-active='Close menu' button-label-inactive='Open menu'></cds-header-menu-button>
-	<cds-header-name href='/' prefix='MTB'>[Dashboard]</cds-header-name>
+<cds-header aria-label="MALVA Dashboard">
+	<cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+	<cds-header-name href="/" prefix="MALVA">[Dashboard]</cds-header-name>
 </cds-header>
 
-<cds-side-nav usage-mode='regular' aria-label='Side navigation'>
+<cds-side-nav usage-mode="regular" aria-label="Side navigation">
 	<cds-side-nav-items>
-		<cds-side-nav-link href='/'>
-            <Fragment set:html={reportData} />
-            Resumen
-        </cds-side-nav-link>
-		<cds-side-nav-link href='/registros'>
-            <Fragment set:html={connectionReceive} />
-            Registros
-        </cds-side-nav-link>
+		<cds-side-nav-link large href="/">
+			<connection-icon slot="title-icon"></connection-icon>
+			Resumen
+		</cds-side-nav-link>
+		<cds-side-nav-link large href="/registros">
+			<report-icon slot="title-icon"></report-icon>
+			Registros
+		</cds-side-nav-link>
 	</cds-side-nav-items>
 </cds-side-nav>
 
-<main class='cds-content ui-shell-content'>
-	<div class='cds-grid'>
-		<div class='cds-row'>
-			<div class='cds--offset-lg-3 cds--col-lg-13'>
+<main class="cds--content ui-shell-content">
+	<div class="cds--grid">
+		<div class="cds--row">
+			<div class="cds--col-lg-13 cds--offset-lg-3">
 				<slot />
 			</div>
 		</div>
@@ -38,6 +35,9 @@ const { default: reportData } = await import(`./report-data.svg?raw`);
 <style></style>
 
 <script>
-	import "@carbon/web-components/es/components/ui-shell/index.js"
-	import "./container.scss"
+	import "@carbon/web-components/es/components/ui-shell/index.js";
+	import "./container-v2.scss";
+	import "./shell.scss";
+    import "./icons/connection-icon"
+    import "./icons/report-icon"
 </script>
